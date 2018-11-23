@@ -177,7 +177,7 @@ layui.config({
 			id: 'LAY_layuipro',
 			btn: ['好'],
 			moveType: 1,
-			content: '<div style="padding:15px 20px; text-align:justify; line-height: 22px; text-indent:2em;border-bottom:1px solid #e2e2e2;"><p>组员创建文件放入page目录下自己管理的文件夹内，内部目录结构由自己整理，位置错误的文件将被定期清理。</p><p>根目录下css，images，js，json，layui文件夹及favicon.ico，index.html文件请勿私自修改，仅允许调用。</p><p>前端布局全程使用layui，所需文件在layui文件夹内。为保证稳定性，本次项目采用1.0.9版本，该版本为旧版本，帮助文档网址<a href="https://www.layui.com/v1/doc" target="_blank">https://www.layui.com/v1/doc</a></p></div>',
+			content: '<div style="padding:15px 20px; text-align:justify; line-height: 22px; text-indent:2em;border-bottom:1px solid #e2e2e2;"><p>页面文件位于page目录下，css文件位于css目录下，js文件位于js目录下</p><p>各开发人员只在分配给自己的文件内进行修改，任何擅自新增的文件将被删除，禁止修改系统、框架文件及他人文件</p><p>前端布局全程使用layui，所需文件在layui文件夹内。为保证稳定性，本次项目采用1.0.9版本，该版本为旧版本，帮助文档网址<a href="https://www.layui.com/v1/doc" target="_blank">https://www.layui.com/v1/doc</a></p></div>',
 			success: function (layero) {
 				var btn = layero.find('.layui-layer-btn');
 				btn.css('text-align', 'center');
