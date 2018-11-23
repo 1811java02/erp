@@ -191,30 +191,16 @@
 	"spread": false,
 	"children": [
 	  {
-		"title": "付款冲款",
+		"title": "应收冲款单",
 		"icon": "&#xe609;",
-		"href": "page/zhangkuan/zk_fukuanchongkuan.html",
+		"href": "page/zhangkuan/zk_yingShouChongKuan.html",
 		"spread": false,
 		"target": ""
 	  },
 	  {
-		"title": "收款冲款",
+		"title": "应付冲款单",
 		"icon": "&#xe609;",
-		"href": "page/zhangkuan/zk_shoukuanchongkuan.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "预付单",
-		"icon": "&#xe609;",
-		"href": "page/zhangkuan/zk_yufu.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "预收款",
-		"icon": "&#xe609;",
-		"href": "page/zhangkuan/zk_yushou.html",
+		"href": "page/zhangkuan/zk_yingFuChongKuan.html",
 		"spread": false,
 		"target": ""
 	  }
