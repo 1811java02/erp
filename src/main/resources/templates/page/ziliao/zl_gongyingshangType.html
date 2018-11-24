@@ -4,7 +4,48 @@
 	<meta charset="UTF-8">
 	<title>供应商类别</title>
 </head>
+<link rel="stylesheet" href="../../layui/css/layui.css">
+<style>
+	.layui-form-label{
+		text-align: left;
+	}
+</style>
 <body>
-供应商类别
+<form class="layui-form" action="">
+	<div class="layui-form-item">
+		<label class="layui-form-label">类别编号</label>
+		<div class="layui-input-block">
+			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">类别名称</label>
+		<div class="layui-input-block">
+			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">英文名称</label>
+		<div class="layui-input-block">
+			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		</div>
+	</div>
+
+	<div class="layui-form-item layui-form-text">
+		<label class="layui-form-label">备注</label>
+		<div class="layui-input-block">
+			<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+		</div>
+	</div>
+
+</form>
 </body>
+<script src="../../layui/layui.js"></script>
+<script>
+    //Demo
+    layui.use(['form','element'], function(){
+        var form = layui.form,
+            element=layui.element;
+    });
+</script>
 </html>
