@@ -73,7 +73,14 @@
 		"href": "page/ziliao/zl_wuliaoType.html",
 		"spread": false,
 		"target": ""
-	  }
+	  },
+		{
+			"title": "计量单位",
+			"icon": "&#xe609;",
+			"href": "page/ziliao/zl_jiliangdanwei.html",
+			"spread": false,
+			"target": ""
+		}
 	]
   },
   {
