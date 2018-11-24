@@ -2,9 +2,151 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>采购分摊作业</title>
+	<title>分摊</title>
+	<link rel="stylesheet" href="../../layui/css/layui.css">
+	<style>
+		.layui-form-item .layui-input-inline{
+			width: 400px;
+		}
+		.layui-form-label{
+			width: 100px;
+			text-align: left;
+		}
+		.layui-tab-content{
+			padding: 0px;
+		}
+		.layui-tab-item{
+			height: 260px;
+		}
+	</style>
 </head>
 <body>
-采购分摊作业
+<form class="layui-form" style="margin: 0px auto;" action="">
+	<div class="layui-form-item">
+		<label class="layui-form-label">单据日期</label>
+		<div class="layui-input-inline">
+			<input type="date" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		</div>
+		<label class="layui-form-label">单据号码</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">分摊方式</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		</div>
+		<label class="layui-form-label">凭证编号</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">待摊金额本位币</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		</div>
+	</div>
+
+
+
+
+
+
+	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+		<ul class="layui-tab-title">
+			<li class="layui-this">费用明细</li>
+			<li>分摊结果</li>
+
+		</ul>
+
+
+		<div class="layui-tab-content">
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<colgroup>
+						<col width="150">
+						<col width="200">
+						<col>
+					</colgroup>
+					<thead>
+					<tr>
+						<th>(栏号)</th>
+						<th>费用编号</th>
+						<th>(费用名称)</th>
+						<th>(币别)</th>
+						<th>(汇率)</th>
+						<th>(金额)</th>
+						<th>金额本位币</th>
+
+					</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
+			</div>
+			<div class="layui-tab-item">
+				<table class="layui-table">
+					<colgroup>
+						<col width="150">
+						<col width="200">
+						<col>
+					</colgroup>
+					<thead>
+					<tr>
+						<th>(栏号)</th>
+						<th>采购入库单号</th>
+						<th>(物料编号)</th>
+						<th>(物料名称)</th>
+						<th>(规格型号)</th>
+						<th>(采购金额)</th>
+						<th>数量</th>
+						<th>单位</th>
+						<th>重量</th>
+						<th>材积</th>
+						<th>分摊金额</th>
+
+					</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
+			</div>
+
+
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">制单人员</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		</div>
+		<label class="layui-form-label">复核人员</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		</div>
+	</div>
+
+
+	<div class="layui-form-item">
+		<div class="layui-input-inline layui-bg-blue" style="width: 80px;" >
+			<select class="layui-btn">
+				<option value="">功能</option>
+				<option value="0">载入来源</option>
+				<option value="0">自动分摊</option>
+			</select>
+		</div>
+	</div>
+</form>
 </body>
+<script src="../../layui/layui.js"></script>
+<script>
+    //Demo
+    layui.use(['form','element'], function(){
+        var form = layui.form,
+            element=layui.element;
+    });
+</script>
 </html>
