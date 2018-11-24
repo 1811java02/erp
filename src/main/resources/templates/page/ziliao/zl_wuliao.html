@@ -3,8 +3,316 @@
 <head>
 	<meta charset="UTF-8">
 	<title>物料主文件</title>
+	<link rel="stylesheet" href="../../layui/css/layui.css">
+	<link rel="stylesheet" href="../../css/ziliao/zl_wuliao.css">
+	<style>
+		.layui-nav .layui-nav-item a,.layui-nav .layui-nav-item a:hover{
+			color: black;
+		}
+	</style>
 </head>
-<body>
-物料主文件
+<body style="width: 1000px;margin: auto;padding: 10px;">
+<form class="layui-form">
+	<div class="layui-form-item">
+		<label class="layui-form-label">物料编号</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+		<label class="layui-form-label">物料类别</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">物料名称</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+		<label class="layui-form-label">计量单位</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">规格型号</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+		<label class="layui-form-label">条形码编号</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">英文名称</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+	</div>
+</form>
+<div class="layui-tab layui-tab-card">
+	<ul class="layui-tab-title">
+		<li class="layui-this" lay-id="1">基本资料</li>
+		<li lay-id="2">存量总信息</li>
+		<li lay-id="3">存量明细信息</li>
+		<li lay-id="4">交易资料</li>
+		<li lay-id="5">物料描述</li>
+	</ul>
+	<div class="layui-tab-content" style="height: 500px;overflow: scroll;padding: 0;">
+		<div class="layui-tab-item layui-show" style="padding-top:10px;">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<label class="layui-form-label">建议售价</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">使用币别</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">售价A</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">物料形态</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">售价B</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">单价是否含税</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">售价C</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">税目</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">售价D</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">税率</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">售价E</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">采购提前期</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">标准进价</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">主供应商</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label" style="width: 110px">使用批号设定</label>
+				</div>
+				<div class="layui-form-item" style="margin-top: -40px">
+					<div class="layui-input-block" style="margin-left: 40px;">
+						<div class="layui-input-inline" style="width: 400px">
+							<input type="checkbox" title="使用批号管理" lay-skin="primary">
+							<input type="checkbox" title="使用出厂日期" lay-skin="primary">
+							<input type="checkbox" title="使用有效天数" lay-skin="primary">
+						</div>
+						<label class="layui-form-label">有效天数</label>
+						<div class="layui-input-inline">
+							<input type="text" class="layui-input">
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="layui-tab-item" style="padding-top:10px;">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<label class="layui-form-label" style="margin-right: 200px;">期初设定</label>
+					<label class="layui-form-label">当前信息</label>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">安全存量</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">低于安全存量</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">期初总数量</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">现有总存量</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">平均成本</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">现行平均总成本</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">标准成本</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">标准总成本</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">期初总成本</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">现行总成本</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="layui-tab-item">
+			<table class="layui-table" style="margin: 0;">
+				<thead>
+				<tr>
+					<th>仓库编号</th>
+					<th>仓库名称</th>
+					<th>期初存量</th>
+					<th>现有存量</th>
+				</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+		<div class="layui-tab-item" style="padding-top:10px;">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<label class="layui-form-label" style="margin-right: 200px;">期初设定</label>
+					<label class="layui-form-label">当前信息</label>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">最初出库日</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input"
+						       onclick="layui.laydate({elem: this})">
+					</div>
+					<label class="layui-form-label">最近出库日</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input"
+						       onclick="layui.laydate({elem: this})">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">最出入库日</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input"
+						       onclick="layui.laydate({elem: this})">
+					</div>
+					<label class="layui-form-label">最近入库日</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input"
+						       onclick="layui.laydate({elem: this})">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">呆滞起记天数</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">使用日期</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input"
+						       onclick="layui.laydate({elem: this})">
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="layui-tab-item" style="padding-top:10px;">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<label class="layui-form-label">自定栏1</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">自定栏2</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">物料说明</label>
+					<div class="layui-input-block">
+						<textarea name="desc" placeholder="请输入内容"
+							  class="layui-textarea"></textarea>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="layui-form-item" style="margin-bottom: 200px;">
+	<div class="layui-input-block" style="margin: 0;">
+		<ul class="layui-nav" style="background-color: transparent">
+			<li class="layui-nav-item">
+				<a href="javascript:;">设定</a>
+				<dl class="layui-nav-child">
+					<dd><a href="">物料期初设定</a></dd>
+					<dd><a href="">期初批号设定</a></dd>
+					<dd><a href="">原厂物料设定</a></dd>
+					<dd><a href="">物料组合设定</a></dd>
+					<dd><a href="">物料图片设定</a></dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">功能</a>
+				<dl class="layui-nav-child">
+					<dd><a href="">条码打印</a></dd>
+					<dd><a href="">询价查询</a></dd>
+					<dd><a href="">物料数据校正</a></dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<script src="../../layui/lay/dest/layui.all.js"></script>
+<script src="../../js/ziliao/zl_wuliao.js"></script>
 </body>
 </html>
