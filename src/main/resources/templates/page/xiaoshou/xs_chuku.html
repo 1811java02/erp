@@ -3,8 +3,236 @@
 <head>
 	<meta charset="UTF-8">
 	<title>销售出库单</title>
+	<link rel="stylesheet" href="../../css/xiaoshou/xs_chuku.css">
+	<link rel="stylesheet" href="../../layui/css/layui.css">
+	<style>
+		.layui-nav .layui-nav-item a,.layui-nav .layui-nav-item a:hover{
+			color: black;
+		}
+	</style>
 </head>
-<body>
-销售出库单
+<body style="width: 1000px;margin: auto;padding: 10px;">
+<form class="layui-form">
+	<div class="layui-form-item">
+		<label class="layui-form-label">客户</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+		<label class="layui-form-label">单据日期</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" onclick="layui.laydate({elem: this})">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">送货地址</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+		<label class="layui-form-label">单据号码</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">销售出库类型</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+		<label class="layui-form-label">币别</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">单价是否含税</label>
+		<div class="layui-input-inline">
+			<select>
+				<option value="true" selected>含税</option>
+				<option value="false">未税</option>
+			</select>
+		</div>
+		<label class="layui-form-label">汇率</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">仓库</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+		<label class="layui-form-label">国外贸易</label>
+		<div class="layui-input-inline">
+			<select name="word">
+				<option value="true" selected>是</option>
+				<option value="false">否</option>
+			</select>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">凭证编号</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+		<label class="layui-form-label"></label>
+		<div class="layui-input-inline">
+			<input type="checkbox" title="复核后自动生成发票" lay-skin="primary" checked>
+		</div>
+	</div>
+</form>
+<div class="layui-tab layui-tab-card">
+	<ul class="layui-tab-title">
+		<li class="layui-this" lay-id="1">内容</li>
+		<li lay-id="2">账款</li>
+		<li lay-id="3">备注</li>
+	</ul>
+	<div class="layui-tab-content" style="height: 300px;overflow: scroll;padding: 0;">
+		<div class="layui-tab-item layui-show">
+			<table class="layui-table" style="margin: 0;width: 4000px;">
+				<thead>
+				<tr>
+					<th>栏号</th>
+					<th>物料编号</th>
+					<th>物料名称</th>
+					<th>规格型号</th>
+					<th>单位名称</th>
+					<th>数量</th>
+					<th>折扣前单价</th>
+					<th>折数</th>
+					<th>单价</th>
+					<th>金额</th>
+					<th>税率</th>
+					<th>税额</th>
+					<th>含税金额</th>
+					<th>批号</th>
+					<th>物料组合</th>
+					<th>赠品</th>
+					<th>发票明细</th>
+					<th>未开票数量</th>
+					<th>分录备注</th>
+					<th>来源单别</th>
+					<th>来源单号</th>
+					<th>客户订单</th>
+				</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+		<div class="layui-tab-item" style="padding-top: 10px;">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<label class="layui-form-label">账款归属</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">收款日期</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input"
+						       onclick="layui.laydate({elem: this})">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">收款条件</label>
+					<div class="layui-input-inline">
+						<select>
+							<option value="1" selected>到货</option>
+							<option value="2">次月</option>
+							<option value="3">月结</option>
+							<option value="4">其它</option>
+						</select>
+					</div>
+					<label class="layui-form-label">账款月份</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input"
+						       onclick="layui.laydate({elem: this})">
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="layui-tab-item" style="padding-top: 10px;padding-right: 10px;">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<label class="layui-form-label">自定栏1</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+					<label class="layui-form-label">自定栏2</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">收款条件</label>
+					<div class="layui-input-block">
+						<textarea name="desc" placeholder="请输入内容"
+							  class="layui-textarea"></textarea>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<form class="layui-form">
+	<div class="layui-form-item">
+		<label class="layui-form-label">业务人员</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+		<label class="layui-form-label">制单人员</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">所属部门</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+		<label class="layui-form-label">复核人员</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">所属项目</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item" style="margin-bottom: 150px;">
+		<div class="layui-input-block" style="margin: 0;">
+			<ul class="layui-nav" style="background-color: transparent">
+				<li class="layui-nav-item">
+					<a href="javascript:;">查询</a>
+					<dl class="layui-nav-child">
+						<dd><a href="">历史交易查询</a></dd>
+						<dd><a href="">单据状况查询</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;">转单</a>
+					<dl class="layui-nav-child">
+						<dd><a href="">销售报价转入</a></dd>
+						<dd><a href="">销售订单转入</a></dd>
+						<dd><a href="">商业发票转入</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;">功能</a>
+					<dl class="layui-nav-child">
+						<dd><a href="">物料组合设定</a></dd>
+						<dd><a href="">批号设定</a></dd>
+						<dd><a href="">条码打印</a></dd>
+						<dd><a href="">批次变更单价</a></dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+	</div>
+</form>
+
+<script src="../../layui/lay/dest/layui.all.js"></script>
+<script src="../../js/xiaoshou/xs_chuku.js"></script>
 </body>
 </html>
