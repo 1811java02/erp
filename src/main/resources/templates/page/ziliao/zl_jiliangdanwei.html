@@ -3,8 +3,64 @@
 <head>
 	<meta charset="UTF-8">
 	<title>计量单位</title>
+	<link rel="stylesheet" href="../../layui/css/layui.css">
+	<style>
+		.layui-form-item .layui-input-inline{
+			width: 400px;
+		}
+		.layui-form-label{
+			width: 100px;
+			text-align: left;
+		}
+		.layui-tab-content{
+			padding: 0px;
+		}
+		.layui-tab-item{
+			height: 260px;
+		}
+	</style>
 </head>
 <body>
-计量单位
+<form class="layui-form" style="margin: 0px auto;" action="">
+	<div class="layui-form-item">
+		<label class="layui-form-label">单位编号</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		</div>
+		<label class="layui-form-label">单位名称</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">英文名称</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		</div>
+		<label class="layui-form-label">备注</label>
+		<div class="layui-input-inline">
+			<div class="layui-input-block">
+				<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+</form>
 </body>
+<script src="../../layui/layui.js"></script>
+<script>
+    //Demo
+    layui.use(['form','element'], function(){
+        var form = layui.form,
+            element=layui.element;
+    });
+</script>
 </html>
