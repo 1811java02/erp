@@ -73,7 +73,14 @@
 		"href": "page/ziliao/zl_wuliaoType.html",
 		"spread": false,
 		"target": ""
-	  }
+	  },
+		{
+			"title": "计量单位",
+			"icon": "&#xe609;",
+			"href": "page/ziliao/zl_jiliangdanwei.html",
+			"spread": false,
+			"target": ""
+		}
 	]
   },
   {
@@ -197,20 +204,34 @@
 	"href": "",
 	"spread": false,
 	"children": [
-	  {
-		"title": "应收冲款单",
-		"icon": "&#xe609;",
-		"href": "page/zhangkuan/zk_yingShouChongKuan.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "应付冲款单",
-		"icon": "&#xe609;",
-		"href": "page/zhangkuan/zk_yingFuChongKuan.html",
-		"spread": false,
-		"target": ""
-	  }
+		{
+			"title": "预收款单",
+			"icon": "&#xe609;",
+			"href": "page/zhangkuan/zk_yuShouKuan.html",
+			"spread": false,
+			"target": ""
+		},
+		{
+			"title": "预付款单",
+			"icon": "&#xe609;",
+			"href": "page/zhangkuan/zk_yuFuKuan.html",
+			"spread": false,
+			"target": ""
+		},
+		{
+			"title": "应收冲款单",
+			"icon": "&#xe609;",
+			"href": "page/zhangkuan/zk_yingShouChongKuan.html",
+			"spread": false,
+			"target": ""
+	  	},
+	  	{
+			"title": "应付冲款单",
+			"icon": "&#xe609;",
+			"href": "page/zhangkuan/zk_yingFuChongKuan.html",
+			"spread": false,
+			"target": ""
+		  }
 	]
   }
 ]
