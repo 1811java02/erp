@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>部门</title>
-</head>
-<body>
-部门
-</body>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>部门</title>
+		<link rel="stylesheet" href="layui/css/layui.css" />
+	</head>
+
+	<body>
+		<form class="layui-form layui-form-pane">
+			<div class="layui-form-item">
+				<label class="layui-form-label">部门编号</label>
+				<div class="layui-input-block">
+					<input type="text" name="" lay-verify="deptid" autocomplete="off" placeholder="" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">部门名称</label>
+				<div class="layui-input-block">
+					<input type="text" name="" lay-verify="deptname" autocomplete="off" placeholder="" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">英文名称</label>
+				<div class="layui-input-block">
+					<input type="text" name="" lay-verify="englishname" autocomplete="off" placeholder="" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label">备注</label>
+					<div class="layui-input-block">
+						<textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<button class="layui-btn layui-btn-primary">
+					设定
+					<i class="layui-icon" style="font-size: 16px; color：black;">&#xe625;</i> 
+				</button>
+			</div>
+		</form>
+	</body>
+	<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+	<script type="text/javascript" src="layui/layui.js"></script>
+
 </html>
