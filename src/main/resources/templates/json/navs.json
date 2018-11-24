@@ -181,7 +181,14 @@
 		"href": "page/kucun/kc_pandian.html",
 		"spread": false,
 		"target": ""
-	  }
+	  },
+		{
+			"title": "调价单",
+			"icon": "&#xe609;",
+			"href": "page/kucun/kc_tiaojia.html",
+			"spread": false,
+			"target": ""
+		}
 	]
   },
   {
