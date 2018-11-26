@@ -5,61 +5,37 @@
 	<title>客户类别</title>
 	<link rel="stylesheet" href="../../layui/css/layui.css">
 </head>
-<body style="width: 1000px;margin: auto;padding: 10px;">
-<div class="layui-row layui-col-space10">
-	<div class="layui-col-md5">
-		<div class="layui-form-item">
-			<label class="layui-form-label">类别编号</label>
-			<div class="layui-input-inline">
-				<input type="text" name="title" required lay-verify="required" placeholder=""
-				       autocomplete="off" class="layui-input">
-			</div>
-
-		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">类别名称</label>
-			<div class="layui-input-inline">
-				<input type="text" name="title" required lay-verify="required" placeholder=""
-				       autocomplete="off" class="layui-input">
-			</div>
+<body style="width: 1000px;padding: 10px;">
+<form class="layui-form">
+	<div class="layui-form-item">
+		<label class="layui-form-label">类别编号</label>
+		<div class="layui-input-block">
+			<input type="text" name="title" required lay-verify="required" placeholder=""
+				   autocomplete="off" class="layui-input">
 		</div>
 	</div>
-
+	<div class="layui-form-item">
+		<label class="layui-form-label">类别名称</label>
+		<div class="layui-input-block">
+			<input type="text" name="title" required lay-verify="required" placeholder=""
+				   autocomplete="off" class="layui-input">
+		</div>
+	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">英文名称</label>
-		<div class="layui-input-inline">
+		<div class="layui-input-block">
 			<input type="text" name="title" required lay-verify="required" placeholder="" autocomplete="off"
-			       class="layui-input">
+				   class="layui-input">
 		</div>
 	</div>
-</div>
-
-<div class="layui-form-item">
-	<label class="layui-form-label">备注</label>
-	<div class="layui-input-inline">
-		<textarea name="" rows="10" cols="40"></textarea>
+	<div class="layui-form-item">
+		<label class="layui-form-label">备注</label>
+		<div class="layui-input-block">
+			<textarea class="layui-textarea"></textarea>
+		</div>
 	</div>
-</div>
-</div>
-
-</div>
+</form>
 </body>
 <script src="../../layui/lay/dest/layui.all.js"></script>
-<script type="text/javascript">
-	//Demo
-	layui.use('form', function () {
-		var form = layui.form;
-
-	});
-
-	//注意：选项卡 依赖 element 模块，否则无法进行功能性操作
-	layui.use('element', function () {
-		var element = layui.element;
-
-		//…
-	});
-
-	layui.form();
-</script>
 
 </html>
