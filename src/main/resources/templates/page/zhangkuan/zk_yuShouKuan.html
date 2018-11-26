@@ -1,222 +1,239 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>预收款</title>
-    <link rel="icon" href="../../favicon.ico">
-    <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
-    <link rel="stylesheet" href="../../css/zhangkuan/zk_yingShouChongKuan.css">
-    <style>
-    </style>
+	<meta charset="UTF-8">
+	<title>预收款</title>
+	<link rel="icon" href="../../favicon.ico">
+	<link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
+	<link rel="stylesheet" href="../../css/zhangkuan/zk_yingShouChongKuan.css">
+	<style>
+	</style>
 </head>
 <body>
 <form class="layui-form" action="">
-    <div class="layui-form-item">
-        <label class="layui-form-label">客户</label>
-        <div class="layui-input-inline">
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-        <label class="layui-form-label">单据时间</label>
-        <div class="layui-input-inline">
-            <input type="date" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">结算方式一</label>
-        <div class="layui-input-inline">
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-            &nbsp;&nbsp;
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-        <label class="layui-form-label">单据号码</label>
-        <div class="layui-input-inline">
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">结算方式二</label>
-        <div class="layui-input-inline">
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-            &nbsp;&nbsp;
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-        <label class="layui-form-label">币别</label>
-        <div class="layui-input-inline">
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">结算方式三</label>
-        <div class="layui-input-inline">
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-            &nbsp;&nbsp;
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-        <label class="layui-form-label">汇率</label>
-        <div class="layui-input-inline">
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">折扣率(%)</label>
-        <div class="layui-input-inline">
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-        <label class="layui-form-label">应收冲款类型</label>
-        <div class="layui-input-inline">
-            <select  lay-filter="sel" id="sel" name="sel" >
-                <option selected>请选择</option>
-                <option value="0">预收款</option>
-                <option value="1">收款冲款</option>
-                <option value="2">预收冲应收</option>
+	<div class="layui-form-item">
+		<label class="layui-form-label">客户</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+		</div>
+		<label class="layui-form-label">单据时间</label>
+		<div class="layui-input-inline">
+			<input type="date" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">结算方式一</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+			&nbsp;&nbsp;
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+		</div>
+		<label class="layui-form-label">单据号码</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">结算方式二</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+			&nbsp;&nbsp;
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+		</div>
+		<label class="layui-form-label">币别</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">结算方式三</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+			&nbsp;&nbsp;
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+		</div>
+		<label class="layui-form-label">汇率</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">折扣率(%)</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+		</div>
+		<label class="layui-form-label">应收冲款类型</label>
+		<div class="layui-input-inline">
+			<select lay-filter="sel" id="sel" name="sel">
+				<option selected>请选择</option>
+				<option value="0">预收款</option>
+				<option value="1">收款冲款</option>
+				<option value="2">预收冲应收</option>
 
-            </select>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">终止账月</label>
-        <div class="layui-input-inline">
-            <input type="date" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-        <label class="layui-form-label">凭证编号</label>
-        <div class="layui-input-inline">
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-tab layui-tab-card" id="tab1">
-        <ul class="layui-tab-title">
-            <li class="layui-this">内容</li>
-            <li class="layui-this">备注</li>
+			</select>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">终止账月</label>
+		<div class="layui-input-inline">
+			<input type="date" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+		</div>
+		<label class="layui-form-label">凭证编号</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+		</div>
+	</div>
+	<div class="layui-tab layui-tab-card" id="tab1">
+		<ul class="layui-tab-title">
+			<li class="layui-this">内容</li>
+			<li class="layui-this">备注</li>
 
-        </ul>
-        <div class="layui-tab-content" style="height: 200px;">
-            <div class="layui-tab-item layui-show">
-                <table class="layui-table">
-                    <colgroup>
-                        <col width="150">
-                        <col width="200">
-                        <col>
-                    </colgroup>
-                    <thead>
-                    <tr>
-                        <th>预收金额</th>
-                        <th>来源别</th>
-                        <th>来源单号</th>
-                        <th>摘要</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+		</ul>
+		<div class="layui-tab-content" style="height: 200px;">
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<colgroup>
+						<col width="150">
+						<col width="200">
+						<col>
+					</colgroup>
+					<thead>
+					<tr>
+						<th>预收金额</th>
+						<th>来源别</th>
+						<th>来源单号</th>
+						<th>摘要</th>
+					</tr>
+					</thead>
+					<tbody>
 
-                    </tbody>
-                </table>
-
-
-            </div>
-            <div class="layui-tab-item ">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">自定栏一</label>
-                    <div class="layui-input-inline">
-                        <select class="layui-select" lay-verify="required">
-                            <option value="">请选择</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">自定栏二</label>
-                    <div class="layui-input-inline">
-                        <select class="layui-select" lay-verify="required">
-                            <option value="">请选择</option>
-                        </select>
-                    </div>
-                    <div class="layui-form-item layui-form-text">
-                        <label class="layui-form-label">备注</label>
-                        <div class="layui-input-block">
-                            <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-                </div>
+					</tbody>
+				</table>
 
 
-            </div>
-        </div>
-    </div>
+			</div>
+			<div class="layui-tab-item ">
+				<div class="layui-form-item">
+					<label class="layui-form-label">自定栏一</label>
+					<div class="layui-input-inline">
+						<select class="layui-select" lay-verify="required">
+							<option value="">请选择</option>
+						</select>
+					</div>
+					<label class="layui-form-label">自定栏二</label>
+					<div class="layui-input-inline">
+						<select class="layui-select" lay-verify="required">
+							<option value="">请选择</option>
+						</select>
+					</div>
+					<div class="layui-form-item layui-form-text">
+						<label class="layui-form-label">备注</label>
+						<div class="layui-input-block">
+							<textarea name="desc" placeholder="请输入内容"
+								  class="layui-textarea"></textarea>
+						</div>
+					</div>
+				</div>
 
 
+			</div>
+		</div>
+	</div>
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">所属部门</label>
-        <div class="layui-input-inline">
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-        <label class="layui-form-label">制单人员</label>
-        <div class="layui-input-inline">
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">所属项目</label>
-        <div class="layui-input-inline">
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-        <label class="layui-form-label">复核人员</label>
-        <div class="layui-input-inline">
-            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-    </div>
 
-    </div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">所属部门</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+		</div>
+		<label class="layui-form-label">制单人员</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">所属项目</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+		</div>
+		<label class="layui-form-label">复核人员</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			       class="layui-input">
+		</div>
+	</div>
 
-    <div></div>
-    <div></div>
-    <div></div>
-    <ul class="layui-nav layui-nav-tree" lay-filter="test">
-        <li class="layui-nav-item">
-            <a href="javascript:;">功能</a>
-            <dl class="layui-nav-child">
-                <dd><a href="">1</a></dd>
-                <dd><a href="">2</a></dd>
-                <dd><a href="">3</a></dd>
-            </dl>
-        </li>
+	</div>
 
-    </ul>
-    <ul class="layui-nav layui-nav-tree" lay-filter="test">
-        <li class="layui-nav-item">
-            <a href="javascript:;">自动计算</a>
-            <dl class="layui-nav-child">
-                <dd><a href="">1</a></dd>
-                <dd><a href="">2</a></dd>
-                <dd><a href="">3</a></dd>
-            </dl>
-        </li>
+	<div></div>
+	<div></div>
+	<div></div>
+	<ul class="layui-nav layui-nav-tree" lay-filter="test">
+		<li class="layui-nav-item">
+			<a href="javascript:;">功能</a>
+			<dl class="layui-nav-child">
+				<dd><a href="">1</a></dd>
+				<dd><a href="">2</a></dd>
+				<dd><a href="">3</a></dd>
+			</dl>
+		</li>
 
-    </ul>
+	</ul>
+	<ul class="layui-nav layui-nav-tree" lay-filter="test">
+		<li class="layui-nav-item">
+			<a href="javascript:;">自动计算</a>
+			<dl class="layui-nav-child">
+				<dd><a href="">1</a></dd>
+				<dd><a href="">2</a></dd>
+				<dd><a href="">3</a></dd>
+			</dl>
+		</li>
+
+	</ul>
 
 </form>
 
 <script src="../../layui/lay/dest/layui.all.js"></script>
 <script src="../../js/jquery-1.12.4.js"></script>
 <script>
-    layui.use('form', function(){
-        var form=layui.form();
-        form.on('select(sel)', function(data){
-            alert(data.value)
-            alert(t1)
-            if(data.value==0){
-                $("#tab1").addClass(".displayblock");
-                $("#tab2").removeClass(".displayblock");
-                $("#tab3").removeClass(".displayblock");
+	layui.use('form', function () {
+		var form = layui.form();
+		form.on('select(sel)', function (data) {
+			alert(data.value)
+			alert(t1)
+			if (data.value == 0) {
+				$("#tab1").addClass(".displayblock");
+				$("#tab2").removeClass(".displayblock");
+				$("#tab3").removeClass(".displayblock");
 
-            }else if(data.value==1){
-                $("#tab1").removeClass(".displayblock");
-                $("#tab2").addClass(".displayblock");
-                $("#tab3").removeClass(".displayblock");
-            }else if(data.value==2){
-                $("#tab1").removeClass(".displayblock");
-                $("#tab2").removeClass(".displayblock");
-                $("#tab3").addClass(".displayblock");
-            }
-        });
-    })
-
+			} else if (data.value == 1) {
+				$("#tab1").removeClass(".displayblock");
+				$("#tab2").addClass(".displayblock");
+				$("#tab3").removeClass(".displayblock");
+			} else if (data.value == 2) {
+				$("#tab1").removeClass(".displayblock");
+				$("#tab2").removeClass(".displayblock");
+				$("#tab3").addClass(".displayblock");
+			}
+		});
+	})
 
 
 </script>

@@ -6,19 +6,21 @@
 	<link rel="stylesheet" href="../../layui/css/layui.css">
 </head>
 <body>
-<div class="layui-row layui-col-space10" >
+<div class="layui-row layui-col-space10">
 	<div class="layui-col-md5">
 		<div class="layui-form-item">
 			<label class="layui-form-label">类别编号</label>
 			<div class="layui-input-inline">
-				<input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+				<input type="text" name="title" required lay-verify="required" placeholder=""
+				       autocomplete="off" class="layui-input">
 			</div>
 
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">类别名称</label>
 			<div class="layui-input-inline">
-				<input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+				<input type="text" name="title" required lay-verify="required" placeholder=""
+				       autocomplete="off" class="layui-input">
 			</div>
 		</div>
 	</div>
@@ -26,7 +28,8 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">英文名称</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+			<input type="text" name="title" required lay-verify="required" placeholder="" autocomplete="off"
+			       class="layui-input">
 		</div>
 	</div>
 </div>
@@ -34,7 +37,7 @@
 <div class="layui-form-item">
 	<label class="layui-form-label">备注</label>
 	<div class="layui-input-inline">
-	<textarea name="" rows="10" cols="40"></textarea>
+		<textarea name="" rows="10" cols="40"></textarea>
 	</div>
 </div>
 </div>
@@ -42,21 +45,21 @@
 </div>
 </body>
 <script src="../../layui/lay/dest/layui.all.js"></script>
-<script type="text/javascript" >
-    //Demo
-    layui.use('form', function(){
-        var form = layui.form;
+<script type="text/javascript">
+	//Demo
+	layui.use('form', function () {
+		var form = layui.form;
 
-    });
+	});
 
-    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
-    layui.use('element', function(){
-        var element = layui.element;
+	//注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+	layui.use('element', function () {
+		var element = layui.element;
 
-        //…
-    });
+		//…
+	});
 
-    layui.form();
+	layui.form();
 </script>
 
 </html>

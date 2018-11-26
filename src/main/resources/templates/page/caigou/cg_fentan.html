@@ -5,17 +5,20 @@
 	<title>分摊</title>
 	<link rel="stylesheet" href="../../layui/css/layui.css">
 	<style>
-		.layui-form-item .layui-input-inline{
+		.layui-form-item .layui-input-inline {
 			width: 400px;
 		}
-		.layui-form-label{
+
+		.layui-form-label {
 			width: 100px;
 			text-align: left;
 		}
-		.layui-tab-content{
+
+		.layui-tab-content {
 			padding: 0px;
 		}
-		.layui-tab-item{
+
+		.layui-tab-item {
 			height: 260px;
 		}
 	</style>
@@ -25,33 +28,34 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">单据日期</label>
 		<div class="layui-input-inline">
-			<input type="date" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+			<input type="date" name="title" required lay-verify="required" placeholder="请输入标题"
+			       autocomplete="off" class="layui-input">
 		</div>
 		<label class="layui-form-label">单据号码</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			       autocomplete="off" class="layui-input">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">分摊方式</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			       autocomplete="off" class="layui-input">
 		</div>
 		<label class="layui-form-label">凭证编号</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			       autocomplete="off" class="layui-input">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">待摊金额本位币</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			       autocomplete="off" class="layui-input">
 		</div>
 	</div>
-
-
-
-
 
 
 	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
@@ -117,36 +121,38 @@
 			</div>
 
 
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">制单人员</label>
-		<div class="layui-input-inline">
-			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
 		</div>
-		<label class="layui-form-label">复核人员</label>
-		<div class="layui-input-inline">
-			<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		<div class="layui-form-item">
+			<label class="layui-form-label">制单人员</label>
+			<div class="layui-input-inline">
+				<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+				       autocomplete="off" class="layui-input">
+			</div>
+			<label class="layui-form-label">复核人员</label>
+			<div class="layui-input-inline">
+				<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+				       autocomplete="off" class="layui-input">
+			</div>
 		</div>
-	</div>
 
 
-	<div class="layui-form-item">
-		<div class="layui-input-inline layui-bg-blue" style="width: 80px;" >
-			<select class="layui-btn">
-				<option value="">功能</option>
-				<option value="0">载入来源</option>
-				<option value="0">自动分摊</option>
-			</select>
+		<div class="layui-form-item">
+			<div class="layui-input-inline layui-bg-blue" style="width: 80px;">
+				<select class="layui-btn">
+					<option value="">功能</option>
+					<option value="0">载入来源</option>
+					<option value="0">自动分摊</option>
+				</select>
+			</div>
 		</div>
-	</div>
 </form>
 </body>
 <script src="../../layui/layui.js"></script>
 <script>
-    //Demo
-    layui.use(['form','element'], function(){
-        var form = layui.form,
-            element=layui.element;
-    });
+	//Demo
+	layui.use(['form', 'element'], function () {
+		var form = layui.form,
+			element = layui.element;
+	});
 </script>
 </html>

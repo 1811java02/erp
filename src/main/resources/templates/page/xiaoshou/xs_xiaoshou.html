@@ -5,208 +5,214 @@
 	<title>销售订单</title>
 	<link rel="stylesheet" href="../../layui/css/layui.css">
 </head>
-	<div style="margin-top: 10px">
-		<form class="layui-form">
-			<div class="layui-form-item">
-				<div class="layui-inline">
-					<label class="layui-form-label">客户</label>
-					<div class="layui-input-inline">
-						<input style="width: 250px" type="text" class="layui-input">
-					</div>
-				</div>
-				<div class="layui-inline" style="margin-left: 20px">
-					<label class="layui-form-label">单据日期</label>
-					<div class="layui-input-inline">
-						<input style="width: 250px" type="text" class="layui-input" placeholder="yyyy-MM-dd" onclick="layui.laydate({elem:this});">
-					</div>
+<div style="margin-top: 10px">
+	<form class="layui-form">
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">客户</label>
+				<div class="layui-input-inline">
+					<input style="width: 250px" type="text" class="layui-input">
 				</div>
 			</div>
-			<div class="layui-form-item">
-				<div class="layui-inline">
-					<label class="layui-form-label">送货地址</label>
-					<div class="layui-input-inline">
-						<input style="width: 250px" type="text" class="layui-input">
-					</div>
-				</div>
-				<div class="layui-inline" style="margin-left: 20px">
-					<label class="layui-form-label">单据号码</label>
-					<div class="layui-input-inline">
-						<input style="width: 250px" type="text" class="layui-input">
-					</div>
+			<div class="layui-inline" style="margin-left: 20px">
+				<label class="layui-form-label">单据日期</label>
+				<div class="layui-input-inline">
+					<input style="width: 250px" type="text" class="layui-input"
+					       placeholder="yyyy-MM-dd" onclick="layui.laydate({elem:this});">
 				</div>
 			</div>
-			<div class="layui-form-item">
-				<div class="layui-inline">
-					<label class="layui-form-label">订单类型</label>
-					<div class="layui-input-inline">
-						<input style="width: 250px" type="text" class="layui-input">
-					</div>
-				</div>
-				<div class="layui-inline" style="margin-left: 20px">
-					<label class="layui-form-label">客户订单</label>
-					<div class="layui-input-inline">
-						<input style="width: 250px" type="text" class="layui-input">
-					</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">送货地址</label>
+				<div class="layui-input-inline">
+					<input style="width: 250px" type="text" class="layui-input">
 				</div>
 			</div>
-			<div class="layui-form-item">
-				<div class="layui-inline">
-					<label class="layui-form-label">是否含税</label>
-					<div class="layui-input-inline">
-						<input style="width: 250px" type="text" class="layui-input">
-					</div>
-				</div>
-				<div class="layui-inline" style="margin-left: 20px">
-					<label class="layui-form-label">币别</label>
-					<div class="layui-input-inline">
-						<input style="width: 250px" type="text" class="layui-input">
-					</div>
+			<div class="layui-inline" style="margin-left: 20px">
+				<label class="layui-form-label">单据号码</label>
+				<div class="layui-input-inline">
+					<input style="width: 250px" type="text" class="layui-input">
 				</div>
 			</div>
-			<div class="layui-form-item">
-				<div class="layui-inline">
-					<label class="layui-form-label">单况</label>
-					<div class="layui-input-inline">
-						<input style="width: 250px" type="text" class="layui-input">
-					</div>
-				</div>
-				<div class="layui-inline" style="margin-left: 20px">
-					<label class="layui-form-label">汇率</label>
-					<div class="layui-input-inline">
-						<input style="width: 250px" type="text" class="layui-input">
-					</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">订单类型</label>
+				<div class="layui-input-inline">
+					<input style="width: 250px" type="text" class="layui-input">
 				</div>
 			</div>
-		</form>
-	</div>
-	<div>
-		<form class="layui-tab layui-tab-card layui-form" style="height: 300px">
-			<ul class="layui-tab-title">
-				<li class="layui-this">内容</li>
-				<li>账款</li>
-				<li>备注</li>
-			</ul>
-			<div class="layui-tab-content" style="height: 250px;overflow: scroll;padding: 0px;">
-				<div class="layui-tab-item layui-show">
-					<table class="layui-table" style="width: 4500px;">
-						<colgroup>
-							<col width="150">
-							<col width="200">
-							<col>
-						</colgroup>
-						<thead>
-						<tr>
-							<th>(栏号)</th>
-							<th>物料编号</th>
-							<th>(物料名称)</th>
-							<th>(规格型号)</th>
-							<th>(单位名称)</th>
-							<th>数量</th>
-							<th>折扣前单价</th>
-							<th>折数(%)</th>
-							<th>单价</th>
-							<th>(金额)</th>
-							<th>税额(%)</th>
-							<th>(税额)</th>
-							<th>含税金额</th>
-							<th>预出库日</th>
-							<th>(未出数量)</th>
-							<th>赠品</th>
-							<th>分录备注</th>
-							<th>(物料组合)</th>
-							<th>(来源单别)</th>
-							<th>(来源单号)</th>
-							<th>生产</th>
-							<th>(排程单号)</th>
-							<th>(已生产数量)</th>
-						</tr>
-						</thead>
-						<tbody>
-						<tr>
-							<td>贤心</td>
-							<td>2016-11-29</td>
-							<td>人生就像是一场修行</td>
-						</tr>
-						<tr>
-							<td>贤心</td>
-							<td>2016-11-29</td>
-							<td>人生就像是一场修行</td>
-						</tr>
-						</tbody>
-					</table>
+			<div class="layui-inline" style="margin-left: 20px">
+				<label class="layui-form-label">客户订单</label>
+				<div class="layui-input-inline">
+					<input style="width: 250px" type="text" class="layui-input">
 				</div>
-				<div class="layui-tab-item">
-					<div class="layui-form-item">
-						<div class="layui-inline">
-							<label class="layui-form-label">账款归属</label>
-							<div class="layui-input-inline">
-								<input style="width: 250px" type="text" class="layui-input">
-							</div>
-						</div>
-						<div class="layui-inline" style="margin-left: 20px">
-							<label class="layui-form-label">收款日期</label>
-							<div class="layui-input-inline">
-								<input style="width: 250px" type="text" class="layui-input" placeholder="yyyy-MM-dd" onclick="layui.laydate({elem:this});">
-							</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">是否含税</label>
+				<div class="layui-input-inline">
+					<input style="width: 250px" type="text" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-inline" style="margin-left: 20px">
+				<label class="layui-form-label">币别</label>
+				<div class="layui-input-inline">
+					<input style="width: 250px" type="text" class="layui-input">
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">单况</label>
+				<div class="layui-input-inline">
+					<input style="width: 250px" type="text" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-inline" style="margin-left: 20px">
+				<label class="layui-form-label">汇率</label>
+				<div class="layui-input-inline">
+					<input style="width: 250px" type="text" class="layui-input">
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div>
+	<form class="layui-tab layui-tab-card layui-form" style="height: 300px">
+		<ul class="layui-tab-title">
+			<li class="layui-this">内容</li>
+			<li>账款</li>
+			<li>备注</li>
+		</ul>
+		<div class="layui-tab-content" style="height: 250px;overflow: scroll;padding: 0px;">
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table" style="width: 4500px;">
+					<colgroup>
+						<col width="150">
+						<col width="200">
+						<col>
+					</colgroup>
+					<thead>
+					<tr>
+						<th>(栏号)</th>
+						<th>物料编号</th>
+						<th>(物料名称)</th>
+						<th>(规格型号)</th>
+						<th>(单位名称)</th>
+						<th>数量</th>
+						<th>折扣前单价</th>
+						<th>折数(%)</th>
+						<th>单价</th>
+						<th>(金额)</th>
+						<th>税额(%)</th>
+						<th>(税额)</th>
+						<th>含税金额</th>
+						<th>预出库日</th>
+						<th>(未出数量)</th>
+						<th>赠品</th>
+						<th>分录备注</th>
+						<th>(物料组合)</th>
+						<th>(来源单别)</th>
+						<th>(来源单号)</th>
+						<th>生产</th>
+						<th>(排程单号)</th>
+						<th>(已生产数量)</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>贤心</td>
+						<td>2016-11-29</td>
+						<td>人生就像是一场修行</td>
+					</tr>
+					<tr>
+						<td>贤心</td>
+						<td>2016-11-29</td>
+						<td>人生就像是一场修行</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="layui-tab-item">
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label">账款归属</label>
+						<div class="layui-input-inline">
+							<input style="width: 250px" type="text" class="layui-input">
 						</div>
 					</div>
-					<div class="layui-form-item">
-						<div class="layui-inline">
-							<label class="layui-form-label">收款条件</label>
-							<div class="layui-input-inline">
-								<input style="width: 250px" type="text" class="layui-input">
-							</div>
-						</div>
-						<div class="layui-inline" style="margin-left: 20px">
-							<label class="layui-form-label">账款月份</label>
-							<div class="layui-input-inline">
-								<input style="width: 250px" type="text" class="layui-input" placeholder="yyyy-MM-dd" onclick="layui.laydate({elem:this,type: 'month'});">
-							</div>
+					<div class="layui-inline" style="margin-left: 20px">
+						<label class="layui-form-label">收款日期</label>
+						<div class="layui-input-inline">
+							<input style="width: 250px" type="text" class="layui-input"
+							       placeholder="yyyy-MM-dd"
+							       onclick="layui.laydate({elem:this});">
 						</div>
 					</div>
 				</div>
-				<div class="layui-tab-item">
-					<div class="layui-form-item">
-						<div class="layui-inline">
-							<label class="layui-form-label">表头条文</label>
-							<div class="layui-input-inline">
-								<input style="width: 250px" type="text" class="layui-input">
-							</div>
-						</div>
-						<div class="layui-inline" style="margin-left: 20px">
-							<label class="layui-form-label">自定栏一</label>
-							<div class="layui-input-inline">
-								<select name="city" lay-verify="">
-									<option value=""></option>
-								</select>
-							</div>
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label">收款条件</label>
+						<div class="layui-input-inline">
+							<input style="width: 250px" type="text" class="layui-input">
 						</div>
 					</div>
-					<div class="layui-form-item">
-						<div class="layui-inline">
-							<label class="layui-form-label">表尾条文</label>
-							<div class="layui-input-inline">
-								<input style="width: 250px" type="text" class="layui-input">
-							</div>
-						</div>
-						<div class="layui-inline" style="margin-left: 20px">
-							<label class="layui-form-label">自定栏二</label>
-							<div class="layui-input-inline">
-								<select name="city" lay-verify="">
-									<option value=""></option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="layui-form-item layui-form-text">
-						<label class="layui-form-label">备注</label>
-						<div class="layui-input-block">
-							<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+					<div class="layui-inline" style="margin-left: 20px">
+						<label class="layui-form-label">账款月份</label>
+						<div class="layui-input-inline">
+							<input style="width: 250px" type="text" class="layui-input"
+							       placeholder="yyyy-MM-dd"
+							       onclick="layui.laydate({elem:this,type: 'month'});">
 						</div>
 					</div>
 				</div>
 			</div>
-	</div>
+			<div class="layui-tab-item">
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label">表头条文</label>
+						<div class="layui-input-inline">
+							<input style="width: 250px" type="text" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-inline" style="margin-left: 20px">
+						<label class="layui-form-label">自定栏一</label>
+						<div class="layui-input-inline">
+							<select name="city" lay-verify="">
+								<option value=""></option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label">表尾条文</label>
+						<div class="layui-input-inline">
+							<input style="width: 250px" type="text" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-inline" style="margin-left: 20px">
+						<label class="layui-form-label">自定栏二</label>
+						<div class="layui-input-inline">
+							<select name="city" lay-verify="">
+								<option value=""></option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label">备注</label>
+					<div class="layui-input-block">
+						<textarea name="desc" placeholder="请输入内容"
+							  class="layui-textarea"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
 </from>
 </div>
 <div>
