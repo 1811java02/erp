@@ -1,237 +1,237 @@
 [
-  {
-	"title": "首页",
-	"icon": "icon-computer",
-	"href": "page/main.html",
-	"spread": false
-  },
-  {
-	"title": "基本资料",
-	"icon": "&#xe630;",
-	"href": "",
-	"spread": false,
-	"children": [
-	  {
-		"title": "部门",
-		"icon": "&#xe609;",
-		"href": "page/ziliao/zl_bumen.html",
+	{
+		"title": "首页",
+		"icon": "icon-computer",
+		"href": "page/main.html",
+		"spread": false
+	},
+	{
+		"title": "基本资料",
+		"icon": "&#xe630;",
+		"href": "",
 		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "仓库",
-		"icon": "&#xe609;",
-		"href": "page/ziliao/zl_cangku.html",
+		"children": [
+			{
+				"title": "部门",
+				"icon": "&#xe609;",
+				"href": "page/ziliao/zl_bumen.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "仓库",
+				"icon": "&#xe609;",
+				"href": "page/ziliao/zl_cangku.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "供应商资料",
+				"icon": "&#xe609;",
+				"href": "page/ziliao/zl_gongyingshang.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "供应商类别",
+				"icon": "&#xe609;",
+				"href": "page/ziliao/zl_gongyingshangType.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "客户主文件",
+				"icon": "&#xe609;",
+				"href": "page/ziliao/zl_kehu.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "客户类别",
+				"icon": "&#xe609;",
+				"href": "page/ziliao/zl_kehuType.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "人员主文件",
+				"icon": "&#xe609;",
+				"href": "page/ziliao/zl_renyuan.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "物料主文件",
+				"icon": "&#xe609;",
+				"href": "page/ziliao/zl_wuliao.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "物料类别",
+				"icon": "&#xe609;",
+				"href": "page/ziliao/zl_wuliaoType.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "计量单位",
+				"icon": "&#xe609;",
+				"href": "page/ziliao/zl_jiliangdanwei.html",
+				"spread": false,
+				"target": ""
+			}
+		]
+	},
+	{
+		"title": "采购管理",
+		"icon": "&#xe630;",
+		"href": "",
 		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "供应商资料",
-		"icon": "&#xe609;",
-		"href": "page/ziliao/zl_gongyingshang.html",
+		"children": [
+			{
+				"title": "采购订单",
+				"icon": "&#xe609;",
+				"href": "page/caigou/cg_caigou.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "采购询价单",
+				"icon": "&#xe609;",
+				"href": "page/caigou/cg_xunjia.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "采购请购单",
+				"icon": "&#xe609;",
+				"href": "page/caigou/cg_qinggou.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "采购入库单",
+				"icon": "&#xe609;",
+				"href": "page/caigou/cg_ruku.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "采购退货单",
+				"icon": "&#xe609;",
+				"href": "page/caigou/cg_tuihuo.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "采购分摊作业",
+				"icon": "&#xe609;",
+				"href": "page/caigou/cg_fentan.html",
+				"spread": false,
+				"target": ""
+			}
+		]
+	},
+	{
+		"title": "销售管理",
+		"icon": "&#xe630;",
+		"href": "",
 		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "供应商类别",
-		"icon": "&#xe609;",
-		"href": "page/ziliao/zl_gongyingshangType.html",
+		"children": [
+			{
+				"title": "销售报价单",
+				"icon": "&#xe609;",
+				"href": "page/xiaoshou/xs_baojia.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "销售订单",
+				"icon": "&#xe609;",
+				"href": "page/xiaoshou/xs_xiaoshou.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "销售出库单",
+				"icon": "&#xe609;",
+				"href": "page/xiaoshou/xs_chuku.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "销售退货单",
+				"icon": "&#xe609;",
+				"href": "page/xiaoshou/xs_tuihuo.html",
+				"spread": false,
+				"target": ""
+			}
+		]
+	},
+	{
+		"title": "库存管理",
+		"icon": "&#xe630;",
+		"href": "",
 		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "客户主文件",
-		"icon": "&#xe609;",
-		"href": "page/ziliao/zl_kehu.html",
+		"children": [
+			{
+				"title": "调拨单",
+				"icon": "&#xe609;",
+				"href": "page/kucun/kc_diaobo.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "盘点单",
+				"icon": "&#xe609;",
+				"href": "page/kucun/kc_pandian.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "调价单",
+				"icon": "&#xe609;",
+				"href": "page/kucun/kc_tiaojia.html",
+				"spread": false,
+				"target": ""
+			}
+		]
+	},
+	{
+		"title": "账款管理",
+		"icon": "&#xe630;",
+		"href": "",
 		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "客户类别",
-		"icon": "&#xe609;",
-		"href": "page/ziliao/zl_kehuType.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "人员主文件",
-		"icon": "&#xe609;",
-		"href": "page/ziliao/zl_renyuan.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "物料主文件",
-		"icon": "&#xe609;",
-		"href": "page/ziliao/zl_wuliao.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "物料类别",
-		"icon": "&#xe609;",
-		"href": "page/ziliao/zl_wuliaoType.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "计量单位",
-		"icon": "&#xe609;",
-		"href": "page/ziliao/zl_jiliangdanwei.html",
-		"spread": false,
-		"target": ""
-	  }
-	]
-  },
-  {
-	"title": "采购管理",
-	"icon": "&#xe630;",
-	"href": "",
-	"spread": false,
-	"children": [
-	  {
-		"title": "采购订单",
-		"icon": "&#xe609;",
-		"href": "page/caigou/cg_caigou.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "采购询价单",
-		"icon": "&#xe609;",
-		"href": "page/caigou/cg_xunjia.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "采购请购单",
-		"icon": "&#xe609;",
-		"href": "page/caigou/cg_qinggou.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "采购入库单",
-		"icon": "&#xe609;",
-		"href": "page/caigou/cg_ruku.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "采购退货单",
-		"icon": "&#xe609;",
-		"href": "page/caigou/cg_tuihuo.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "采购分摊作业",
-		"icon": "&#xe609;",
-		"href": "page/caigou/cg_fentan.html",
-		"spread": false,
-		"target": ""
-	  }
-	]
-  },
-  {
-	"title": "销售管理",
-	"icon": "&#xe630;",
-	"href": "",
-	"spread": false,
-	"children": [
-	  {
-		"title": "销售报价单",
-		"icon": "&#xe609;",
-		"href": "page/xiaoshou/xs_baojia.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "销售订单",
-		"icon": "&#xe609;",
-		"href": "page/xiaoshou/xs_xiaoshou.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "销售出库单",
-		"icon": "&#xe609;",
-		"href": "page/xiaoshou/xs_chuku.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "销售退货单",
-		"icon": "&#xe609;",
-		"href": "page/xiaoshou/xs_tuihuo.html",
-		"spread": false,
-		"target": ""
-	  }
-	]
-  },
-  {
-	"title": "库存管理",
-	"icon": "&#xe630;",
-	"href": "",
-	"spread": false,
-	"children": [
-	  {
-		"title": "调拨单",
-		"icon": "&#xe609;",
-		"href": "page/kucun/kc_diaobo.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "盘点单",
-		"icon": "&#xe609;",
-		"href": "page/kucun/kc_pandian.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "调价单",
-		"icon": "&#xe609;",
-		"href": "page/kucun/kc_tiaojia.html",
-		"spread": false,
-		"target": ""
-	  }
-	]
-  },
-  {
-	"title": "账款管理",
-	"icon": "&#xe630;",
-	"href": "",
-	"spread": false,
-	"children": [
-	  {
-		"title": "预收款单",
-		"icon": "&#xe609;",
-		"href": "page/zhangkuan/zk_yuShouKuan.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "预付款单",
-		"icon": "&#xe609;",
-		"href": "page/zhangkuan/zk_yuFuKuan.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "应收冲款单",
-		"icon": "&#xe609;",
-		"href": "page/zhangkuan/zk_yingShouChongKuan.html",
-		"spread": false,
-		"target": ""
-	  },
-	  {
-		"title": "应付冲款单",
-		"icon": "&#xe609;",
-		"href": "page/zhangkuan/zk_yingFuChongKuan.html",
-		"spread": false,
-		"target": ""
-	  }
-	]
-  }
+		"children": [
+			{
+				"title": "预收款单",
+				"icon": "&#xe609;",
+				"href": "page/zhangkuan/zk_yuShouKuan.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "预付款单",
+				"icon": "&#xe609;",
+				"href": "page/zhangkuan/zk_yuFuKuan.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "应收冲款单",
+				"icon": "&#xe609;",
+				"href": "page/zhangkuan/zk_yingShouChongKuan.html",
+				"spread": false,
+				"target": ""
+			},
+			{
+				"title": "应付冲款单",
+				"icon": "&#xe609;",
+				"href": "page/zhangkuan/zk_yingFuChongKuan.html",
+				"spread": false,
+				"target": ""
+			}
+		]
+	}
 ]

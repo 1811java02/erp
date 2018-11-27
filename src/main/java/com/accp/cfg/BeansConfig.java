@@ -40,9 +40,9 @@ public class BeansConfig {
 		types.add(MediaType.APPLICATION_JSON_UTF8);
 		fjhmc.setSupportedMediaTypes(types);
 		fjhmc.setFeatures(SerializerFeature.WriteEnumUsingToString, SerializerFeature.WriteMapNullValue,
-				SerializerFeature.QuoteFieldNames, SerializerFeature.PrettyFormat,
-				SerializerFeature.WriteDateUseDateFormat, SerializerFeature.WriteNullNumberAsZero,
-				SerializerFeature.WriteNullStringAsEmpty, SerializerFeature.DisableCircularReferenceDetect);
+			SerializerFeature.QuoteFieldNames, SerializerFeature.PrettyFormat,
+			SerializerFeature.WriteDateUseDateFormat, SerializerFeature.WriteNullNumberAsZero,
+			SerializerFeature.WriteNullStringAsEmpty, SerializerFeature.DisableCircularReferenceDetect);
 		return new HttpMessageConverters(fjhmc);
 	}
 }

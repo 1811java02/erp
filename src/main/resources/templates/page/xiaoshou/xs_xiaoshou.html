@@ -5,7 +5,7 @@
 	<title>销售订单</title>
 	<link rel="stylesheet" href="../../layui/css/layui.css">
 </head>
-<body style="width: 1000px;padding: 10px;">
+<body style="width: 100%;padding: 10px;box-sizing: border-box;min-width: 900px;">
 <div>
 	<form class="layui-form">
 		<div class="layui-form-item">
@@ -19,7 +19,7 @@
 				<label class="layui-form-label">单据日期</label>
 				<div class="layui-input-inline">
 					<input style="width: 250px" type="text" class="layui-input"
-						   placeholder="yyyy-MM-dd" onclick="layui.laydate({elem:this});">
+					       placeholder="yyyy-MM-dd" onclick="layui.laydate({elem:this});">
 				</div>
 			</div>
 		</div>
@@ -149,8 +149,8 @@
 						<label class="layui-form-label">收款日期</label>
 						<div class="layui-input-inline">
 							<input style="width: 250px" type="text" class="layui-input"
-								   placeholder="yyyy-MM-dd"
-								   onclick="layui.laydate({elem:this});">
+							       placeholder="yyyy-MM-dd"
+							       onclick="layui.laydate({elem:this});">
 						</div>
 					</div>
 				</div>
@@ -165,8 +165,8 @@
 						<label class="layui-form-label">账款月份</label>
 						<div class="layui-input-inline">
 							<input style="width: 250px" type="text" class="layui-input"
-								   placeholder="yyyy-MM-dd"
-								   onclick="layui.laydate({elem:this,type: 'month'});">
+							       placeholder="yyyy-MM-dd"
+							       onclick="layui.laydate({elem:this,type: 'month'});">
 						</div>
 					</div>
 				</div>
@@ -208,7 +208,7 @@
 					<label class="layui-form-label">备注</label>
 					<div class="layui-input-block">
 						<textarea name="desc" placeholder="请输入内容"
-								  class="layui-textarea"></textarea>
+							  class="layui-textarea"></textarea>
 					</div>
 				</div>
 			</div>
