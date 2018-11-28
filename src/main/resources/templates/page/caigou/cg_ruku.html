@@ -189,11 +189,11 @@
 							<input type="text" class="layui-input">
 						</div>
 					</div>
-				</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label">备注</label>
-					<div class="layui-input-block">
-						<textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+					<div class="layui-form-item layui-form-text">
+						<label class="layui-form-label">备注</label>
+						<div class="layui-input-block">
+							<textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -230,24 +230,40 @@
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<div class="layui-inline">
-				<button class="layui-btn layui-btn-primary">
-					查询
-					<i class="layui-icon" style="font-size:16px; color:black;">&#xe625;</i>
-				</button>
-			</div>
-			<div class="layui-inline">
-				<button class="layui-btn layui-btn-primary">
-					转单
-					<i class="layui-icon">&#xe625;</i>
-				</button>
-			</div>
-			<div class="layui-inline">
-				<button class="layui-btn layui-btn-primary">
-					功能
-					<i class="layui-icon">&#xe625;</i>
-				</button>
-			</div>
+			<ul class="layui-nav" lay-filter="" style="background-color: white;padding-left: 0;">
+				<li class="layui-nav-item" style="margin-right: 20px;">
+					<button class="layui-btn layui-btn-primary" style="padding: 0 30px 0 10px;">
+						查询
+						<span class="layui-nav-more" style="right: 10px;"></span>
+					</button>
+					<dl class="layui-nav-child"> <!-- 二级菜单 -->
+						<dd><a href="">历史交易查询</a></dd>
+						<dd><a href="">分摊费用明细</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item" style="margin-right: 20px;">
+					<button class="layui-btn layui-btn-primary" style="padding: 0 30px 0 10px;">
+						转单
+						<span class="layui-nav-more" style="right: 10px;"></span>
+					</button>
+					<dl class="layui-nav-child"> <!-- 二级菜单 -->
+						<dd><a href="">采购询价转入</a></dd>
+						<dd><a href="">采购订单转入</a></dd>
+						<dd><a href="">进口商业发票转入</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item">
+					<button class="layui-btn layui-btn-primary" style="padding: 0 30px 0 10px;">
+						功能
+						<span class="layui-nav-more" style="right: 10px;"></span>
+					</button>
+					<dl class="layui-nav-child"> <!-- 二级菜单 -->
+						<dd><a href="">批号设定</a></dd>
+						<dd><a href="">条码打印</a></dd>
+						<dd><a href="">批次变更单价</a></dd>
+					</dl>
+				</li>
+			</ul>
 		</div>
 	</from>
 </div>

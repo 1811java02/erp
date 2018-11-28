@@ -14,28 +14,6 @@
 	<link rel="stylesheet" href="layui/css/layui.css" media="all"/>
 	<link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all"/>
 	<link rel="stylesheet" href="css/main.css" media="all"/>
-	<style>
-		.menu-list {
-			float: left;
-			width: 20px;
-			height: 20px;
-			margin: 15px 15px 0 0;
-			font-size: 17px;
-			text-align: center;
-			padding: 5px 5px;
-			color: #fff;
-			background-color: #1AA094;
-		}
-
-		.menu-list:hover {
-			color: #fff;
-		}
-
-		.menu-list[disabled] {
-			cursor: default;
-			background-color: #aaaaaa;
-		}
-	</style>
 </head>
 <body class="main_body">
 <div class="layui-layout layui-layout-admin">
@@ -45,31 +23,45 @@
 			<a href="#" class="logo">iERP</a>
 			<!-- 显示/隐藏菜单 -->
 			<a href="javascript:;" class="iconfont hideMenu icon-menu1"></a>
-			<!-- 操作按钮 -->
-			<a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
-				<i class="layui-icon">&#xe603;</i>
-			</a>
-			<a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
-				<i class="layui-icon">&#xe602;</i>
-			</a>
-			<a href="javascript:;" class="iconfont menu-list" title="新增" id="menu-add">
-				<i class="layui-icon">&#xe654;</i>
-			</a>
-			<a href="javascript:;" class="iconfont menu-list" title="修改" id="menu-update" disabled>
-				<i class="layui-icon">&#xe642;</i>
-			</a>
-			<a href="javascript:;" class="iconfont menu-list" title="删除" id="menu-delete">
-				<i class="layui-icon">&#xe640;</i>
-			</a>
-			<a href="javascript:;" class="iconfont menu-list" title="审核" id="menu-adopt" disabled="">
-				<i class="layui-icon">&#xe605;</i>
-			</a>
-			<a href="javascript:;" class="iconfont menu-list" title="反审核" id="menu-refuse">
-				<i class="layui-icon">&#x1006;</i>
-			</a>
-			<a href="javascript:;" class="iconfont menu-list" title="刷新" id="menu-refresh">
-				<i class="layui-icon">&#x1002;</i>
-			</a>
+			<!-- 天气信息 -->
+			<div class="weather" pc>
+				<div id="tp-weather-widget"></div>
+				<script>(function (T, h, i, n, k, P, a, g, e) {
+					g = function () {
+						P = h.createElement(i);
+						a = h.getElementsByTagName(i)[0];
+						P.src = k;
+						P.charset = "utf-8";
+						P.async = 1;
+						a.parentNode.insertBefore(P, a)
+					};
+					T["ThinkPageWeatherWidgetObject"] = n;
+					T[n] || (T[n] = function () {
+						(T[n].q = T[n].q || []).push(arguments)
+					});
+					T[n].l = +new Date();
+					if (T.attachEvent) {
+						T.attachEvent("onload", g)
+					} else {
+						T.addEventListener("load", g, false)
+					}
+				}(window, document, "script", "tpwidget", "//widget.seniverse.com/widget/chameleon.js"))</script>
+				<script>tpwidget("init", {
+					"flavor": "slim",
+					"location": "WX4FBXXFKE4F",
+					"geolocation": "enabled",
+					"language": "zh-chs",
+					"unit": "c",
+					"theme": "chameleon",
+					"container": "tp-weather-widget",
+					"bubble": "disabled",
+					"alarmType": "badge",
+					"color": "#FFFFFF",
+					"uid": "U9EC08A15F",
+					"hash": "039da28f5581f4bcb5c799fb4cdfb673"
+				});
+				tpwidget("show");</script>
+			</div>
 			<!-- 顶部右侧菜单 -->
 			<ul class="layui-nav top_menu">
 				<li class="layui-nav-item showNotice" id="showNotice" pc>
