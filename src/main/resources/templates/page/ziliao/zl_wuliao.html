@@ -14,6 +14,52 @@
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
 <form class="layui-form">
 	<div class="layui-form-item">
+		<div class="layui-input-block" style="margin-left: 0">
+			<ul class="layui-nav" style="background-color: transparent;">
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
+						<i class="layui-icon">&#xe603;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
+						<i class="layui-icon">&#xe602;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="新增" id="menu-add">
+						<i class="layui-icon">&#xe654;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="修改" id="menu-update" disabled>
+						<i class="layui-icon">&#xe642;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="删除" id="menu-delete">
+						<i class="layui-icon">&#xe640;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="审核" id="menu-adopt" disabled="">
+						<i class="layui-icon">&#xe605;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="反审核" id="menu-refuse">
+						<i class="layui-icon">&#x1006;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="刷新" id="menu-refresh">
+						<i class="layui-icon">&#x1002;</i>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="layui-form-item">
 		<label class="layui-form-label">物料编号</label>
 		<div class="layui-input-inline">
 			<input type="text" class="layui-input">
@@ -58,7 +104,7 @@
 		<li lay-id="4">交易资料</li>
 		<li lay-id="5">物料描述</li>
 	</ul>
-	<div class="layui-tab-content" style="height: 500px;overflow: scroll;padding: 0;">
+	<div class="layui-tab-content" style="height: 510px;overflow: scroll;padding: 0;">
 		<div class="layui-tab-item layui-show" style="padding-top:10px;">
 			<form class="layui-form">
 				<div class="layui-form-item">
@@ -285,30 +331,6 @@
 				</div>
 			</form>
 		</div>
-	</div>
-</div>
-<div class="layui-form-item" style="margin-bottom: 200px;">
-	<div class="layui-input-block" style="margin: 0;">
-		<ul class="layui-nav" style="background-color: transparent">
-			<li class="layui-nav-item">
-				<a href="javascript:;">设定</a>
-				<dl class="layui-nav-child">
-					<dd><a href="">物料期初设定</a></dd>
-					<dd><a href="">期初批号设定</a></dd>
-					<dd><a href="">原厂物料设定</a></dd>
-					<dd><a href="">物料组合设定</a></dd>
-					<dd><a href="">物料图片设定</a></dd>
-				</dl>
-			</li>
-			<li class="layui-nav-item">
-				<a href="javascript:;">功能</a>
-				<dl class="layui-nav-child">
-					<dd><a href="">条码打印</a></dd>
-					<dd><a href="">询价查询</a></dd>
-					<dd><a href="">物料数据校正</a></dd>
-				</dl>
-			</li>
-		</ul>
 	</div>
 </div>
 
