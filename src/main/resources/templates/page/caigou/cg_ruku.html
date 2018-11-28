@@ -8,11 +8,73 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link rel="stylesheet" href="../../layui/css/layui.css"/>
+	<link rel="stylesheet" href="../../css/common.css">
 </head>
 
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
 <div id="Purchase">
 	<from class="layui-form layui-form-pane">
+		<div class="layui-form-item">
+			<div class="layui-input-block" style="margin-left: 0">
+				<ul class="layui-nav" style="background-color: transparent;">
+					<li class="layui-nav-item">
+						<a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
+							<i class="layui-icon">&#xe603;</i>
+						</a>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
+							<i class="layui-icon">&#xe602;</i>
+						</a>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;" class="iconfont menu-list" title="新增" id="menu-add">
+							<i class="layui-icon">&#xe654;</i>
+						</a>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;" class="iconfont menu-list" title="修改" id="menu-update" disabled>
+							<i class="layui-icon">&#xe642;</i>
+						</a>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;" class="iconfont menu-list" title="删除" id="menu-delete">
+							<i class="layui-icon">&#xe640;</i>
+						</a>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;" class="iconfont menu-list" title="审核" id="menu-adopt" disabled="">
+							<i class="layui-icon">&#xe605;</i>
+						</a>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;" class="iconfont menu-list" title="反审核" id="menu-refuse">
+							<i class="layui-icon">&#x1006;</i>
+						</a>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;" class="iconfont menu-list" title="刷新" id="menu-refresh">
+							<i class="layui-icon">&#x1002;</i>
+						</a>
+					</li>
+					<li class="layui-nav-item" style="margin-left: 20px;">
+						<a href="javascript:;">查询</a>
+						<dl class="layui-nav-child">
+							<dd><a href="">历史交易查询</a></dd>
+							<dd><a href="">分摊费用明细</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;">转单</a>
+						<dl class="layui-nav-child">
+							<dd><a href="">采购询价转入</a></dd>
+							<dd><a href="">采购订单转入</a></dd>
+							<dd><a href="">进口商业发票转入</a></dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">供应商</label>
 			<div class="layui-input-inline">
@@ -228,42 +290,6 @@
 				<input type="text" name="" lay-verify="title" autocomplete="off"
 				       class="layui-input"/>
 			</div>
-		</div>
-		<div class="layui-form-item">
-			<ul class="layui-nav" lay-filter="" style="background-color: white;padding-left: 0;">
-				<li class="layui-nav-item" style="margin-right: 20px;">
-					<button class="layui-btn layui-btn-primary" style="padding: 0 30px 0 10px;">
-						查询
-						<span class="layui-nav-more" style="right: 10px;"></span>
-					</button>
-					<dl class="layui-nav-child"> <!-- 二级菜单 -->
-						<dd><a href="">历史交易查询</a></dd>
-						<dd><a href="">分摊费用明细</a></dd>
-					</dl>
-				</li>
-				<li class="layui-nav-item" style="margin-right: 20px;">
-					<button class="layui-btn layui-btn-primary" style="padding: 0 30px 0 10px;">
-						转单
-						<span class="layui-nav-more" style="right: 10px;"></span>
-					</button>
-					<dl class="layui-nav-child"> <!-- 二级菜单 -->
-						<dd><a href="">采购询价转入</a></dd>
-						<dd><a href="">采购订单转入</a></dd>
-						<dd><a href="">进口商业发票转入</a></dd>
-					</dl>
-				</li>
-				<li class="layui-nav-item">
-					<button class="layui-btn layui-btn-primary" style="padding: 0 30px 0 10px;">
-						功能
-						<span class="layui-nav-more" style="right: 10px;"></span>
-					</button>
-					<dl class="layui-nav-child"> <!-- 二级菜单 -->
-						<dd><a href="">批号设定</a></dd>
-						<dd><a href="">条码打印</a></dd>
-						<dd><a href="">批次变更单价</a></dd>
-					</dl>
-				</li>
-			</ul>
 		</div>
 	</from>
 </div>

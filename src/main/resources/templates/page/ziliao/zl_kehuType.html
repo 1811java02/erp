@@ -4,9 +4,56 @@
 	<meta charset="UTF-8">
 	<title>客户类别</title>
 	<link rel="stylesheet" href="../../layui/css/layui.css">
+	<link rel="stylesheet" href="../../css/common.css">
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
 <form class="layui-form">
+	<div class="layui-form-item">
+		<div class="layui-input-block" style="margin-left: 0">
+			<ul class="layui-nav" style="background-color: transparent;">
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
+						<i class="layui-icon">&#xe603;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
+						<i class="layui-icon">&#xe602;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="新增" id="menu-add">
+						<i class="layui-icon">&#xe654;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="修改" id="menu-update" disabled>
+						<i class="layui-icon">&#xe642;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="删除" id="menu-delete">
+						<i class="layui-icon">&#xe640;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="审核" id="menu-adopt" disabled="">
+						<i class="layui-icon">&#xe605;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="反审核" id="menu-refuse">
+						<i class="layui-icon">&#x1006;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="刷新" id="menu-refresh">
+						<i class="layui-icon">&#x1002;</i>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">类别编号</label>
 		<div class="layui-input-block">

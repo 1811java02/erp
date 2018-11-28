@@ -8,9 +8,56 @@
 	<link rel="stylesheet" href="../../css/zhangkuan/zk_yingShouChongKuan.css">
 	<style>
 	</style>
+	<link rel="stylesheet" href="../../css/common.css">
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
 <form class="layui-form" action="">
+	<div class="layui-form-item">
+		<div class="layui-input-block" style="margin-left: 0">
+			<ul class="layui-nav" style="background-color: transparent;">
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
+						<i class="layui-icon">&#xe603;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
+						<i class="layui-icon">&#xe602;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="新增" id="menu-add">
+						<i class="layui-icon">&#xe654;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="修改" id="menu-update" disabled>
+						<i class="layui-icon">&#xe642;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="删除" id="menu-delete">
+						<i class="layui-icon">&#xe640;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="审核" id="menu-adopt" disabled="">
+						<i class="layui-icon">&#xe605;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="反审核" id="menu-refuse">
+						<i class="layui-icon">&#x1006;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="刷新" id="menu-refresh">
+						<i class="layui-icon">&#x1002;</i>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">客户</label>
 		<div class="layui-input-inline">
@@ -92,7 +139,6 @@
 		<ul class="layui-tab-title">
 			<li class="layui-this">内容</li>
 			<li>备注</li>
-
 		</ul>
 		<div class="layui-tab-content" style="height: 200px;">
 			<div class="layui-tab-item layui-show">
@@ -114,8 +160,6 @@
 
 					</tbody>
 				</table>
-
-
 			</div>
 			<div class="layui-tab-item ">
 				<div class="layui-form-item">
@@ -141,13 +185,9 @@
 						</div>
 					</div>
 				</div>
-
-
 			</div>
 		</div>
 	</div>
-
-
 	<div class="layui-form-item">
 		<label class="layui-form-label">所属部门</label>
 		<div class="layui-input-inline">
@@ -172,35 +212,6 @@
 			       class="layui-input">
 		</div>
 	</div>
-
-	</div>
-
-	<div></div>
-	<div></div>
-	<div></div>
-	<ul class="layui-nav layui-nav-tree" lay-filter="test">
-		<li class="layui-nav-item">
-			<a href="javascript:;">功能</a>
-			<dl class="layui-nav-child">
-				<dd><a href="">1</a></dd>
-				<dd><a href="">2</a></dd>
-				<dd><a href="">3</a></dd>
-			</dl>
-		</li>
-
-	</ul>
-	<ul class="layui-nav layui-nav-tree" lay-filter="test">
-		<li class="layui-nav-item">
-			<a href="javascript:;">自动计算</a>
-			<dl class="layui-nav-child">
-				<dd><a href="">1</a></dd>
-				<dd><a href="">2</a></dd>
-				<dd><a href="">3</a></dd>
-			</dl>
-		</li>
-
-	</ul>
-
 </form>
 
 <script src="../../layui/lay/dest/layui.all.js"></script>

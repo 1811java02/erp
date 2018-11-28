@@ -1,0 +1,11 @@
+.layui-nav{
+	background-color: transparent;
+}
+
+.layui-nav .layui-nav-item a, .layui-nav .layui-nav-item a:hover {
+	color: black;
+}
+
+.layui-nav .layui-this:after {
+	display: none;
+}
