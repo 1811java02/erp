@@ -5,4 +5,7 @@
 	<select id="queryDsproduct" resultType="tdsproduct">
 		select * from t_dsproduct
 	</select>
+	<select id="queryDsproductclass" resultType="tdsproductclass">
+		select * from t_dsproductclass
+	</select>
 </mapper>
