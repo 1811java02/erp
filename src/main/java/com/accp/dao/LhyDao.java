@@ -1,4 +1,9 @@
 package com.accp.dao;
 
-public class LhyDao {
+import com.accp.pojo.TDsproduct;
+
+import java.util.List;
+
+public interface LhyDao {
+	List<TDsproduct> queryDsproduct();
 }
