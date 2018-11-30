@@ -157,7 +157,8 @@
 					</div>
 					<label class="layui-form-label">税率</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input" id="busitaxrate">
+						<input style="width: 90%;float: left;" type="text" class="layui-input" id="busitaxrate">
+						<span style="width: 5%;float:left;padding-left: 5px;line-height: 38px;">%</span>
 					</div>
 				</div>
 				<div class="layui-form-item">
@@ -211,27 +212,27 @@
 					</div>
 					<label class="layui-form-label">低于安全存量</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="low">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">期初总数量</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="snum">
 					</div>
 					<label class="layui-form-label">现有总存量</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="nnum">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">平均成本</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="sprice">
 					</div>
 					<label class="layui-form-label">现行平均总成本</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="nprice">
 					</div>
 				</div>
 				<div class="layui-form-item">
@@ -241,17 +242,17 @@
 					</div>
 					<label class="layui-form-label">标准总成本</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="bstdcostAll">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">期初总成本</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="samount">
 					</div>
 					<label class="layui-form-label">现行总成本</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="namount">
 					</div>
 				</div>
 			</form>
@@ -266,7 +267,7 @@
 					<th>现有存量</th>
 				</tr>
 				</thead>
-				<tbody>
+				<tbody id="list">
 				</tbody>
 			</table>
 		</div>
@@ -344,10 +345,21 @@
 	toPage();
 
 	function toPage(page) {
-		var index=layer.load(1);
+		var index = layer.load(1);
 		$.getJSON('/lhy/query/dsproduct', {page: page}, function (data) {
 			layer.close(index);
+			if (data.hasPreviousPage) {
+				$("#menu-prev").attr("onclick", "toPage(" + data.prePage + ")")
+			} else {
+				$("#menu-prev").removeAttr("onclick");
+			}
+			if (data.hasNextPage) {
+				$("#menu-next").attr("onclick", "toPage(" + data.nextPage + ")")
+			} else {
+				$("#menu-next").removeAttr("onclick");
+			}
 			var obj = data.list[0];
+			console.info(obj)
 			$("#prodid").val(obj.prodid);
 			$("#prodname").val(obj.prodname);
 			$("#classname").val(obj.classname);
@@ -364,7 +376,7 @@
 			$("#stdprice").val(obj.stdprice);
 			$("#currname").val(obj.currname);
 			$("#prodform").val(obj.prodform);
-			$("#priceoftax").val(obj.priceoftax);
+			$("#priceoftax").val(obj.priceoftax==1?'含税':'不含税');
 			$("#taxitemsname").val(obj.taxitemsname);
 			$("#busitaxrate").val(obj.busitaxrate);
 			$("#advancedays").val(obj.advancedays);
@@ -379,21 +391,35 @@
 			$("#udef1").val(obj.udef1);
 			$("#udef2").val(obj.udef2);
 			$("#proddesc").val(obj.proddesc);
-			if (data.hasPreviousPage) {
-				$("#menu-prev").attr("onclick", "toPage(" + data.prePage + ")")
-			}else{
-				$("#menu-prev").removeAttr("onclick");
-			}
-			if (data.hasNextPage) {
-				$("#menu-next").attr("onclick", "toPage(" + data.nextPage + ")")
-			}else{
-				$("#menu-next").removeAttr("onclick");
-			}
+			$("#list").empty();
+			var snum = 0, sprice = 0, samount = 0, nnum = 0, nprice = 0, namount = 0;
+			$(obj.dsdswareamount).each(function (i, obj) {
+				snum += obj.bquantity;
+				sprice += obj.bavgcost;
+				samount += obj.ballcost;
+				nnum += obj.quantity;
+				nprice += obj.cavgcost;
+				namount += obj.callcost;
+				var tr = $("<tr></tr>");
+				var td1 = $("<td></td>").text(obj.warehouse.wareid);
+				var td2 = $("<td></td>").text(obj.warehouse.warename);
+				var td3 = $("<td></td>").text(obj.bquantity);
+				var td4 = $("<td></td>").text(obj.quantity);
+				tr.append(td1, td2, td3, td4);
+				$("#list").append(tr);
+			})
+			$("#snum").val(snum);
+			$("#sprice").val(sprice);
+			$("#samount").val(samount);
+			$("#nnum").val(nnum);
+			$("#nprice").val(nprice);
+			$("#namount").val(namount);
+			$("#bstdcostAll").val(obj.bstdcost * nnum);
+			low=obj.safeqty-nnum;
+			low=low>0?low:0;
+			$("#low").val(low);
 		})
 	}
-
-	$("#classname").click(function () {
-	})
 </script>
 </body>
 </html>

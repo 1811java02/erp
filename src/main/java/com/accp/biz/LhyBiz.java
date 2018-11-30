@@ -1,7 +1,7 @@
 package com.accp.biz;
 
 import com.accp.dao.LhyDao;
-import com.accp.pojo.T_DSPRODUCT;
+import com.accp.vo.lhy.T_DSPRODUCT;
 import com.accp.pojo.T_DSPRODUCTCLASS;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

@@ -1,4 +1,5 @@
 package com.accp.dao;
 
-public class ZspDao {
+public interface ZspDao {
+      String get();
 }
