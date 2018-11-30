@@ -1,8 +1,8 @@
 package com.accp.action;
 
 import com.accp.biz.LhyBiz;
-import com.accp.pojo.TDsproduct;
-import com.accp.pojo.TDsproductclass;
+import com.accp.pojo.T_DSPRODUCT;
+import com.accp.pojo.T_DSPRODUCTCLASS;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +15,12 @@ public class LhyAction {
 	private LhyBiz biz;
 
 	@RequestMapping("/lhy/query/dsproduct")
-	public PageInfo<TDsproduct> queryDsproduct(@RequestParam(defaultValue = "1") Integer page) {
+	public PageInfo<T_DSPRODUCT> queryDsproduct(@RequestParam(defaultValue = "1") Integer page) {
 		return biz.queryDsproduct(page);
 	}
 
 	@RequestMapping("/lhy/query/dsproductclass")
-	public PageInfo<TDsproductclass> queryDsproductclass(@RequestParam(defaultValue = "1") Integer page) {
+	public PageInfo<T_DSPRODUCTCLASS> queryDsproductclass(@RequestParam(defaultValue = "1") Integer page) {
 		return biz.queryDsproductclass(page);
 	}
 }

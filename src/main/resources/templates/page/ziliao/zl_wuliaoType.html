@@ -135,7 +135,9 @@
 <script>
 	toPage();
 	function toPage(page) {
+		var index=layer.load(1);
 		$.getJSON('/lhy/query/dsproductclass', {page: page}, function (data) {
+			layer.close(index);
 			var obj=data.list[0];
 			console.info(obj)
 			$("#classid").val(obj.classid);
@@ -152,9 +154,13 @@
 			$("#mome").val(obj.mome);
 			if(data.hasPreviousPage){
 				$("#menu-prev").attr("onclick","toPage("+data.prePage+")")
+			}else{
+				$("#menu-prev").removeAttr("onclick");
 			}
 			if(data.hasNextPage){
 				$("#menu-next").attr("onclick","toPage("+data.nextPage+")")
+			}else{
+				$("#menu-next").removeAttr("onclick");
 			}
 		})
 	}

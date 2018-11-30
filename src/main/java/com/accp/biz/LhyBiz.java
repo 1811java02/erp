@@ -1,8 +1,8 @@
 package com.accp.biz;
 
 import com.accp.dao.LhyDao;
-import com.accp.pojo.TDsproduct;
-import com.accp.pojo.TDsproductclass;
+import com.accp.pojo.T_DSPRODUCT;
+import com.accp.pojo.T_DSPRODUCTCLASS;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +13,13 @@ public class LhyBiz {
 	@Autowired
 	private LhyDao dao;
 
-	public PageInfo<TDsproduct> queryDsproduct(int page) {
+	public PageInfo<T_DSPRODUCT> queryDsproduct(int page) {
 		PageHelper.startPage(page, 1);
-		return new PageInfo<TDsproduct>(dao.queryDsproduct());
+		return new PageInfo<T_DSPRODUCT>(dao.queryDsproduct());
 	}
 
-	public PageInfo<TDsproductclass> queryDsproductclass(int page) {
+	public PageInfo<T_DSPRODUCTCLASS> queryDsproductclass(int page) {
 		PageHelper.startPage(page, 1);
-		return new PageInfo<TDsproductclass>(dao.queryDsproductclass());
+		return new PageInfo<T_DSPRODUCTCLASS>(dao.queryDsproductclass());
 	}
 }
