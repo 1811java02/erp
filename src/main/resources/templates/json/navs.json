@@ -80,6 +80,13 @@
 				"href": "page/ziliao/zl_jiliangdanwei.html",
 				"spread": false,
 				"target": ""
+			},
+			{
+				"title": "单据类型设定",
+				"icon": "&#xe609;",
+				"href": "page/ziliao/zl_danjuleixing.html",
+				"spread": false,
+				"target": ""
 			}
 		]
 	},
