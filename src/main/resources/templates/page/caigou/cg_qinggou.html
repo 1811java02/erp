@@ -186,4 +186,13 @@
 </form>
 </body>
 <script src="../../layui/lay/dest/layui.all.js"></script>
+<script src="../../js/jquery-1.12.4.js"></script>
+<script>
+	$(function () {
+		$.post("/zsp/query/get",function (data) {
+			alert(data);
+        })
+    })
+
+</script>
 </html>
