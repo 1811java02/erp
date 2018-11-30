@@ -1,8 +1,6 @@
 package com.accp.biz;
 
 import com.accp.dao.LhyDao;
-import com.accp.pojo.TDsproduct;
-import com.accp.pojo.TDsproductclass;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
