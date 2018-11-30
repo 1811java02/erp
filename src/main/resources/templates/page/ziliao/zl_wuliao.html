@@ -6,6 +6,11 @@
 	<link rel="stylesheet" href="../../layui/css/layui.css">
 	<link rel="stylesheet" href="../../css/ziliao/zl_wuliao.css">
 	<link rel="stylesheet" href="../../css/common.css">
+	<style>
+		body .layui-layer-loading .layui-layer-content {
+			background: url('../../layui/css/modules/layer/default/loading-1.gif') no-repeat;
+		}
+	</style>
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
 <form class="layui-form">
@@ -337,9 +342,12 @@
 <script src="../../js/ziliao/zl_wuliao.js"></script>
 <script>
 	toPage();
+
 	function toPage(page) {
+		var index=layer.load(1);
 		$.getJSON('/lhy/query/dsproduct', {page: page}, function (data) {
-			var obj=data.list[0];
+			layer.close(index);
+			var obj = data.list[0];
 			$("#prodid").val(obj.prodid);
 			$("#prodname").val(obj.prodname);
 			$("#classname").val(obj.classname);
@@ -371,14 +379,21 @@
 			$("#udef1").val(obj.udef1);
 			$("#udef2").val(obj.udef2);
 			$("#proddesc").val(obj.proddesc);
-			if(data.hasPreviousPage){
-				$("#menu-prev").attr("onclick","toPage("+data.prePage+")")
+			if (data.hasPreviousPage) {
+				$("#menu-prev").attr("onclick", "toPage(" + data.prePage + ")")
+			}else{
+				$("#menu-prev").removeAttr("onclick");
 			}
-			if(data.hasNextPage){
-				$("#menu-next").attr("onclick","toPage("+data.nextPage+")")
+			if (data.hasNextPage) {
+				$("#menu-next").attr("onclick", "toPage(" + data.nextPage + ")")
+			}else{
+				$("#menu-next").removeAttr("onclick");
 			}
 		})
 	}
+
+	$("#classname").click(function () {
+	})
 </script>
 </body>
 </html>
