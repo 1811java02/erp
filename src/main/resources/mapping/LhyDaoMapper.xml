@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.LhyDao">
-	<select id="queryDsproduct" resultType="t_dsproduct">
+	<resultMap id="dsdswareamountMap" type="com.accp.vo.lhy.T_DSDSWAREAMOUNT">
+		<result property="warehouseid" column="warehouseid"></result>
+		<association property="warehouse" column="warehouseid" select="selectWarehouse"></association>
+	</resultMap>
+	<resultMap id="dsproductMap" type="com.accp.vo.lhy.T_DSPRODUCT">
+		<id property="prodid" column="prodid"></id>
+		<collection property="dsdswareamount" column="prodid" select="selectDsdswareamount"></collection>
+	</resultMap>
+
+	<select id="selectWarehouse" resultType="t_warehouse">
+		select * from t_warehouse where wareid=#{0}
+	</select>
+	<select id="selectDsdswareamount" resultMap="dsdswareamountMap">
+		select * from t_dsdswareamount where prodid=#{0}
+	</select>
+
+	<select id="queryDsproduct" resultMap="dsproductMap">
 		select * from t_dsproduct
 	</select>
 	<select id="queryDsproductclass" resultType="t_dsproductclass">
