@@ -17,7 +17,7 @@ public class T_TAKEINADVANCE {
 
     private Double prepaidamount;
 
-    private String abstract;
+    private String remarks;
 
     public String getFundbillid() {
         return fundbillid;
@@ -83,11 +83,11 @@ public class T_TAKEINADVANCE {
         this.prepaidamount = prepaidamount;
     }
 
-    public String getAbstract() {
-        return abstract;
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setAbstract(String abstract) {
-        this.abstract = abstract == null ? null : abstract.trim();
+    public void setRemarks(String remarks) {
+        this.remarks = remarks == null ? null : remarks.trim();
     }
 }
