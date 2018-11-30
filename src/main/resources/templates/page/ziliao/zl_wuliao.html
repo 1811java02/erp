@@ -28,7 +28,8 @@
 					</a>
 				</li>
 				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="修改" id="menu-update" disabled>
+					<a href="javascript:;" class="iconfont menu-list" title="修改" id="menu-update"
+					   disabled>
 						<i class="layui-icon">&#xe642;</i>
 					</a>
 				</li>
@@ -38,7 +39,8 @@
 					</a>
 				</li>
 				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="审核" id="menu-adopt" disabled="">
+					<a href="javascript:;" class="iconfont menu-list" title="审核" id="menu-adopt"
+					   disabled="">
 						<i class="layui-icon">&#xe605;</i>
 					</a>
 				</li>
@@ -58,37 +60,37 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">物料编号</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
+			<input type="text" class="layui-input" id="prodid">
 		</div>
 		<label class="layui-form-label">物料类别</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
+			<input type="text" class="layui-input" id="classname">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">物料名称</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
+			<input type="text" class="layui-input" id="prodname">
 		</div>
 		<label class="layui-form-label">计量单位</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
+			<input type="text" class="layui-input" id="unit">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">规格型号</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
+			<input type="text" class="layui-input" id="prodsize">
 		</div>
 		<label class="layui-form-label">条形码编号</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
+			<input type="text" class="layui-input" id="barcodeid">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">英文名称</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
+			<input type="text" class="layui-input" id="engname">
 		</div>
 	</div>
 </form>
@@ -106,71 +108,71 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">建议售价</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="suggestprice">
 					</div>
 					<label class="layui-form-label">使用币别</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="currname">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">售价A</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="salespricea">
 					</div>
 					<label class="layui-form-label">物料形态</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="prodform">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">售价B</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="salespriceb">
 					</div>
 					<label class="layui-form-label">单价是否含税</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="priceoftax">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">售价C</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="salespricec">
 					</div>
 					<label class="layui-form-label">税目</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="taxitemsname">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">售价D</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="salespriced">
 					</div>
 					<label class="layui-form-label">税率</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="busitaxrate">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">售价E</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="salespricee">
 					</div>
 					<label class="layui-form-label">采购提前期</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="advancedays">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">标准进价</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="stdprice">
 					</div>
 					<label class="layui-form-label">主供应商</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="majorsuppliername">
 					</div>
 				</div>
 				<div class="layui-form-item">
@@ -185,7 +187,7 @@
 						</div>
 						<label class="layui-form-label">有效天数</label>
 						<div class="layui-input-inline">
-							<input type="text" class="layui-input">
+							<input type="text" class="layui-input" id="defvaklidday">
 						</div>
 					</div>
 				</div>
@@ -200,7 +202,7 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">安全存量</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="safeqty">
 					</div>
 					<label class="layui-form-label">低于安全存量</label>
 					<div class="layui-input-inline">
@@ -230,7 +232,7 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">标准成本</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="bstdcost">
 					</div>
 					<label class="layui-form-label">标准总成本</label>
 					<div class="layui-input-inline">
@@ -273,7 +275,7 @@
 					<label class="layui-form-label">最初出库日</label>
 					<div class="layui-input-inline">
 						<input type="text" class="layui-input"
-						       onclick="layui.laydate({elem: this})">
+						       onclick="layui.laydate({elem: this})" id="boutstockday">
 					</div>
 					<label class="layui-form-label">最近出库日</label>
 					<div class="layui-input-inline">
@@ -285,7 +287,7 @@
 					<label class="layui-form-label">最出入库日</label>
 					<div class="layui-input-inline">
 						<input type="text" class="layui-input"
-						       onclick="layui.laydate({elem: this})">
+						       onclick="layui.laydate({elem: this})" id="binstockday">
 					</div>
 					<label class="layui-form-label">最近入库日</label>
 					<div class="layui-input-inline">
@@ -296,12 +298,12 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">呆滞起记天数</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="sluggishdays">
 					</div>
 					<label class="layui-form-label">使用日期</label>
 					<div class="layui-input-inline">
 						<input type="text" class="layui-input"
-						       onclick="layui.laydate({elem: this})">
+						       onclick="layui.laydate({elem: this})" id="invaliddate">
 					</div>
 				</div>
 			</form>
@@ -311,18 +313,18 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">自定栏1</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="udef1">
 					</div>
 					<label class="layui-form-label">自定栏2</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
+						<input type="text" class="layui-input" id="udef2">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">物料说明</label>
 					<div class="layui-input-block">
 						<textarea name="desc" placeholder="请输入内容"
-							  class="layui-textarea"></textarea>
+							  class="layui-textarea" id="proddesc"></textarea>
 					</div>
 				</div>
 			</form>
@@ -331,6 +333,52 @@
 </div>
 
 <script src="../../layui/lay/dest/layui.all.js"></script>
+<script src="../../js/jquery-1.12.4.js"></script>
 <script src="../../js/ziliao/zl_wuliao.js"></script>
+<script>
+	toPage();
+	function toPage(page) {
+		$.getJSON('/lhy/query/dsproduct', {page: page}, function (data) {
+			var obj=data.list[0];
+			$("#prodid").val(obj.prodid);
+			$("#prodname").val(obj.prodname);
+			$("#classname").val(obj.classname);
+			$("#unit").val(obj.unit);
+			$("#prodsize").val(obj.prodsize);
+			$("#barcodeid").val(obj.barcodeid);
+			$("#engname").val(obj.engname);
+			$("#suggestprice").val(obj.suggestprice);
+			$("#salespricea").val(obj.salespricea);
+			$("#salespriceb").val(obj.salespriceb);
+			$("#salespricec").val(obj.salespricec);
+			$("#salespriced").val(obj.salespriced);
+			$("#salespricee").val(obj.salespricee);
+			$("#stdprice").val(obj.stdprice);
+			$("#currname").val(obj.currname);
+			$("#prodform").val(obj.prodform);
+			$("#priceoftax").val(obj.priceoftax);
+			$("#taxitemsname").val(obj.taxitemsname);
+			$("#busitaxrate").val(obj.busitaxrate);
+			$("#advancedays").val(obj.advancedays);
+			$("#majorsuppliername").val(obj.majorsuppliername);
+			$("#defvaklidday").val(obj.defvaklidday);
+			$("#safeqty").val(obj.safeqty);
+			$("#bstdcost").val(obj.bstdcost);
+			$("#boutstockday").val(obj.boutstockday);
+			$("#binstockday").val(obj.binstockday);
+			$("#sluggishdays").val(obj.sluggishdays);
+			$("#invaliddate").val(obj.invaliddate);
+			$("#udef1").val(obj.udef1);
+			$("#udef2").val(obj.udef2);
+			$("#proddesc").val(obj.proddesc);
+			if(data.hasPreviousPage){
+				$("#menu-prev").attr("onclick","toPage("+data.prePage+")")
+			}
+			if(data.hasNextPage){
+				$("#menu-next").attr("onclick","toPage("+data.nextPage+")")
+			}
+		})
+	}
+</script>
 </body>
 </html>

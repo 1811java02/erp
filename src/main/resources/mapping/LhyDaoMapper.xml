@@ -2,5 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.LhyDao">
-
+	<select id="queryDsproduct" resultType="tdsproduct">
+		select * from t_dsproduct
+	</select>
+	<select id="queryDsproductclass" resultType="tdsproductclass">
+		select * from t_dsproductclass
+	</select>
 </mapper>
