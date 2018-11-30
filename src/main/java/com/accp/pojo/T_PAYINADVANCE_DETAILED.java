@@ -11,8 +11,6 @@ public class T_PAYINADVANCE_DETAILED {
 
     private Double prepaidamount;
 
-    private String abstract;
-
     public String getFundbillid() {
         return fundbillid;
     }
@@ -51,13 +49,5 @@ public class T_PAYINADVANCE_DETAILED {
 
     public void setPrepaidamount(Double prepaidamount) {
         this.prepaidamount = prepaidamount;
-    }
-
-    public String getAbstract() {
-        return abstract;
-    }
-
-    public void setAbstract(String abstract) {
-        this.abstract = abstract == null ? null : abstract.trim();
     }
 }
