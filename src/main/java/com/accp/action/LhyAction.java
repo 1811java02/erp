@@ -1,7 +1,7 @@
 package com.accp.action;
 
 import com.accp.biz.LhyBiz;
-import com.accp.pojo.T_DSPRODUCT;
+import com.accp.vo.lhy.T_DSPRODUCT;
 import com.accp.pojo.T_DSPRODUCTCLASS;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;

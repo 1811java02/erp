@@ -1,7 +1,7 @@
 package com.accp.dao;
 
-import com.accp.pojo.T_DSPRODUCT;
 import com.accp.pojo.T_DSPRODUCTCLASS;
+import com.accp.vo.lhy.T_DSPRODUCT;
 
 import java.util.List;
 
