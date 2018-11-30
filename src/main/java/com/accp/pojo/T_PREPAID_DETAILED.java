@@ -1,6 +1,6 @@
 package com.accp.pojo;
 
-public class T_TAKEINADVANCE {
+public class T_PREPAID_DETAILED {
     private String fundbillid;
 
     private Integer linenumber;

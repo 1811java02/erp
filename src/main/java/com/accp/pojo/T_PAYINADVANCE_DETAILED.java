@@ -1,6 +1,6 @@
 package com.accp.pojo;
 
-public class T_TAKEINADVANCE {
+public class T_PAYINADVANCE_DETAILED {
     private String fundbillid;
 
     private Integer linenumber;
@@ -9,15 +9,7 @@ public class T_TAKEINADVANCE {
 
     private String sourcenumber;
 
-    private String sourceorder;
-
-    private String sourceordernumber;
-
-    private Double curprerecv;
-
     private Double prepaidamount;
-
-    private String remarks;
 
     public String getFundbillid() {
         return fundbillid;
@@ -51,43 +43,11 @@ public class T_TAKEINADVANCE {
         this.sourcenumber = sourcenumber == null ? null : sourcenumber.trim();
     }
 
-    public String getSourceorder() {
-        return sourceorder;
-    }
-
-    public void setSourceorder(String sourceorder) {
-        this.sourceorder = sourceorder == null ? null : sourceorder.trim();
-    }
-
-    public String getSourceordernumber() {
-        return sourceordernumber;
-    }
-
-    public void setSourceordernumber(String sourceordernumber) {
-        this.sourceordernumber = sourceordernumber == null ? null : sourceordernumber.trim();
-    }
-
-    public Double getCurprerecv() {
-        return curprerecv;
-    }
-
-    public void setCurprerecv(Double curprerecv) {
-        this.curprerecv = curprerecv;
-    }
-
     public Double getPrepaidamount() {
         return prepaidamount;
     }
 
     public void setPrepaidamount(Double prepaidamount) {
         this.prepaidamount = prepaidamount;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks == null ? null : remarks.trim();
     }
 }
