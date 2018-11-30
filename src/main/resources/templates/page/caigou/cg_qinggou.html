@@ -88,29 +88,34 @@
 			       autocomplete="off" class="layui-input">
 		</div>
 	</div>
-	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+	<div class="layui-tab layui-tab-card" id="tab3">
 		<ul class="layui-tab-title">
 			<li class="layui-this">内容</li>
 			<li>备注</li>
 		</ul>
-		<div class="layui-tab-content">
+		<div class="layui-tab-content" style="height: 200px;overflow: scroll">
 			<div class="layui-tab-item layui-show">
-				<table class="layui-table">
-					<colgroup>
-						<col width="150">
-						<col width="200">
-						<col>
-					</colgroup>
+				<table class="layui-table" style="width: 3000px">
 					<thead>
-					<tr>
-						<th>(栏号)</th>
-						<th>物料编号</th>
-						<th>(物料名称)</th>
-						<th>(物料型号)</th>
-						<th>(规格型号)</th>
-						<th>(单位名称)</th>
-						<th>数量</th>
-						<th>折前单价</th>
+					<tr >
+						<th style="width: 30px">（栏号）</th>
+						<th style="width: 30px">（物料编号）</th>
+						<th style="width: 30px">（物料名称）</th>
+						<th style="width: 30px">（规格型号）</th>
+						<th style="width: 30px">（单位名称）</th>
+						<th style="width: 30px">数量</th>
+						<th style="width: 30px">币别</th>
+						<th style="width: 30px">（标准进价）</th>
+						<th style="width: 30px">（标准进价金额）</th>
+						<th style="width: 30px">（币别）</th>
+						<th style="width: 30px">（单价）</th>
+						<th style="width: 30px">（进价金额）</th>
+						<th style="width: 30px">需求日期</th>
+						<th style="width: 30px">（建议采购日期）</th>
+						<th style="width: 30px">（未采购量）</th>
+						<th style="width: 30px">分录备注</th>
+						<th style="width: 30px">（来源单别）</th>
+						<th style="width: 30px">（来源单号）</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -121,34 +126,34 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">表头条文</label>
 					<div class="layui-input-inline">
-						<input type="text" name="title" required lay-verify="required"
-						       placeholder="请输入标题" autocomplete="off" class="layui-input">
+						<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+							   autocomplete="off" class="layui-input">
 					</div>
-					<label class="layui-form-label">自定义栏1</label>
+					<label class="layui-form-label">自定栏1</label>
 					<div class="layui-input-inline">
-						<select name="city" lay-verify="required">
-							<option value=""></option>
+						<select class="layui-select" lay-verify="required">
+							<option value="">请选择</option>
 						</select>
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">表尾条文</label>
 					<div class="layui-input-inline">
-						<input type="text" name="title" required lay-verify="required"
-						       placeholder="请输入标题" autocomplete="off" class="layui-input">
+						<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+							   autocomplete="off" class="layui-input">
 					</div>
-					<label class="layui-form-label">自定义栏二</label>
+					<label class="layui-form-label">自定栏二</label>
 					<div class="layui-input-inline">
-						<select name="city" lay-verify="required">
-							<option value=""></option>
+						<select class="layui-select" lay-verify="required">
+							<option value="">请选择</option>
 						</select>
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">备注</label>
 					<div class="layui-input-block">
-						<textarea name="desc" placeholder="请输入内容"
-							  class="layui-textarea"></textarea>
+							<textarea name="desc" placeholder="请输入内容"
+									  class="layui-textarea"></textarea>
 					</div>
 				</div>
 			</div>
