@@ -15,8 +15,8 @@ public class LhyAction {
 	private LhyBiz biz;
 
 	@RequestMapping("/lhy/query/dsproduct")
-	public PageInfo<T_DSPRODUCT> queryDsproduct(@RequestParam(defaultValue = "1") Integer page) {
-		return biz.queryDsproduct(page);
+	public PageInfo<T_DSPRODUCT> queryDsproduct(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "1") Integer size) {
+		return biz.queryDsproduct(page, size);
 	}
 
 	@RequestMapping("/lhy/query/dsproductclass")
