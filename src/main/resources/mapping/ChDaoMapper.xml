@@ -5,4 +5,8 @@
     <select id="queryDepartment" resultType="T_DEPARTMENT">
         SELECT * FROM T_DEPARTMENT
     </select>
+
+    <select id="queryBillType" resultType="T_BILLTYPE">
+        SELECT * FROM T_BILLTYPE
+    </select>
 </mapper>

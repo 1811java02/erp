@@ -1,5 +1,6 @@
 package com.accp.dao;
 
+import com.accp.pojo.T_BILLTYPE;
 import com.accp.pojo.T_DEPARTMENT;
 import java.util.List;
 
@@ -10,4 +11,11 @@ public interface ChDao {
      * @return
      */
     public List<T_DEPARTMENT> queryDepartment(int pageNum);
+
+    /**
+     * 查询单据类型
+     * @param pageNum 分页当前页
+     * @return
+     */
+    public List<T_BILLTYPE> queryBillType(int pageNum);
 }

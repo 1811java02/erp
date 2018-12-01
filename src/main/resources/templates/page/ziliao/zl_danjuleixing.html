@@ -7,17 +7,20 @@
     <link rel="stylesheet" href="../../css/common.css">
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
-<form class="layui-form layui-form-pane">
+<div id="BillType">
+<form class="layui-form layui-form-pane" v-for="(bt,index) in BillType.list">
 <div class="layui-form-item">
     <div class="layui-input-block" style="margin-left: 0">
         <ul class="layui-nav" style="background-color: transparent;">
             <li class="layui-nav-item">
-                <a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
+                <a href="javascript:;" class="iconfont menu-list"
+                   title="上一条" id="menu-prev" @click="showBillType(BillType.prePage==0?1:BillType.prePage)">
                     <i class="layui-icon">&#xe603;</i>
                 </a>
             </li>
             <li class="layui-nav-item">
-                <a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
+                <a href="javascript:;" class="iconfont menu-list"
+                   title="下一条" id="menu-next" @click="showBillType(BillType.nextPage==0?BillType.lastPage:BillType.nextPage)">
                     <i class="layui-icon">&#xe602;</i>
                 </a>
             </li>
@@ -57,48 +60,75 @@
 <div class="layui-form-item">
     <label class="layui-form-label">类型编号</label>
     <div class="layui-input-block">
-        <input type="text" name="" lay-verify="billtypeid" autocomplete="off" placeholder=""
-               class="layui-input">
+        <input type="text" name="" lay-verify="classid" autocomplete="off" placeholder=""
+               class="layui-input" v-model="bt.classid" readonly="readonly">
     </div>
 </div>
 <div class="layui-form-item">
     <label class="layui-form-label">类型名称</label>
     <div class="layui-input-block">
-        <input type="text" name="" lay-verify="billtypename" autocomplete="off" placeholder=""
-               class="layui-input">
+        <input type="text" name="" lay-verify="classname" autocomplete="off" placeholder=""
+               class="layui-input" v-model="bt.classname" readonly="readonly">
     </div>
 </div>
 <div class="layui-form-item">
     <label class="layui-form-label">单据名称</label>
     <div class="layui-input-block">
-        <select name="">
-            <option value="采购请购单">采购请购单</option>
-            <option value="采购入库单">采购入库单</option>
-            <option value="采购订单">采购订单</option>
-            <option value="销售订单">销售订单</option>
-            <option value="销售出库单">销售出库单</option>
-            <option value="其他入库单">其他入库单</option>
-            <option value="其他出库单">其他出库单</option>
-        </select>
+        <!--<select name="billtype" v-model="bt.billtype">-->
+            <!--<option value="采购请购单">采购请购单</option>-->
+            <!--<option value="采购入库单">采购入库单</option>-->
+            <!--<option value="采购订单">采购订单</option>-->
+            <!--<option value="销售订单">销售订单</option>-->
+            <!--<option value="销售出库单">销售出库单</option>-->
+            <!--<option value="其他入库单">其他入库单</option>-->
+            <!--<option value="其他出库单">其他出库单</option>-->
+        <!--</select>-->
+        <input type="text" name="" lay-verify="billtype" autocomplete="off" placeholder=""
+               class="layui-input" v-model="bt.billtype" readonly="readonly">
     </div>
 </div>
 <div class="layui-form-item">
     <label class="layui-form-label">英文名称</label>
     <div class="layui-input-block">
         <input type="text" name="" lay-verify="englishname" autocomplete="off" placeholder=""
-               class="layui-input">
+               class="layui-input" v-model="bt.engname" readonly="readonly">
     </div>
 </div>
 <div class="layui-form-item">
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">备注</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+            <textarea placeholder="请输入内容" class="layui-textarea" v-model="bt.memo" readonly="readonly"></textarea>
         </div>
     </div>
 </div>
 </form>
+</div>
 </body>
 <script type="text/javascript" src="../../js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="../../layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript" src="../../js/vue.js"></script>
+<script type="text/javascript">
+    var pageNum=1;
+    var layer = layui.layer;
+    var billtype=new Vue({
+        el:"#BillType",
+        data:{
+            BillType:{}
+        },
+        created:function () {
+            var billtype=this;
+            billtype.showBillType(pageNum)
+        },
+        methods:{
+            showBillType:function (n) {
+                var billtype=this;
+                jQuery.getJSON("/ch/queryBillType",{"pageNum":n},function (data) {
+                    console.info(data);
+                    billtype.BillType=data;
+                })
+            }
+        }
+    })
+</script>
 </html>

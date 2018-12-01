@@ -15,7 +15,6 @@ var dept=new Vue({
             jQuery.getJSON("/ch/queryDepartment",{"pageNum":n},function (data) {
                 console.info(data);
                 dept.department=data;
-                layer.msg(JSON.stringify(data));
             })
         }
     }

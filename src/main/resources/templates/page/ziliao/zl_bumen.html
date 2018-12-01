@@ -10,17 +10,19 @@
 
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
 <div id="Dept">
-<form class="layui-form layui-form-pane">
+<form class="layui-form layui-form-pane" v-for="(dept,index) in department.list">
 	<div class="layui-form-item">
 		<div class="layui-input-block" style="margin-left: 0">
 			<ul class="layui-nav" style="background-color: transparent;">
 				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
+					<a href="javascript:void(0);" class="iconfont menu-list"
+					   title="上一条" id="menu-prev" @click="showDepartment(department.prePage==0?1:department.prePage)">
 						<i class="layui-icon">&#xe603;</i>
 					</a>
 				</li>
 				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
+					<a href="javascript:void(0);" class="iconfont menu-list"
+					   title="下一条" id="menu-next" @click="showDepartment(department.nextPage==0?department.lastPage:department.nextPage)">
 						<i class="layui-icon">&#xe602;</i>
 					</a>
 				</li>
@@ -50,7 +52,7 @@
 					</a>
 				</li>
 				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="刷新" id="menu-refresh">
+					<a href="javascript:;" class="iconfont menu-list" title="刷新" id="menu-refresh" @click="showDepartment(1 )">
 						<i class="layui-icon">&#x1002;</i>
 					</a>
 				</li>
@@ -61,28 +63,29 @@
 		<label class="layui-form-label">部门编号</label>
 		<div class="layui-input-block">
 			<input type="text" name="" lay-verify="deptid" autocomplete="off" placeholder=""
-			       class="layui-input">
+			       class="layui-input" v-model="dept.departid" readonly="readonly">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">部门名称</label>
 		<div class="layui-input-block">
 			<input type="text" name="" lay-verify="deptname" autocomplete="off" placeholder=""
-			       class="layui-input">
+			       class="layui-input" v-model="dept.departname" readonly="readonly">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">英文名称</label>
 		<div class="layui-input-block">
 			<input type="text" name="" lay-verify="englishname" autocomplete="off" placeholder=""
-			       class="layui-input">
+			       class="layui-input" v-model="dept.engname" readonly="readonly">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<div class="layui-form-item layui-form-text">
 			<label class="layui-form-label">备注</label>
 			<div class="layui-input-block">
-				<textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+				<textarea placeholder="请输入内容" class="layui-textarea" v-model="dept.memo" readonly="readonly">
+				</textarea>
 			</div>
 		</div>
 	</div>
@@ -93,5 +96,4 @@
 <script type="text/javascript" src="../../layui/lay/dest/layui.all.js"></script>
 <script type="text/javascript" src="../../js/vue.js"></script>
 <script type="text/javascript" src="../../js/ziliao/zl_bumen.js"></script>
-
 </html>
