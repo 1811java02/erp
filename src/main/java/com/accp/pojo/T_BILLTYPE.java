@@ -1,11 +1,23 @@
 package com.accp.pojo;
 
-public class T_BILLTYPE extends T_BILLTYPEKey {
+public class T_BILLTYPE {
+    private String classid;
+
     private String classname;
+
+    private String billtype;
 
     private String engname;
 
     private String memo;
+
+    public String getClassid() {
+        return classid;
+    }
+
+    public void setClassid(String classid) {
+        this.classid = classid == null ? null : classid.trim();
+    }
 
     public String getClassname() {
         return classname;
@@ -13,6 +25,14 @@ public class T_BILLTYPE extends T_BILLTYPEKey {
 
     public void setClassname(String classname) {
         this.classname = classname == null ? null : classname.trim();
+    }
+
+    public String getBilltype() {
+        return billtype;
+    }
+
+    public void setBilltype(String billtype) {
+        this.billtype = billtype == null ? null : billtype.trim();
     }
 
     public String getEngname() {
