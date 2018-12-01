@@ -1,4 +1,4 @@
-.layui-nav{
+.layui-nav {
 	background-color: transparent;
 }
 
@@ -8,4 +8,11 @@
 
 .layui-nav .layui-this:after {
 	display: none;
+}
+
+.pic-ok {
+	background-size: 100px 100px;
+	background-image: url("../images/ok.png");
+	background-repeat: no-repeat;
+	background-position: calc(100% - 30px) 30px;
 }
