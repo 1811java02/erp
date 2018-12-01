@@ -96,7 +96,7 @@
 			<div class="layui-inline" style="margin-left: 20px">
 				<label class="layui-form-label">单据号码</label>
 				<div class="layui-input-inline">
-					<input style="width: 250px" type="text" class="layui-input">
+					<input id="billno" style="width: 250px" type="text" class="layui-input">
 				</div>
 			</div>
 		</div>
@@ -322,4 +322,18 @@
 </div>
 </body>
 <script src="../../layui/lay/dest/layui.all.js"></script>
+<script src="../../js/jquery-1.12.4.js"></script>
+<script>
+	$.ajax({
+        url:"/lyf/query/salesorder",
+        type:"get",
+        dataType:"json",
+        success:function(result){
+            $.each(result,function(i,obj){
+
+                $("#billno").val(obj.billno);
+            });
+        }
+    });
+</script>
 </html>

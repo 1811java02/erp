@@ -1,4 +1,10 @@
 package com.accp.dao;
 
-public class LyfDao {
+import com.accp.pojo.T_SALESORDER;
+
+import java.util.List;
+
+public interface LyfDao {
+
+    public List<T_SALESORDER> queryAllSalesorder();
 }
