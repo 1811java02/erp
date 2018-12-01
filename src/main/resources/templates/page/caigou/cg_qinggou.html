@@ -184,15 +184,31 @@
 		</div>
 	</div>
 </form>
+ <div id="app">
+	<input type="button" @click="get()" value="点击" />
+</div>
 </body>
 <script src="../../layui/lay/dest/layui.all.js"></script>
 <script src="../../js/jquery-1.12.4.js"></script>
+<script src="../../js/vue.js"></script>
 <script>
 	$(function () {
-		$.post("/zsp/query/get",function (data) {
+		/*$.post("/zsp/query/get",function (data) {
 			alert(data);
-        })
-    })
+        });*/
 
+
+    });
+    new Vue({
+        el : '#app',
+        /*            data : {
+                    },*/
+        methods:{
+            get:function(){
+                alert(2222)
+
+            }
+        }
+    })
 </script>
 </html>

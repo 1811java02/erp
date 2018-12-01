@@ -2,7 +2,80 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.ZspDao">
-       <select id="get" resultType="string">
-          select * from t_purchase_purchase_details where billno=20181129001
-       </select>
+    <resultMap id="getPurchasePurchaseMap" type="com.accp.vo.zsp.T_PURCHASE_PURCHASEVo">
+           <id column="billno" property="billno"/>
+           <result column="billstyleid" property="billstyleid"/>
+           <result column="billdate" property="billdate"/>
+           <result column="auditstatus" property="auditstatus"/>
+           <result column="billstatus" property="billstatus"/>
+           <result column="billstyleid" property="billstyleid"/>
+           <result column="departid" property="departid"/>
+           <result column="footerid" property="footerid"/>
+           <result column="footername" property="footername"/>
+           <result column="headerid" property="headerid"/>
+           <result column="headername" property="headername"/>
+           <result column="maker" property="maker"/>
+           <result column="makersign" property="makersign"/>
+           <result column="permitter" property="permitter"/>
+           <result column="permittersign" property="permittersign"/>
+           <result column="remark" property="remark"/>
+           <result column="salesid" property="salesid"/>
+           <result column="sumqty" property="sumqty"/>
+           <result column="userdef1" property="userdef1"/>
+            <collection property="list" column="billno" select="getTpurchasePurchaseDetails"/>
+    </resultMap>
+    <select id="getPurchasePurchase" resultMap="getPurchasePurchaseMap">
+         select * from t_purchase_purchase  ORDER BY billno asc
+     </select>
+    <select id="getTpurchasePurchaseDetails" resultType="com.accp.pojo.T_PURCHASE_PURCHASE_DETAILS">
+     select * from t_purchase_purchase_details where purchaseid =#{0}
+    </select>
+    <delete id="delPurchasePurchase">
+        delete from t_purchase_purchase where billno=#{billno}
+    </delete>
+    <insert id="addPurchasePurchase">
+        inser into  t_purchase_purchase(billno)values('')
+    </insert>
+    <update id="updatePurchasePurchase">
+        UPDATE t_purchase_purchase SET billstyleid='001' WHERE billno='';
+    </update>
+    <!-- updatePurchasePurchase  addPurchasePurchase  delPurchasePurchase-->
+    <!-- ***************************采购退货单********************************-->
+    <resultMap id="buyreturnVoMap" type="com.accp.vo.zsp.buyreturnVo">
+          <id column="billno" property="billno"/>
+          <result column="billdate" property="billdate"/>
+          <result column="custid" property="custid"/>
+          <result column="addrid" property="addrid"/>
+          <result column="custaddress" property="custaddress"/>
+          <result column="priceoftax" property="priceoftax"/>
+          <result column="currid" property="currid"/>
+          <result column="wareid" property="wareid"/>
+          <result column="exchrate" property="exchrate"/>
+          <result column="isdeduct" property="isdeduct"/>
+          <result column="custombarfirst" property="custombarfirst"/>
+          <result column="custombarsecond" property="custombarsecond"/>
+          <result column="remark" property="remark"/>
+          <result column="salesid" property="salesid"/>
+          <result column="departid" property="departid"/>
+          <result column="maker" property="maker"/>
+          <result column="permitter" property="permitter"/>
+          <result column="reviewstatus" property="reviewstatus"/>
+        <collection property="list" column="billno" select="getBuyreturnDetail"/>
+    </resultMap>
+    <select id="getBuyreturn" resultMap="buyreturnVoMap">
+         select * from T_BUYRETURN
+    </select>
+   <select id="getBuyreturnDetail" resultType="com.accp.pojo.T_BUYRETURN_DETAIL">
+        select * from t_buyreturn_detail
+    </select>
+    <delete id="delBuyreturn">
+          delete from T_BUYRETURN where billno=#{billno}
+    </delete>
+    <insert id="addBuyreturn">
+         inser into  T_BUYRETURN(billno)values('')
+    </insert>
+    <update id="updateBuyreturn">
+         UPDATE T_BUYRETURN SET billstyleid='001' WHERE billno='';
+    </update>
+
 </mapper>
