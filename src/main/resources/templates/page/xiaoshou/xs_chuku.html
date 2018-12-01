@@ -28,7 +28,8 @@
 					</a>
 				</li>
 				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="修改" id="menu-update" disabled>
+					<a href="javascript:;" class="iconfont menu-list" title="修改" id="menu-update"
+					   disabled>
 						<i class="layui-icon">&#xe642;</i>
 					</a>
 				</li>
@@ -38,7 +39,8 @@
 					</a>
 				</li>
 				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="审核" id="menu-adopt" disabled="">
+					<a href="javascript:;" class="iconfont menu-list" title="审核" id="menu-adopt"
+					   disabled="">
 						<i class="layui-icon">&#xe605;</i>
 					</a>
 				</li>
@@ -72,7 +74,7 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">客户</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
+			<input type="text" class="layui-input" id="custid">
 		</div>
 		<label class="layui-form-label">单据日期</label>
 		<div class="layui-input-inline">
@@ -171,7 +173,7 @@
 					<label class="layui-form-label">收款条件</label>
 					<div class="layui-input-block">
 						<textarea name="desc" placeholder="请输入内容"
-								  class="layui-textarea"></textarea>
+							  class="layui-textarea"></textarea>
 					</div>
 				</div>
 			</form>
@@ -210,5 +212,54 @@
 <script src="../../layui/lay/dest/layui.all.js"></script>
 <script src="../../js/jquery-1.12.4.js"></script>
 <script src="../../js/xiaoshou/xs_chuku.js"></script>
+<script>
+	var windowCustid;
+	$("#custid").click(function () {
+		checkCustid();
+	})
+
+	function checkCustid() {
+		$.getJSON('/lhy/query/dsproduct', {size: -1}, function (data) {
+			var table = $("<table class='layui-table' style='margin: 0;overflow-y: scroll'></table>");
+			var thead = $("<thead></thead>");
+			var tbody = $("<tbody></tbody>");
+			var th1 = $("<th></th>").text("编号");
+			var th2 = $("<th></th>").text("名称");
+			thead.append(th1, th2);
+			$(data.list).each(function (i, obj) {
+				var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowCustid,'#custid','" + obj.prodname + "')");
+				var td1 = $("<td></td>").text(obj.prodid);
+				var td2 = $("<td></td>").text(obj.prodname);
+				tr.append(td1, td2);
+				tbody.append(tr);
+			})
+			table.append(thead, tbody);
+			windowCustid = layer.open({
+				type: 1,
+				offset: ['80px', '130px'],
+				area: ["500px", "300px"],
+				title: "选择客户",
+				content: nodeToString(table[0]),
+				btn: ['取消'],
+				yes: function (index, layero) {
+					layer.close(windowCustid);
+				}
+			});
+		})
+	}
+
+	function putValue(window, dom, value) {
+		$(dom).val(value);
+		layer.close(window);
+	}
+
+	function nodeToString(node) {
+		var tmpNode = document.createElement("div");
+		tmpNode.appendChild(node.cloneNode(true));
+		var str = tmpNode.innerHTML;
+		tmpNode = node = null;
+		return str;
+	}
+</script>
 </body>
 </html>

@@ -13,8 +13,9 @@ public class LhyBiz {
 	@Autowired
 	private LhyDao dao;
 
-	public PageInfo<T_DSPRODUCT> queryDsproduct(int page) {
-		PageHelper.startPage(page, 1);
+	public PageInfo<T_DSPRODUCT> queryDsproduct(int page, int size) {
+		if (size > 0)
+			PageHelper.startPage(page, size);
 		return new PageInfo<T_DSPRODUCT>(dao.queryDsproduct());
 	}
 
