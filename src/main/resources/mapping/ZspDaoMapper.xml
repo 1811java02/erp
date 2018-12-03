@@ -22,12 +22,16 @@
            <result column="salesid" property="salesid"/>
            <result column="sumqty" property="sumqty"/>
            <result column="userdef1" property="userdef1"/>
+           <result column="departname" property="departname"/>
+           <result column="personname" property="personname"/>
             <collection property="list" column="billno" select="getTpurchasePurchaseDetails"/>
     </resultMap>
     <select id="getPurchasePurchase" resultMap="getPurchasePurchaseMap">
-         select * from t_purchase_purchase  ORDER BY billno asc
+         select p.* ,d.departname,per.personname from T_PURCHASE_PURCHASE p
+         join  T_Department D on p.DEPARTID=d.DEPARTID
+         join t_personnel per on per.PERSONID=p.SALESID ORDER BY p.billno desc
      </select>
-    <select id="getTpurchasePurchaseDetails" resultType="com.accp.pojo.T_PURCHASE_PURCHASE_DETAILS">
+    <select id="getTpurchasePurchaseDetails" resultType="com.accp.vo.zsp.DsProductVo">
      select * from t_purchase_purchase_details where purchaseid =#{0}
     </select>
     <delete id="delPurchasePurchase">
