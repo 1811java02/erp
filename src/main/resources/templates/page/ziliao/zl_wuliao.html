@@ -230,7 +230,7 @@
 					<div class="layui-input-inline">
 						<input type="text" class="layui-input" id="sprice">
 					</div>
-					<label class="layui-form-label">现行平均总成本</label>
+					<label class="layui-form-label">现行平均成本</label>
 					<div class="layui-input-inline">
 						<input type="text" class="layui-input" id="nprice">
 					</div>
@@ -264,7 +264,11 @@
 					<th>仓库编号</th>
 					<th>仓库名称</th>
 					<th>期初存量</th>
+					<th>期初平均成本</th>
+					<th>期初总成本</th>
 					<th>现有存量</th>
+					<th>现有平均成本</th>
+					<th>现有总成本</th>
 				</tr>
 				</thead>
 				<tbody id="list">
@@ -376,7 +380,7 @@
 			$("#stdprice").val(obj.stdprice);
 			$("#currname").val(obj.currname);
 			$("#prodform").val(obj.prodform);
-			$("#priceoftax").val(obj.priceoftax==1?'含税':'不含税');
+			$("#priceoftax").val(obj.priceoftax == 1 ? '含税' : '不含税');
 			$("#taxitemsname").val(obj.taxitemsname);
 			$("#busitaxrate").val(obj.busitaxrate);
 			$("#advancedays").val(obj.advancedays);
@@ -404,8 +408,12 @@
 				var td1 = $("<td></td>").text(obj.warehouse.wareid);
 				var td2 = $("<td></td>").text(obj.warehouse.warename);
 				var td3 = $("<td></td>").text(obj.bquantity);
-				var td4 = $("<td></td>").text(obj.quantity);
-				tr.append(td1, td2, td3, td4);
+				var td4 = $("<td></td>").text(obj.bavgcost);
+				var td5 = $("<td></td>").text(obj.ballcost);
+				var td6 = $("<td></td>").text(obj.quantity);
+				var td7 = $("<td></td>").text(obj.cavgcost);
+				var td8 = $("<td></td>").text(obj.callcost);
+				tr.append(td1, td2, td3, td4, td5, td6, td7, td8);
 				$("#list").append(tr);
 			})
 			$("#snum").val(snum);
@@ -415,8 +423,8 @@
 			$("#nprice").val(nprice);
 			$("#namount").val(namount);
 			$("#bstdcostAll").val(obj.bstdcost * nnum);
-			low=obj.safeqty-nnum;
-			low=low>0?low:0;
+			low = obj.safeqty - nnum;
+			low = low > 0 ? low : 0;
 			$("#low").val(low);
 		})
 	}
