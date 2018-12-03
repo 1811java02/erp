@@ -13,12 +13,12 @@
 		<div class="layui-input-block" style="margin-left: 0">
 			<ul class="layui-nav" style="background-color: transparent;">
 				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
+					<a href="javascript:;" id="pre" class="iconfont menu-list" title="上一条" id="menu-prev">
 						<i class="layui-icon">&#xe603;</i>
 					</a>
 				</li>
 				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
+					<a href="javascript:;" id="next" class="iconfont menu-list" title="下一条" id="menu-next">
 						<i class="layui-icon">&#xe602;</i>
 					</a>
 				</li>
@@ -220,32 +220,46 @@
 <script src="../../js/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 	var num=1;
-$.post("/query/buyxun",{
-"page":num
-},function (data) {
-    $.each(data.list,function (i,obj) {
-        $("#customerid").val(obj.customerid);
-        $("#billno").val(obj.billno);
-        $("#bildate").val(obj.bildate);
-        $("#validdate").val(obj.validdate);
-        $("#currid").val(obj.currid);
-        $("#priceoftax").val(obj.priceoftax);
-        $("#salesid").val(obj.salesid);
-        $("#maker").val(obj.maker);
-        $("#permitter").val(obj.permitter);
+	var pageinfo={};
+	function load(num){
+        $.post("/query/buyxun",{
+            "page":num
+        },function (data) {
+            pageinfo=data;
+            $.each(data.list,function (i,obj) {
 
-       $.each(obj.details,function (j,objs) {
+                $("#customerid").val(obj.customerid);
+                $("#billno").val(obj.billno);
+                $("#bildate").val(obj.bildate);
+                $("#validdate").val(obj.validdate);
+                $("#currid").val(obj.currid);
+                $("#priceoftax").val(obj.priceoftax);
+                $("#salesid").val(obj.salesid);
+                $("#maker").val(obj.maker);
+                $("#permitter").val(obj.permitter);
+                $.each(obj.details,function (j,objs) {
+					$("#list").html("");
+                    var $row=("<tr><td>"+(i+1)+"</td><td>"+objs.prodid+"</td><td>"+objs.prodname+"</td><td>"+objs.ProdClassID+"</td><td>"+objs.unitname+"</td><td>"+objs.squantity+"</td><td>"+objs.discount+"</td><td>"+objs.sprice+"</td><td>"+objs.amount+"</td><td>"+objs.taxrate+"</td><td>"+objs.taxamt+"</td><td>"+objs.sourcetranflag+"</td><td>"+objs.sourcetranbi+"</td></tr>");
+                    $("#list").append($row);
 
-           var $row=("<tr><td>"+(i+1)+"</td><td>"+objs.prodid+"</td><td>"+objs.prodname+"</td><td>"+objs.ProdClassID+"</td><td>"+objs.unitname+"</td><td>"+objs.squantity+"</td><td>"+objs.discount+"</td><td>"+objs.sprice+"</td><td>"+objs.amount+"</td><td>"+objs.taxrate+"</td><td>"+objs.taxamt+"</td><td>"+objs.sourcetranflag+"</td><td>"+objs.sourcetranbi+"</td><td></td><td></td></tr>");
-           $("#list").append($row);
+                });
 
-       })
-
-    })
+            })
 
 
 
+        });
+	}
+load(num);
+
+
+$("#pre").click(function () {
+load(pageinfo.prePage==0?1:pageinfo.prePage);
+});
+$("#next").click(function () {
+	load(pageinfo.pageNum==pageinfo.lastPage?pageinfo.lastPage:pageinfo.nextPage);
 })
+
 
 </script>
 </html>
