@@ -90,6 +90,7 @@
 	$.post("/query/unit",{
 "page":num
 	},function (data) {
+
 	$("#unitno").val(data.unitid);
 	$("#unitname").val(data.unitname);
 	$("#unitbeizhu").val(data.remark);

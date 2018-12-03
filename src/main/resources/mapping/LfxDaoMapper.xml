@@ -9,4 +9,32 @@
         ORDER BY UNITID asc )
         where rn=#{page}
 </select>
+    <select id="queryhouse" resultType="com.accp.pojo.T_WAREHOUSE">
+   select * from
+        (SELECT t_warehouse.*,rownum rn FROM t_warehouse
+        where rownum &lt;=1000
+        ORDER BY wareid asc )
+        where rn=#{page}
+
+    </select>
+
+    <select id="querybuyxun" resultMap="saleformMap">
+        select * from
+        (SELECT T_BUYXUN.*,rownum rn FROM T_BUYXUN
+        where rownum &lt;=1000
+        ORDER BY BILLNO asc )
+        where rn=#{page}
+	</select>
+
+    <resultMap type="com.accp.pojo.T_BUYXUN" id="saleformMap">
+        <id column="fsaleformno" property="fsaleformno" />
+        <result column="fsaleformdate" property="fsaleformdate" />
+        <result column="fcustomer" property="fcustomer" />
+        <result column="fsales" property="fsales" />
+        <collection property="saleformdetails" column="fsaleformno"
+                    select="selectDetail" />
+    </resultMap>
+    <select id="selectDetail" resultType="pojo.Saleformdetail">
+		select * from saleformdetail where fsaleformno=#{0}
+	</select>
 </mapper>
