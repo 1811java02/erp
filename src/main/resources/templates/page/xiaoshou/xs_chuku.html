@@ -74,7 +74,7 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">客户</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input" id="custid">
+			<input type="text" class="layui-input" id="custid" readonly>
 		</div>
 		<label class="layui-form-label">单据日期</label>
 		<div class="layui-input-inline">
@@ -98,7 +98,7 @@
 		</div>
 		<label class="layui-form-label">币别</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
+			<input type="text" class="layui-input" value="人民币" readonly>
 		</div>
 	</div>
 	<div class="layui-form-item">
@@ -111,13 +111,13 @@
 		</div>
 		<label class="layui-form-label">汇率</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
+			<input type="text" class="layui-input" value="1.0000" readonly>
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">仓库</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
+			<input type="text" class="layui-input" id="wareid" readonly>
 		</div>
 	</div>
 </form>
@@ -184,7 +184,7 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">业务人员</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
+			<input type="text" class="layui-input" id="salesid" readonly>
 		</div>
 		<label class="layui-form-label">制单人员</label>
 		<div class="layui-input-inline">
@@ -194,7 +194,7 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">所属部门</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
+			<input type="text" class="layui-input" id="departid" readonly>
 		</div>
 		<label class="layui-form-label">复核人员</label>
 		<div class="layui-input-inline">
@@ -213,30 +213,35 @@
 <script src="../../js/jquery-1.12.4.js"></script>
 <script src="../../js/xiaoshou/xs_chuku.js"></script>
 <script>
-	var windowCustid;
-	$("#custid").click(function () {
+	var windowCustid, windowWareid, windowSalesid;
+	$("#custid").dblclick(function () {
 		checkCustid();
+	})
+	$("#wareid").dblclick(function () {
+		checkWareid();
+	})
+	$("#salesid").dblclick(function () {
+		checkSalesid();
 	})
 
 	function checkCustid() {
-		$.getJSON('/lhy/query/dsproduct', {size: -1}, function (data) {
+		$.getJSON('/lhy/query/customer', function (data) {
 			var table = $("<table class='layui-table' style='margin: 0;overflow-y: scroll'></table>");
 			var thead = $("<thead></thead>");
 			var tbody = $("<tbody></tbody>");
 			var th1 = $("<th></th>").text("编号");
 			var th2 = $("<th></th>").text("名称");
 			thead.append(th1, th2);
-			$(data.list).each(function (i, obj) {
-				var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowCustid,'#custid','" + obj.prodname + "')");
-				var td1 = $("<td></td>").text(obj.prodid);
-				var td2 = $("<td></td>").text(obj.prodname);
+			$(data).each(function (i, obj) {
+				var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowCustid,'#custid','" + obj.customerfllnae + "')");
+				var td1 = $("<td></td>").text(obj.customerid);
+				var td2 = $("<td></td>").text(obj.customerfllnae);
 				tr.append(td1, td2);
 				tbody.append(tr);
 			})
 			table.append(thead, tbody);
 			windowCustid = layer.open({
 				type: 1,
-				offset: ['80px', '130px'],
 				area: ["500px", "300px"],
 				title: "选择客户",
 				content: nodeToString(table[0]),
@@ -248,8 +253,68 @@
 		})
 	}
 
-	function putValue(window, dom, value) {
+	function checkWareid() {
+		$.getJSON('/lhy/query/warehouse', function (data) {
+			var table = $("<table class='layui-table' style='margin: 0;overflow-y: scroll'></table>");
+			var thead = $("<thead></thead>");
+			var tbody = $("<tbody></tbody>");
+			var th1 = $("<th></th>").text("编号");
+			var th2 = $("<th></th>").text("名称");
+			thead.append(th1, th2);
+			$(data).each(function (i, obj) {
+				var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowWareid,'#wareid','" + obj.warename + "')");
+				var td1 = $("<td></td>").text(obj.wareid);
+				var td2 = $("<td></td>").text(obj.warename);
+				tr.append(td1, td2);
+				tbody.append(tr);
+			})
+			table.append(thead, tbody);
+			windowWareid = layer.open({
+				type: 1,
+				area: ["500px", "300px"],
+				title: "选择仓库",
+				content: nodeToString(table[0]),
+				btn: ['取消'],
+				yes: function (index, layero) {
+					layer.close(windowWareid);
+				}
+			});
+		})
+	}
+
+	function checkSalesid() {
+		$.getJSON('/lhy/query/personnel', function (data) {
+			var table = $("<table class='layui-table' style='margin: 0;overflow-y: scroll'></table>");
+			var thead = $("<thead></thead>");
+			var tbody = $("<tbody></tbody>");
+			var th1 = $("<th></th>").text("编号");
+			var th2 = $("<th></th>").text("姓名");
+			thead.append(th1, th2);
+			$(data).each(function (i, obj) {
+				console.info(obj)
+				var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowSalesid,'#salesid','" + obj.personname + "','#departid','" + obj.department.departname + "')");
+				var td1 = $("<td></td>").text(obj.personid);
+				var td2 = $("<td></td>").text(obj.personname);
+				tr.append(td1, td2);
+				tbody.append(tr);
+			})
+			table.append(thead, tbody);
+			windowSalesid = layer.open({
+				type: 1,
+				area: ["500px", "300px"],
+				title: "选择人员",
+				content: nodeToString(table[0]),
+				btn: ['取消'],
+				yes: function (index, layero) {
+					layer.close(windowSalesid);
+				}
+			});
+		})
+	}
+
+	function putValue(window, dom, value, dom2, value2) {
 		$(dom).val(value);
+		$(dom2).val(value2);
 		layer.close(window);
 	}
 
