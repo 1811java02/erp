@@ -5,6 +5,7 @@
 	<title>采购询价单</title>
 	<link rel="stylesheet" href="../../layui/css/layui.css">
 	<link rel="stylesheet" href="../../css/common.css">
+
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
 <form class="layui-form" style="margin: 0px auto;" action="">
@@ -70,12 +71,12 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">供应商</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" id="customerid" name="title" required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 		<label class="layui-form-label">单据日期</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" id="bildate" name="title" required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 	</div>
@@ -87,32 +88,28 @@
 		</div>
 		<label class="layui-form-label">单据号码</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" id="billno" name="title" required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">有效日期</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" id="validdate" name="title" required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 		<label class="layui-form-label">币别</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" id="currid" name="title" required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">单价是否含税</label>
 		<div class="layui-input-inline">
-			<select name="city" lay-verify="required">
-				<option value=""></option>
-				<option value="0">北京</option>
-				<option value="1">上海</option>
-				<option value="2">广州</option>
-				<option value="3">深圳</option>
-				<option value="4">杭州</option>
+			<select name="city" lay-verify="required" id="priceoftax">
+				<option value="0">未税</option>
+				<option value="1">含税</option>
 			</select>
 		</div>
 		<label class="layui-form-label">汇率</label>
@@ -154,7 +151,8 @@
 						<th>来源单号</th>
 					</tr>
 					</thead>
-					<tbody>
+					<tbody id="list">
+
 					</tbody>
 				</table>
 			</div>
@@ -188,12 +186,12 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">采购人员</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" id="salesid" name="title" required lay-verify="required" placeholder="请输入标题"
 				   autocomplete="off" class="layui-input">
 		</div>
 		<label class="layui-form-label">制单人员</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" id="maker" name="title" required lay-verify="required" placeholder="请输入标题"
 				   autocomplete="off" class="layui-input">
 		</div>
 	</div>
@@ -205,7 +203,7 @@
 		</div>
 		<label class="layui-form-label">复核人员</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" id="permitter" name="title" required lay-verify="required" placeholder="请输入标题"
 				   autocomplete="off" class="layui-input">
 		</div>
 	</div>
@@ -219,4 +217,35 @@
 </form>
 </body>
 <script src="../../layui/lay/dest/layui.all.js"></script>
+<script src="../../js/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	var num=1;
+$.post("/query/buyxun",{
+"page":num
+},function (data) {
+    $.each(data.list,function (i,obj) {
+        $("#customerid").val(obj.customerid);
+        $("#billno").val(obj.billno);
+        $("#bildate").val(obj.bildate);
+        $("#validdate").val(obj.validdate);
+        $("#currid").val(obj.currid);
+        $("#priceoftax").val(obj.priceoftax);
+        $("#salesid").val(obj.salesid);
+        $("#maker").val(obj.maker);
+        $("#permitter").val(obj.permitter);
+
+       $.each(obj.details,function (j,objs) {
+
+           var $row=("<tr><td>"+(i+1)+"</td><td>"+objs.prodid+"</td><td>"+objs.prodname+"</td><td>"+objs.ProdClassID+"</td><td>"+objs.unitname+"</td><td>"+objs.squantity+"</td><td>"+objs.discount+"</td><td>"+objs.sprice+"</td><td>"+objs.amount+"</td><td>"+objs.taxrate+"</td><td>"+objs.taxamt+"</td><td>"+objs.sourcetranflag+"</td><td>"+objs.sourcetranbi+"</td><td></td><td></td></tr>");
+           $("#list").append($row);
+
+       })
+
+    })
+
+
+
+})
+
+</script>
 </html>
