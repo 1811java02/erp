@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="../../css/common.css">
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
-<form class="layui-form" action="">
+<form class="layui-form" action="" id="vmindexCnt">
 	<div class="layui-form-item">
 		<div class="layui-input-block" style="margin-left: 0">
 			<ul class="layui-nav" style="background-color: transparent;">
@@ -188,7 +188,8 @@
 						<th>冲抵金额</th>
 					</tr>
 					</thead>
-					<tbody>
+					<tbody  id="tab">
+
 					</tbody>
 				</table>
 			</div>
@@ -262,19 +263,37 @@
 	</div>
 </form>
 
+
+</body>
 <script src="../../layui/lay/dest/layui.all.js"></script>
 <script src="../../js/jquery-1.12.4.js"></script>
+<script src="../../js/vue.js"></script>
 <script>
-	layui.use('form', function () {
-		var form = layui.form();
-		form.on('select(sel)', function (data) {
-			alert(data.value)
+    var layer = layui.layer;
+    /* $.getJSON("/query",function (data) {
+         layer.msg(JSON.stringify(data));
+             $("#tab").html("");
+         $.each(data,function (i,obj) {
+             var tr = $("<tr></tr>");
+             var td=$("<td class='detaid'>"+obj.id+"</td><td><input type='text' class='form-control tbProdname' value="+obj.customer+"></td><td><input type='text' class='form-control tbAmount' value="+obj.sourcelist+"></td>" +
+                 "<td><input type='text' class='form-control tbPrice' value="+obj.sourcenumber+"></td><td><input type='text' class='form-control tbMoneyAmt' disabled='disabled' value="+obj.fundbilldate+"></td><td><input type='checkbox' class='checkboxs'></td>" +
+                 "<td><a href='javascript:;' class='detailRemove'><span class='glyphicon glyphicon-remove '></span></a></td>");
+             tr.append(td);
+             $("#tab").append(tr);
+         })
+    })*/
+
+    //ajax全局设置
+    $.ajaxSetup({
+        timeout: 6000
+    });
+    $(document).ajaxError(function() {
+        showAlertDialog('服务器异常');
+    });
 
 
-		});
-	})
+
 
 
 </script>
-</body>
 </html>

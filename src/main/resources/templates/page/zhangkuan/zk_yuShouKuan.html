@@ -11,17 +11,18 @@
 	<link rel="stylesheet" href="../../css/common.css">
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
-<form class="layui-form" action="">
+<form class="layui-form" action="" id="vmindexCnt">
+	<div v-for="(temp,index) in pageInfo.list">
 	<div class="layui-form-item">
 		<div class="layui-input-block" style="margin-left: 0">
 			<ul class="layui-nav" style="background-color: transparent;">
 				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
+					<a  @click="goToPage($event,(pageInfo.prePage==0?1:pageInfo.prePage))" href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
 						<i class="layui-icon">&#xe603;</i>
 					</a>
 				</li>
 				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
+					<a  @click="goToPage($event,(pageInfo.pageNum==pageInfo.lastPage?pageInfo.lastPage:pageInfo.nextPage))" href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
 						<i class="layui-icon">&#xe602;</i>
 					</a>
 				</li>
@@ -63,51 +64,51 @@
 		<label class="layui-form-label">客户</label>
 		<div class="layui-input-inline">
 			<input type="text" name="title" required lay-verify="required" autocomplete="off"
-			       class="layui-input">
+			       class="layui-input" v-model="temp.customername">
 		</div>
 		<label class="layui-form-label">单据时间</label>
 		<div class="layui-input-inline">
-			<input type="date" name="title" required lay-verify="required" autocomplete="off"
+			<input type="date" name="title" v-model="temp.fundbilldate" required lay-verify="required" autocomplete="off"
 			       class="layui-input">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">结算方式一</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			<input type="text" name="title" v-model="temp.cashstylename" required lay-verify="required" autocomplete="off"
 			       class="layui-input">
 			&nbsp;&nbsp;
-			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			<input type="text" name="title" v-model="temp.cash"  required lay-verify="required" autocomplete="off"
 			       class="layui-input">
 		</div>
 		<label class="layui-form-label">单据号码</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			<input type="text" name="title" v-model="temp.fundbillid"   required lay-verify="required" autocomplete="off"
 			       class="layui-input">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">结算方式二</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			<input type="text" name="title"   v-model="temp.visastylename" required lay-verify="required" autocomplete="off"
 			       class="layui-input">
 			&nbsp;&nbsp;
-			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			<input type="text" name="title"  v-model="temp.visa" required lay-verify="required" autocomplete="off"
 			       class="layui-input">
 		</div>
 		<label class="layui-form-label">币别</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			<input type="text" name="title" v-model="temp.bcurrencyname" required lay-verify="required" autocomplete="off"
 			       class="layui-input">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">结算方式三</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			<input type="text" name="title" v-model="temp.otherpaystylename"   required lay-verify="required" autocomplete="off"
 			       class="layui-input">
 			&nbsp;&nbsp;
-			<input type="text" name="title" required lay-verify="required" autocomplete="off"
+			<input type="text" name="title" v-model="temp.otherpay"  required lay-verify="required" autocomplete="off"
 			       class="layui-input">
 		</div>
 		<label class="layui-form-label">汇率</label>
@@ -158,7 +159,12 @@
 					</tr>
 					</thead>
 					<tbody>
-
+							<tr v-for="(temp1,index) in temp.list">
+									<td v-text="temp1.curprerecv"></td>
+									<td v-text="temp1.sourcelist"></td>
+									<td v-text="temp1.sourcenumber"></td>
+									<td v-text="temp1.remarks"></td>
+							</tr>
 					</tbody>
 				</table>
 			</div>
@@ -213,32 +219,77 @@
 			       class="layui-input">
 		</div>
 	</div>
+	</div>
 </form>
 
 <script src="../../layui/lay/dest/layui.all.js"></script>
 <script src="../../js/jquery-1.12.4.js"></script>
+<script src="../../js/vue.js"></script>
 <script>
-	layui.use('form', function () {
-		var form = layui.form();
-		form.on('select(sel)', function (data) {
-			alert(data.value)
-			alert(t1)
-			if (data.value == 0) {
-				$("#tab1").addClass(".displayblock");
-				$("#tab2").removeClass(".displayblock");
-				$("#tab3").removeClass(".displayblock");
+    var layer = layui.layer;
+    /* $.getJSON("/query",function (data) {
+         layer.msg(JSON.stringify(data));
+             $("#tab").html("");
+         $.each(data,function (i,obj) {
+             var tr = $("<tr></tr>");
+             var td=$("<td class='detaid'>"+obj.id+"</td><td><input type='text' class='form-control tbProdname' value="+obj.customer+"></td><td><input type='text' class='form-control tbAmount' value="+obj.sourcelist+"></td>" +
+                 "<td><input type='text' class='form-control tbPrice' value="+obj.sourcenumber+"></td><td><input type='text' class='form-control tbMoneyAmt' disabled='disabled' value="+obj.fundbilldate+"></td><td><input type='checkbox' class='checkboxs'></td>" +
+                 "<td><a href='javascript:;' class='detailRemove'><span class='glyphicon glyphicon-remove '></span></a></td>");
+             tr.append(td);
+             $("#tab").append(tr);
+         })
+    })*/
 
-			} else if (data.value == 1) {
-				$("#tab1").removeClass(".displayblock");
-				$("#tab2").addClass(".displayblock");
-				$("#tab3").removeClass(".displayblock");
-			} else if (data.value == 2) {
-				$("#tab1").removeClass(".displayblock");
-				$("#tab2").removeClass(".displayblock");
-				$("#tab3").addClass(".displayblock");
-			}
-		});
-	})
+    //ajax全局设置
+    $.ajaxSetup({
+        timeout: 6000
+    });
+    $(document).ajaxError(function() {
+        showAlertDialog('服务器异常');
+    });
+    //构建VM渲染引擎
+    var vm = new Vue({
+        el: "#vmindexCnt",
+        data: {
+            pageInfo: {}
+        },
+        created: function() {
+            var vm = this;
+            //读取restful
+            vm.goToPage(null, 1);
+        },
+        methods: {
+            goToPage: function(e, pageNum) {
+                $.getJSON("http://172.20.0.26/zg/query/getAdvancereceipt",{
+                    "page":pageNum
+                }, function(data) {
+                    vm.pageInfo = data;
+                },"json");
+            },
+            /* updateInfo: function(e, pid) {
+                 //利用缓存
+                 window.sessionStorage.setItem("pid", pid);
+                 alert("");
+             },*/
+            removeInfo: function(e, pid) {
+                if (window.confirm('是否移除?')) {
+                    $.post("http://172.20.0.26/zg/query/deleteAdvancereceipt",{
+                        "fundbillid":fundbillid
+                    }, function(data) {
+                        if (data.code == 200) {
+                            alert("移除成功");
+                            vm.goToPage(null,1);
+                        } else {
+                            alert("移除失败");
+                        }
+                    },"json");
+
+                }
+            }
+        }
+    });
+
+
 
 
 </script>

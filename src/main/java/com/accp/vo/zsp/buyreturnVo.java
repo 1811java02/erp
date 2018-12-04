@@ -5,6 +5,7 @@ import com.accp.pojo.T_BUYRETURN_DETAIL;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class buyreturnVo extends com.accp.pojo.T_BUYRETURN {
     private List<T_BUYRETURN_DETAIL>list=new ArrayList<T_BUYRETURN_DETAIL>();
 
