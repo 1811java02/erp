@@ -79,9 +79,12 @@ public class ZspAction {
      * 删除采购请购单的主详表
      * @param buyreturn 参数是 请购单主表
      */
+    @RequestMapping("/delBuyreturn")
+    @ResponseBody
     public Map<String,String> delBuyreturn(T_BUYRETURN buyreturn){
         Map<String,String>map=new HashMap<String, String>();
         biz.delBuyreturn(buyreturn);
+        map.put("code","200");
         return map;
     }
     /**
@@ -91,6 +94,7 @@ public class ZspAction {
     public Map<String,String> addBuyreturn(T_BUYRETURN buyreturn){
         Map<String,String>map=new HashMap<String, String>();
         biz.addBuyreturn(buyreturn);
+        map.put("code","200");
         return map;
     }
     /**
@@ -100,6 +104,7 @@ public class ZspAction {
     public Map<String,String> updateBuyreturn(T_BUYRETURN buyreturn){
         Map<String,String>map=new HashMap<String, String>();
         biz.updateBuyreturn(buyreturn);
+        map.put("code","200");
         return map;
     }
 }

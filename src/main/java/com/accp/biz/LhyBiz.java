@@ -1,12 +1,17 @@
 package com.accp.biz;
 
 import com.accp.dao.LhyDao;
-import com.accp.vo.lhy.T_DSPRODUCT;
+import com.accp.pojo.T_CUSTOMER_INFORMATION;
 import com.accp.pojo.T_DSPRODUCTCLASS;
+import com.accp.pojo.T_WAREHOUSE;
+import com.accp.vo.lhy.T_DSPRODUCT;
+import com.accp.vo.lhy.T_PERSONNEL;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class LhyBiz {
@@ -22,5 +27,17 @@ public class LhyBiz {
 	public PageInfo<T_DSPRODUCTCLASS> queryDsproductclass(int page) {
 		PageHelper.startPage(page, 1);
 		return new PageInfo<T_DSPRODUCTCLASS>(dao.queryDsproductclass());
+	}
+
+	public List<T_CUSTOMER_INFORMATION> queryCustomer() {
+		return dao.queryCustomer();
+	}
+
+	public List<T_WAREHOUSE> queryWarehouse() {
+		return dao.queryWarehouse();
+	}
+
+	public List<T_PERSONNEL> queryPersonnel() {
+		return dao.queryPersonnel();
 	}
 }

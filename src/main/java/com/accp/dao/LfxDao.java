@@ -13,5 +13,5 @@ public interface LfxDao {
     //查询仓库维护表
     public T_WAREHOUSE queryhouse(@Param("page") Integer page);
     //查询采购询价单
-    public T_BUYXUN querybuyxun(@Param("page") Integer page);
+    public List<T_BUYXUN> querybuyxun();
 }

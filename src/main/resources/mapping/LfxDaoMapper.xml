@@ -19,22 +19,25 @@
     </select>
 
     <select id="querybuyxun" resultMap="saleformMap">
-        select * from
-        (SELECT T_BUYXUN.*,rownum rn FROM T_BUYXUN
-        where rownum &lt;=1000
-        ORDER BY BILLNO asc )
-        where rn=#{page}
+               SELECT * FROM T_BUYXUN
+		ORDER BY BILLNO DESC
 	</select>
 
     <resultMap type="com.accp.pojo.T_BUYXUN" id="saleformMap">
-        <id column="fsaleformno" property="fsaleformno" />
-        <result column="fsaleformdate" property="fsaleformdate" />
-        <result column="fcustomer" property="fcustomer" />
-        <result column="fsales" property="fsales" />
-        <collection property="saleformdetails" column="fsaleformno"
+        <id column="billno" property="billno" />
+        <result column="bildate" property="bildate" />
+        <result column="customerid" property="customerid" />
+        <result column="validdate" property="validdate" />
+        <result column="priceoftax" property="priceoftax" />
+        <result column="currid" property="currid" />
+        <result column="maker" property="maker" />
+        <result column="permitter" property="permitter" />
+        <result column="salesid" property="salesid" />
+        <result column="astatus" property="astatus" />
+        <collection property="details" column="billno"
                     select="selectDetail" />
     </resultMap>
-    <select id="selectDetail" resultType="pojo.Saleformdetail">
-		select * from saleformdetail where fsaleformno=#{0}
+    <select id="selectDetail" resultType="com.accp.pojo.T_BUYORDERXI_DETAIL">
+		select * from t_Buyxun_Detail where billno=#{0}
 	</select>
 </mapper>

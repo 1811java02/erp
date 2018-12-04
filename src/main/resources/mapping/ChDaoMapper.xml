@@ -2,11 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.ChDao">
+    <!--查询部门 -->
     <select id="queryDepartment" resultType="T_DEPARTMENT">
         SELECT * FROM T_DEPARTMENT
     </select>
 
+    <!--查询单据类型-->
     <select id="queryBillType" resultType="T_BILLTYPE">
         SELECT * FROM T_BILLTYPE
+    </select>
+
+    <!--查询仓库 -->
+    <select id="queryWareHouse" resultType="T_WAREHOUSE">
+        SELECT * FROM T_WAREHOUSE
+    </select>
+
+    <!--查询当前时间最大单据号 -->
+    <select id="getBillNo" resultType="long" parameterType="string">
+        SELECT MAX(BILLNO) FROM T_PURCHASE_MASTER WHERE BILLDATE=#{date}
+    </select>
+
+    <!--查询采购入库单的单据类型 -->
+    <select id="queryBillTypeByRk" resultType="T_BILLTYPE">
+        SELECT * FROM T_BILLTYPE WHERE BILLTYPE='采购入库单'
     </select>
 </mapper>

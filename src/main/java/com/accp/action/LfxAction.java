@@ -1,6 +1,8 @@
 package com.accp.action;
 
 import com.accp.biz.LfxBiz;
+import com.accp.pojo.T_BUYORDER;
+import com.accp.pojo.T_BUYXUN;
 import com.accp.pojo.T_UNIT;
 import com.accp.pojo.T_WAREHOUSE;
 import com.github.pagehelper.PageHelper;
@@ -21,13 +23,19 @@ public class LfxAction {
     @ResponseBody
     private T_UNIT queryunit(Integer page) throws  Exception{
        return  biz.queryunit(page);
-    }
+    };
 
     @RequestMapping("/warehouse")
     @ResponseBody
     private T_WAREHOUSE querywarehouse(Integer page) throws  Exception{
                                                                                      ;
         return biz.querywarehouse(page);
+    };
+    @RequestMapping("/buyxun")
+    @ResponseBody
+    private  PageInfo<T_BUYXUN> querybuyxun(Integer page) throws  Exception{
+
+        return biz.querybuyxun(page);
     }
 
 
