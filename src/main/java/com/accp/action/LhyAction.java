@@ -1,6 +1,7 @@
 package com.accp.action;
 
 import com.accp.biz.LhyBiz;
+import com.accp.pojo.T_BILLTYPE;
 import com.accp.pojo.T_CUSTOMER_INFORMATION;
 import com.accp.pojo.T_DSPRODUCTCLASS;
 import com.accp.pojo.T_WAREHOUSE;
@@ -43,5 +44,15 @@ public class LhyAction {
 	@RequestMapping("/query/personnel")
 	public List<T_PERSONNEL> queryPersonnel() {
 		return biz.queryPersonnel();
+	}
+
+	@RequestMapping("/query/dsdssalemainId")
+	public String queryDsdssalemainId(String date) {
+		return biz.queryDsdssalemainId(date);
+	}
+
+	@RequestMapping("/query/billtype")
+	public List<T_BILLTYPE> queryBilltype() {
+		return biz.queryBilltype();
 	}
 }
