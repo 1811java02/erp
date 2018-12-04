@@ -1,8 +1,6 @@
 package com.accp.pojo;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class T_BUYXUN {
     private String billno;
@@ -23,16 +21,7 @@ public class T_BUYXUN {
 
     private String salesid;
 
-    public List<T_BUYORDERXI_DETAIL> getDetails() {
-        return details;
-    }
-
-    public void setDetails(List<T_BUYORDERXI_DETAIL> details) {
-        this.details = details;
-    }
-
     private Integer astatus;
-    private List<T_BUYORDERXI_DETAIL> details=new ArrayList<T_BUYORDERXI_DETAIL>(0);
 
     public String getBillno() {
         return billno;
