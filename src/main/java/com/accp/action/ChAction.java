@@ -1,9 +1,7 @@
 package com.accp.action;
 
 import com.accp.biz.ChBiz;
-import com.accp.pojo.T_BILLTYPE;
-import com.accp.pojo.T_DEPARTMENT;
-import com.accp.pojo.T_WAREHOUSE;
+import com.accp.pojo.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +46,17 @@ public class ChAction {
     @ResponseBody
     public String getBillNo(String date){
        return chbiz.getBillNo(date);
+    }
+
+    @GetMapping("/queryPerson")
+    @ResponseBody
+    public List<T_PERSONNEL> queryPerson(){
+        return chbiz.queryPerson();
+    }
+
+    @GetMapping("/queryShort")
+    @ResponseBody
+    public List<T_DSDATASET1> queryShort(){
+        return chbiz.queryShort();
     }
 }

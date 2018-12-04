@@ -1,9 +1,7 @@
 package com.accp.biz;
 
 import com.accp.dao.ChDao;
-import com.accp.pojo.T_BILLTYPE;
-import com.accp.pojo.T_DEPARTMENT;
-import com.accp.pojo.T_WAREHOUSE;
+import com.accp.pojo.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +43,13 @@ public class ChBiz {
         }else{
             return String.valueOf(billno+1);
         }
+    }
+
+    public List<T_PERSONNEL> queryPerson(){
+        return chdao.queryPerson();
+    }
+
+    public List<T_DSDATASET1> queryShort(){
+        return chdao.queryShort();
     }
 }

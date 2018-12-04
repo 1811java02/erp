@@ -1,8 +1,6 @@
 package com.accp.dao;
 
-import com.accp.pojo.T_BILLTYPE;
-import com.accp.pojo.T_DEPARTMENT;
-import com.accp.pojo.T_WAREHOUSE;
+import com.accp.pojo.*;
 
 import java.util.List;
 
@@ -39,4 +37,16 @@ public interface ChDao {
      * @return
      */
     public Long getBillNo(String date);
+
+    /**
+     * 查询人员
+     * @return
+     */
+    public List<T_PERSONNEL> queryPerson();
+
+    /**
+     * 查询供应商
+     * @return
+     */
+    public List<T_DSDATASET1> queryShort();
 }

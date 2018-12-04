@@ -26,4 +26,14 @@
     <select id="queryBillTypeByRk" resultType="T_BILLTYPE">
         SELECT * FROM T_BILLTYPE WHERE BILLTYPE='采购入库单'
     </select>
+
+    <!--查询人员 -->
+    <select id="queryPerson" resultType="T_PERSONNEL">
+        SELECT * FROM T_PERSONNEL
+    </select>
+
+    <!--查询供应商 -->
+    <select id="queryShort" resultType="T_DSDATASET1">
+        SELECT  * FROM T_DSDATASET1
+    </select>
 </mapper>
