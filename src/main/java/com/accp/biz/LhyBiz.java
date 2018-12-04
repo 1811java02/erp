@@ -1,9 +1,11 @@
 package com.accp.biz;
 
 import com.accp.dao.LhyDao;
+import com.accp.pojo.T_BILLTYPE;
 import com.accp.pojo.T_CUSTOMER_INFORMATION;
 import com.accp.pojo.T_DSPRODUCTCLASS;
 import com.accp.pojo.T_WAREHOUSE;
+import com.accp.vo.lhy.T_DSDSSALEMAIN;
 import com.accp.vo.lhy.T_DSPRODUCT;
 import com.accp.vo.lhy.T_PERSONNEL;
 import com.github.pagehelper.PageHelper;
@@ -39,5 +41,18 @@ public class LhyBiz {
 
 	public List<T_PERSONNEL> queryPersonnel() {
 		return dao.queryPersonnel();
+	}
+
+	public String queryDsdssalemainId(String date) {
+		T_DSDSSALEMAIN dsdssalemain = dao.queryDsdssalemainByDate(date);
+		if (dsdssalemain == null) {
+			return date.replace("-", "") + "001";
+		} else {
+			return String.valueOf(Integer.valueOf(dsdssalemain.getBillno()) + 1);
+		}
+	}
+
+	public List<T_BILLTYPE> queryBilltype() {
+		return dao.queryBilltype();
 	}
 }

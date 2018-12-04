@@ -6,6 +6,11 @@
 	<link rel="stylesheet" href="../../css/xiaoshou/xs_chuku.css">
 	<link rel="stylesheet" href="../../layui/css/layui.css">
 	<link rel="stylesheet" href="../../css/common.css">
+	<style>
+		[readonly] {
+			cursor: default;
+		}
+	</style>
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
 <form class="layui-form pic-ok">
@@ -78,7 +83,8 @@
 		</div>
 		<label class="layui-form-label">单据日期</label>
 		<div class="layui-input-inline">
-			<input id="date" type="text" class="layui-input" onclick="layui.laydate({elem: this})">
+			<input id="date" type="text" class="layui-input" id="billdate"
+				   onclick="layui.laydate({elem: this, choose: queryId})" readonly>
 		</div>
 	</div>
 	<div class="layui-form-item">
@@ -88,13 +94,13 @@
 		</div>
 		<label class="layui-form-label">单据号码</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
+			<input type="text" class="layui-input" id="billno" readonly>
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">销售出库类型</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
+			<input type="text" class="layui-input" id="saleclassid" readonly>
 		</div>
 		<label class="layui-form-label">币别</label>
 		<div class="layui-input-inline">
@@ -105,8 +111,8 @@
 		<label class="layui-form-label">单价是否含税</label>
 		<div class="layui-input-inline">
 			<select id="shui">
-				<option value="true" selected>含税</option>
-				<option value="false">未税</option>
+				<option value="0" selected>含税</option>
+				<option value="1">未税</option>
 			</select>
 		</div>
 		<label class="layui-form-label">汇率</label>
@@ -173,7 +179,7 @@
 					<label class="layui-form-label">收款条件</label>
 					<div class="layui-input-block">
 						<textarea name="desc" placeholder="请输入内容"
-							  class="layui-textarea"></textarea>
+								  class="layui-textarea"></textarea>
 					</div>
 				</div>
 			</form>
@@ -213,118 +219,173 @@
 <script src="../../js/jquery-1.12.4.js"></script>
 <script src="../../js/xiaoshou/xs_chuku.js"></script>
 <script>
-	var windowCustid, windowWareid, windowSalesid;
-	$("#custid").dblclick(function () {
-		checkCustid();
-	})
-	$("#wareid").dblclick(function () {
-		checkWareid();
-	})
-	$("#salesid").dblclick(function () {
-		checkSalesid();
-	})
+    getDate();
 
-	function checkCustid() {
-		$.getJSON('/lhy/query/customer', function (data) {
-			var table = $("<table class='layui-table' style='margin: 0;overflow-y: scroll'></table>");
-			var thead = $("<thead></thead>");
-			var tbody = $("<tbody></tbody>");
-			var th1 = $("<th></th>").text("编号");
-			var th2 = $("<th></th>").text("名称");
-			thead.append(th1, th2);
-			$(data).each(function (i, obj) {
-				var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowCustid,'#custid','" + obj.customerfllnae + "')");
-				var td1 = $("<td></td>").text(obj.customerid);
-				var td2 = $("<td></td>").text(obj.customerfllnae);
-				tr.append(td1, td2);
-				tbody.append(tr);
-			})
-			table.append(thead, tbody);
-			windowCustid = layer.open({
-				type: 1,
-				area: ["500px", "300px"],
-				title: "选择客户",
-				content: nodeToString(table[0]),
-				btn: ['取消'],
-				yes: function (index, layero) {
-					layer.close(windowCustid);
-				}
-			});
-		})
-	}
+    function getDate() {
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth();
+        if (month < 10)
+            month = "0" + month;
+        var day = date.getDate();
+        if (day < 10)
+            day = "0" + day;
+        date = year + "-" + month + "-" + day;
+        $("#date").val(date);
+        queryId();
+    }
 
-	function checkWareid() {
-		$.getJSON('/lhy/query/warehouse', function (data) {
-			var table = $("<table class='layui-table' style='margin: 0;overflow-y: scroll'></table>");
-			var thead = $("<thead></thead>");
-			var tbody = $("<tbody></tbody>");
-			var th1 = $("<th></th>").text("编号");
-			var th2 = $("<th></th>").text("名称");
-			thead.append(th1, th2);
-			$(data).each(function (i, obj) {
-				var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowWareid,'#wareid','" + obj.warename + "')");
-				var td1 = $("<td></td>").text(obj.wareid);
-				var td2 = $("<td></td>").text(obj.warename);
-				tr.append(td1, td2);
-				tbody.append(tr);
-			})
-			table.append(thead, tbody);
-			windowWareid = layer.open({
-				type: 1,
-				area: ["500px", "300px"],
-				title: "选择仓库",
-				content: nodeToString(table[0]),
-				btn: ['取消'],
-				yes: function (index, layero) {
-					layer.close(windowWareid);
-				}
-			});
-		})
-	}
+    function queryId() {
+        $.getJSON("/lhy/query/dsdssalemainId", {date: $("#date").val()}, function (data) {
+            $("#billno").val(data);
+        })
+    }
 
-	function checkSalesid() {
-		$.getJSON('/lhy/query/personnel', function (data) {
-			var table = $("<table class='layui-table' style='margin: 0;overflow-y: scroll'></table>");
-			var thead = $("<thead></thead>");
-			var tbody = $("<tbody></tbody>");
-			var th1 = $("<th></th>").text("编号");
-			var th2 = $("<th></th>").text("姓名");
-			thead.append(th1, th2);
-			$(data).each(function (i, obj) {
-				console.info(obj)
-				var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowSalesid,'#salesid','" + obj.personname + "','#departid','" + obj.department.departname + "')");
-				var td1 = $("<td></td>").text(obj.personid);
-				var td2 = $("<td></td>").text(obj.personname);
-				tr.append(td1, td2);
-				tbody.append(tr);
-			})
-			table.append(thead, tbody);
-			windowSalesid = layer.open({
-				type: 1,
-				area: ["500px", "300px"],
-				title: "选择人员",
-				content: nodeToString(table[0]),
-				btn: ['取消'],
-				yes: function (index, layero) {
-					layer.close(windowSalesid);
-				}
-			});
-		})
-	}
+    var windowCustid, windowWareid, windowSalesid, windowSaleclassid;
+    $("#custid").dblclick(function () {
+        checkCustid();
+    })
+    $("#wareid").dblclick(function () {
+        checkWareid();
+    })
+    $("#salesid").dblclick(function () {
+        checkSalesid();
+    })
+    $("#saleclassid").dblclick(function () {
+        checkSaleclassid();
+    })
 
-	function putValue(window, dom, value, dom2, value2) {
-		$(dom).val(value);
-		$(dom2).val(value2);
-		layer.close(window);
-	}
+    function checkCustid() {
+        $.getJSON('/lhy/query/customer', function (data) {
+            var table = $("<table class='layui-table' style='margin: 0;overflow-y: scroll'></table>");
+            var thead = $("<thead></thead>");
+            var tbody = $("<tbody></tbody>");
+            var th1 = $("<th></th>").text("编号");
+            var th2 = $("<th></th>").text("名称");
+            thead.append(th1, th2);
+            $(data).each(function (i, obj) {
+                var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowCustid,'#custid','" + obj.customerfllnae + "')");
+                var td1 = $("<td></td>").text(obj.customerid);
+                var td2 = $("<td></td>").text(obj.customerfllnae);
+                tr.append(td1, td2);
+                tbody.append(tr);
+            })
+            table.append(thead, tbody);
+            windowCustid = layer.open({
+                type: 1,
+                area: ["500px", "300px"],
+                title: "选择客户",
+                content: nodeToString(table[0]),
+                btn: ['取消'],
+                yes: function (index, layero) {
+                    layer.close(windowCustid);
+                }
+            });
+        })
+    }
 
-	function nodeToString(node) {
-		var tmpNode = document.createElement("div");
-		tmpNode.appendChild(node.cloneNode(true));
-		var str = tmpNode.innerHTML;
-		tmpNode = node = null;
-		return str;
-	}
+    function checkWareid() {
+        $.getJSON('/lhy/query/warehouse', function (data) {
+            var table = $("<table class='layui-table' style='margin: 0;overflow-y: scroll'></table>");
+            var thead = $("<thead></thead>");
+            var tbody = $("<tbody></tbody>");
+            var th1 = $("<th></th>").text("编号");
+            var th2 = $("<th></th>").text("名称");
+            thead.append(th1, th2);
+            $(data).each(function (i, obj) {
+                var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowWareid,'#wareid','" + obj.warename + "')");
+                var td1 = $("<td></td>").text(obj.wareid);
+                var td2 = $("<td></td>").text(obj.warename);
+                tr.append(td1, td2);
+                tbody.append(tr);
+            })
+            table.append(thead, tbody);
+            windowWareid = layer.open({
+                type: 1,
+                area: ["500px", "300px"],
+                title: "选择仓库",
+                content: nodeToString(table[0]),
+                btn: ['取消'],
+                yes: function (index, layero) {
+                    layer.close(windowWareid);
+                }
+            });
+        })
+    }
+
+    function checkSalesid() {
+        $.getJSON('/lhy/query/personnel', function (data) {
+            var table = $("<table class='layui-table' style='margin: 0;overflow-y: scroll'></table>");
+            var thead = $("<thead></thead>");
+            var tbody = $("<tbody></tbody>");
+            var th1 = $("<th></th>").text("编号");
+            var th2 = $("<th></th>").text("姓名");
+            thead.append(th1, th2);
+            $(data).each(function (i, obj) {
+                console.info(obj)
+                var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowSalesid,'#salesid','" + obj.personname + "','#departid','" + obj.department.departname + "')");
+                var td1 = $("<td></td>").text(obj.personid);
+                var td2 = $("<td></td>").text(obj.personname);
+                tr.append(td1, td2);
+                tbody.append(tr);
+            })
+            table.append(thead, tbody);
+            windowSalesid = layer.open({
+                type: 1,
+                area: ["500px", "300px"],
+                title: "选择人员",
+                content: nodeToString(table[0]),
+                btn: ['取消'],
+                yes: function (index, layero) {
+                    layer.close(windowSalesid);
+                }
+            });
+        })
+    }
+
+    function checkSaleclassid() {
+        $.getJSON('/lhy/query/billtype', function (data) {
+            var table = $("<table class='layui-table' style='margin: 0;overflow-y: scroll'></table>");
+            var thead = $("<thead></thead>");
+            var tbody = $("<tbody></tbody>");
+            var th1 = $("<th></th>").text("编号");
+            var th2 = $("<th></th>").text("类型");
+            thead.append(th1, th2);
+            $(data).each(function (i, obj) {
+                console.info(obj)
+                var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowSaleclassid,'#saleclassid','" + obj.classname + "')");
+                var td1 = $("<td></td>").text(obj.classid);
+                var td2 = $("<td></td>").text(obj.classname);
+                tr.append(td1, td2);
+                tbody.append(tr);
+            })
+            table.append(thead, tbody);
+            windowSaleclassid = layer.open({
+                type: 1,
+                area: ["500px", "300px"],
+                title: "选择单据类型",
+                content: nodeToString(table[0]),
+                btn: ['取消'],
+                yes: function (index, layero) {
+                    layer.close(windowSaleclassid);
+                }
+            });
+        })
+    }
+
+    function putValue(window, dom, value, dom2, value2) {
+        $(dom).val(value);
+        $(dom2).val(value2);
+        layer.close(window);
+    }
+
+    function nodeToString(node) {
+        var tmpNode = document.createElement("div");
+        tmpNode.appendChild(node.cloneNode(true));
+        var str = tmpNode.innerHTML;
+        tmpNode = node = null;
+        return str;
+    }
 </script>
 </body>
 </html>

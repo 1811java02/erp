@@ -5,6 +5,8 @@ import com.accp.pojo.T_PURCHASE_PURCHASE_DETAILS;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class T_PURCHASE_PURCHASEVo extends com.accp.pojo.T_PURCHASE_PURCHASE {
       private List<DsProductVo> list=new ArrayList<DsProductVo>();
       private String personname ;

@@ -1,10 +1,13 @@
 package com.accp.dao;
 
+import com.accp.pojo.T_BILLTYPE;
 import com.accp.pojo.T_CUSTOMER_INFORMATION;
 import com.accp.pojo.T_DSPRODUCTCLASS;
 import com.accp.pojo.T_WAREHOUSE;
+import com.accp.vo.lhy.T_DSDSSALEMAIN;
 import com.accp.vo.lhy.T_DSPRODUCT;
 import com.accp.vo.lhy.T_PERSONNEL;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,4 +21,8 @@ public interface LhyDao {
 	List<T_WAREHOUSE> queryWarehouse();
 
 	List<T_PERSONNEL> queryPersonnel();
+
+	T_DSDSSALEMAIN queryDsdssalemainByDate(@Param("date") String date);
+
+	List<T_BILLTYPE> queryBilltype();
 }

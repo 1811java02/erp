@@ -14,6 +14,13 @@
 		<result property="departid" column="departid"></result>
 		<association property="department" column="departid" select="selectDepartment"></association>
 	</resultMap>
+	<resultMap id="dsdssalemainMap" type="com.accp.vo.lhy.T_DSDSSALEMAIN">
+		<id property="billno" column="billno"></id>
+		<collection property="dsdssalesub" column="billno" select="selectDsdssalesub"></collection>
+	</resultMap>
+	<resultMap id="dsdssalesubMap" type="com.accp.vo.lhy.T_DSDSSALESUB">
+
+	</resultMap>
 
 	<select id="selectWarehouse" resultType="t_warehouse">
 		select * from t_warehouse where wareid=#{0}
@@ -23,6 +30,9 @@
 	</select>
 	<select id="selectDepartment" resultType="t_department">
 		select * from t_department where departid=#{0}
+	</select>
+	<select id="selectDsdssalesub" resultMap="dsdssalesubMap">
+		select * from t_dsdssalesub where billno=#{0}
 	</select>
 
 	<select id="queryDsproduct" resultMap="dsproductMap">
@@ -39,5 +49,11 @@
 	</select>
 	<select id="queryPersonnel" resultMap="personnelMap">
 		select * from t_personnel
+	</select>
+	<select id="queryDsdssalemainByDate" resultMap="dsdssalemainMap">
+		select * from t_dsdssalemain where billdate=#{date}
+	</select>
+	<select id="queryBilltype" resultType="t_billtype">
+		select * from t_billtype where billtype='销售出库单'
 	</select>
 </mapper>
