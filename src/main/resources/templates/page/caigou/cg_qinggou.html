@@ -122,18 +122,18 @@
 					</tr>
 					</thead>
 					     <tr v-for="(temp1,index) in temp.list">
-							 <td style="width: 30px"  v-text="index">（栏号）</th>
-							 <td style="width: 30px" v-text="temp1.id">（物料编号）</td>
-							 <td style="width: 30px" v-text="temp1.id">（物料名称）</td>
-							 <td style="width: 30px" v-text="temp1.id">（规格型号）</td>
-							 <td style="width: 30px" v-text="temp1.id">（单位名称）</td>
-							 <td style="width: 30px" v-text="temp1.id">数量</td>
-							 <td style="width: 30px" v-text="temp1.id">币别</td>
-							 <td style="width: 30px" v-text="temp1.id">（标准进价）</td>
-							 <td style="width: 30px" v-text="temp1.id">（标准进价金额）</td>
-							 <td style="width: 30px" v-text="temp1.id">（币别）</td>
-							 <td style="width: 30px" v-text="temp1.id">（单价）</td>
-							 <td style="width: 30px" v-text="temp1.id">（进价金额）</td>
+							 <td style="width: 30px"  v-text="(index+1)">（栏号）</th>
+							 <td style="width: 30px" v-text="temp1.prodid">（物料编号）</td>
+							 <td style="width: 30px" v-text="temp1.prodname">（物料名称）</td>
+							 <td style="width: 30px" v-text="temp1.prodsize">（规格型号）</td>
+							 <td style="width: 30px" v-text="temp1.unit">（单位名称）</td>
+							 <td style="width: 30px" v-text="0">数量</td>
+							 <td style="width: 30px" v-text="temp1.currname">币别</td>
+							 <td style="width: 30px" v-text="temp1.stdprice">（标准进价）</td>
+							 <td style="width: 30px" v-text="0">（标准进价金额）</td>
+							 <td style="width: 30px" v-text="temp1.unitname">（币别）</td>
+							 <td style="width: 30px" v-text="temp1.sprice">（单价）</td>
+							 <td style="width: 30px" v-text="temp1.amount">（进价金额）</td>
 							 <td style="width: 30px" v-text="temp1.id">需求日期</td>
 							 <td style="width: 30px" v-text="temp1.id">（建议采购日期）</td>
 							 <td style="width: 30px" v-text="temp1.id">（未采购量）</td>
@@ -224,7 +224,8 @@
     var vm = new Vue({
         el: "#vmindexCnt",
         data: {
-            pageInfo: {}
+            pageInfo: {},
+            T_PURCHASE_PURCHASE:{}
         },
         created: function() {
             var vm = this;
@@ -239,15 +240,16 @@
                     vm.pageInfo = data;
                 },"json");
             },
-           /* updateInfo: function(e, pid) {
+            updateInfo: function(e, pid) {
+                alert()
                 //利用缓存
-                window.sessionStorage.setItem("pid", pid);
-                alert("");
-            },*/
-            removeInfo: function(e, pid) {
+                /*window.sessionStorage.setItem("pid", pid);
+                alert("");*/
+            },
+            removeInfo: function(e,billno) {
                 if (window.confirm('是否移除?')) {
-                    $.getJSON("http://172.20.0.76/zsp/query/getPurchasePurchase",{
-                        "Page":pageNum
+                    $.getJSON("http://172.20.0.76/zsp/query/delPurchasePurchase",{
+                        "billno":billno
                     }, function(data) {
                         if (data.code == 200) {
                             alert("移除成功");

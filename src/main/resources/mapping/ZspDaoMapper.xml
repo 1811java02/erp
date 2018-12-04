@@ -24,18 +24,35 @@
            <result column="userdef1" property="userdef1"/>
            <result column="departname" property="departname"/>
            <result column="personname" property="personname"/>
-            <collection property="list" column="billno" select="getTpurchasePurchaseDetails"/>
+        <collection property="list" column="billno" select="getTpurchasePurchaseDetails"/>
     </resultMap>
     <select id="getPurchasePurchase" resultMap="getPurchasePurchaseMap">
-         select p.* ,d.departname,per.personname from T_PURCHASE_PURCHASE p
+        select p.* ,d.departname,per.personname from T_PURCHASE_PURCHASE p
          join  T_Department D on p.DEPARTID=d.DEPARTID
          join t_personnel per on per.PERSONID=p.SALESID ORDER BY p.billno desc
+
      </select>
-    <select id="getTpurchasePurchaseDetails" resultType="com.accp.vo.zsp.DsProductVo">
-     select * from t_purchase_purchase_details where purchaseid =#{0}
+    <resultMap id="DsProductVoMap" type="com.accp.vo.zsp.DsProductVo">
+        <id column="prodid" property="prodid"/>
+        <result column="prodname" property="prodname"/>
+        <result column="prodsize" property="prodsize"/>
+        <result column="unit" property="unit"/>
+        <result column="currname" property="currname"/>
+        <result column="stdprice" property="stdprice"/>
+        <result column="sprice" property="sprice"/>
+        <result column="unitname" property="unitname"/>
+        <result column="amount" property="amount"/>
+    </resultMap>
+    <select id="getTpurchasePurchaseDetails" resultMap="DsProductVoMap">
+    select d.prodid,d.prodname,d.prodsize,d.unit,d.currname,d.stdprice,
+  (select  p.sprice from (select * from T_BUYORDERXI_DETAIL t order by t.PRODID desc) p where rownum = 1 and PRODID=p.PRODID ) sprice,
+  (select  p.unitname from (select * from T_BUYORDERXI_DETAIL t order by t.PRODID desc) p where rownum = 1  and PRODID=p.PRODID) unitname,
+  (select  p.amount from (select * from T_BUYORDERXI_DETAIL t order by t.PRODID desc) p where rownum = 1  and PRODID=p.PRODID) amount
+from T_PURCHASE_PURCHASE_DETAILS p join T_DSPRODUCT d on d.PRODID=p.PRODID
+     where p.purchaseid =#{0}
     </select>
     <delete id="delPurchasePurchase">
-        delete from t_purchase_purchase where billno=#{billno}
+        delete from t_purchase_purchase where billno=#{billno}z
     </delete>
     <insert id="addPurchasePurchase">
         inser into  t_purchase_purchase(billno)values('')

@@ -35,9 +35,12 @@ public class ZspAction {
      * 删除采购请购单的主详表
      * @param purchasePurchase 参数是 请购单主表
      */
-    public Map<String,String > delPurchasePurchase(T_PURCHASE_PURCHASE purchasePurchase){
+    @RequestMapping("/delPurchasePurchase")
+    @ResponseBody
+    public Map<String,String > delPurchasePurchase(String billno){
+        System.out.print("*******************************************************************");
         Map<String,String>map=new HashMap<String, String>();
-        biz.delPurchasePurchase(purchasePurchase);
+        biz.delPurchasePurchase(billno);
         map.put("code","200");
         return map;
 

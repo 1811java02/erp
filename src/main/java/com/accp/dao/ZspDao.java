@@ -20,7 +20,7 @@ public interface ZspDao {
        * @param buyreturn 参数是 采购单主表对象
        * @return 返回受影响的行数
        */
-      int delPurchasePurchase(@Param("purchasePurchase")T_PURCHASE_PURCHASE purchasePurchase);
+      int delPurchasePurchase(@Param("billno")String billno);
       /**
        * 对采购请购单主详表删除
        * @param buyreturn 参数是 采购单主表对象
