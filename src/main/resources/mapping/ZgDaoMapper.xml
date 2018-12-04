@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
 <mapper namespace="com.accp.dao.ZgDao">
+
+
+        <select  id="queryCustomeraccountdetails"  resultType="T_CUSTOMERACCOUNTDETAILS">
+                    select    *from   t_customeraccountdetails
+           </select>
+
+        <select id="queryCUSTOMER_INFORMATION"  resultType="T_CUSTOMER_INFORMATION">
+                  select cuw.CustomerID,cuw.CustomerAbreviation    *from  t_customer_information as cuw
+        </select>
+
+    <resultMap id="AdvancereceiptMap" type="com.accp.vo.zg.AdvancereceiptVo">
+        <id column="fundbillid" property="fundbillid"/>
+        <result column="fundbilldate" property="fundbilldate"/>
+        <result column="customerid" property="customerid"/>
+        <result column="customername" property="customername"/>
+        <result column="cashstylename" property="cashstylename"/>
+        <result column="cash" property="cash"/>
+        <result column="visastylename" property="visastylename"/>
+        <result column="visa" property="visa"/>
+        <result column="otherpaystylename" property="otherpaystylename"/>
+        <result column="otherpay" property="otherpay"/>
+        <result column="bcurrencyname" property="bcurrencyname"/>
+        <result column="exchangerate" property="exchangerate"/>
+        <result column="discountper" property="discountper"/>
+        <result column="accmonthtomonth" property="accmonthtomonth"/>
+        <result column="voucherno" property="voucherno"/>
+        <result column="departnamefrom" property="departnamefrom"/>
+        <result column="makersign" property="makersign"/>
+        <result column="projectfrom" property="projectfrom"/>
+        <result column="fermittersign" property="fermittersign"/>
+        <result column="auditstatus" property="auditstatus"/>
+        <result column="customcolumnone" property="customcolumnone"/>
+        <result column="customcolumntwo" property="customcolumntwo"/>
+        <result column="remarks" property="remarks"/>
+        <collection property="details" column="fundbillid" select="getAdvancereceiptDetail"/>
+    </resultMap>
+    <select id="getAdvancereceipt" resultMap="AdvancereceiptMap">
+         select * from t_advancereceipt
+    </select>
+    <select id="getAdvancereceiptDetail" resultType="T_ADVANCERECEIPTDETAILS">
+        select * from t_advancereceiptdetails
+    </select>
+
 
 </mapper>

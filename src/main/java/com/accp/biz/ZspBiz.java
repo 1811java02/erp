@@ -23,6 +23,7 @@ public class ZspBiz {
      * @return 返回分页对象
      */
     public PageInfo<T_PURCHASE_PURCHASE> getPurchasePurchase(Integer page){
+
         PageHelper.startPage(page, 1);
         return new PageInfo<T_PURCHASE_PURCHASE>(dao.getPurchasePurchase());
     }
@@ -32,8 +33,8 @@ public class ZspBiz {
      * 删除采购请购单的主详表
      * @param purchasePurchase 参数是 请购单主表
      */
-    public void delPurchasePurchase(T_PURCHASE_PURCHASE purchasePurchase){
-        dao.addPurchasePurchase(purchasePurchase);
+    public void delPurchasePurchase(String billno){
+        dao.delPurchasePurchase(billno);
     }
     /**
      * 添加采购请购单的主详表
