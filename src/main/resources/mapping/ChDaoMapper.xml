@@ -41,4 +41,14 @@
     <select id="querySubordinateDept" resultType="string" parameterType="string">
         SELECT DEPARTNAME FROM T_DEPARTMENT WHERE DEPARTID=(SELECT DEPARTID FROM T_PERSONNEL WHERE PERSONNAME=#{personname})
     </select>
+
+    <!--查询物料 -->
+    <select id="queryProdct" resultType="T_DSPRODUCT">
+        SELECT * FROM T_DSPRODUCT
+    </select>
+
+    <!--根据物料编号查询物料信息 -->
+    <select id="queryProdctInfo" resultType="T_DSPRODUCT" parameterType="string">
+        SELECT * FROM T_DSPRODUCT WHERE PRODID=#{prodid}
+    </select>
 </mapper>

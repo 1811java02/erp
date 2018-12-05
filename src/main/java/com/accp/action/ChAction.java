@@ -50,7 +50,8 @@ public class ChAction {
 
     @GetMapping("/queryPerson")
     @ResponseBody
-    public List<T_PERSONNEL> queryPerson(){
+    public List<T_PERSONNEL> queryPerson() throws InterruptedException{
+        Thread.sleep(5000);
         return chbiz.queryPerson();
     }
 
@@ -63,7 +64,18 @@ public class ChAction {
     @GetMapping("/querySubordinateDept")
     @ResponseBody
     public String querySubordinateDept(String personname){
-        System.out.print(personname+"========================");
         return chbiz.querySubordinateDept(personname);
+    }
+
+    @GetMapping("/queryProdct")
+    @ResponseBody
+    public List<T_DSPRODUCT> queryProdct() {
+        return chbiz.queryProdct();
+    }
+
+    @GetMapping("/queryProdctInfo")
+    @ResponseBody
+    public T_DSPRODUCT queryProdctInfo(String prodid){
+        return chbiz.queryProdctInfo(prodid);
     }
 }

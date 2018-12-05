@@ -56,4 +56,12 @@ public class ChBiz {
     public String querySubordinateDept(String personname){
         return chdao.querySubordinateDept(personname);
     }
+
+    public  List<T_DSPRODUCT> queryProdct(){
+        return chdao.queryProdct();
+    }
+
+    public T_DSPRODUCT queryProdctInfo(String prodid){
+        return chdao.queryProdctInfo(prodid);
+    }
 }

@@ -55,4 +55,17 @@ public interface ChDao {
      * @return
      */
     public String querySubordinateDept(String personname);
+
+    /**
+     * 查询物料
+     * @return
+     */
+    public  List<T_DSPRODUCT> queryProdct();
+
+    /**
+     * 根据物料编号查询物料信息
+     * @param prodid
+     * @return
+     */
+    public T_DSPRODUCT queryProdctInfo(String prodid);
 }
