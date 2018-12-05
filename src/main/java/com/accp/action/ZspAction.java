@@ -50,6 +50,7 @@ public class ZspAction {
      * @param purchasePurchase 参数是 请购单主表对象 +详表集合
      */
     public Map<String,String >  addPurchasePurchase(T_PURCHASE_PURCHASE purchasePurchase){
+        System.out.println("***************************************************");
         Map<String,String>map=new HashMap<String, String>();
         biz.addPurchasePurchase(purchasePurchase);
         map.put("code","200");

@@ -24,7 +24,7 @@ public class ZspBiz {
      */
     public PageInfo<T_PURCHASE_PURCHASE> getPurchasePurchase(Integer page){
 
-        PageHelper.startPage(page, 1);
+        PageHelper.startPage(page,1);
         return new PageInfo<T_PURCHASE_PURCHASE>(dao.getPurchasePurchase());
     }
     //<!-- updatePurchasePurchase  addPurchasePurchase  delPurchasePurchase-->

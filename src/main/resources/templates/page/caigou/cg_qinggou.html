@@ -79,10 +79,10 @@
 		<label class="layui-form-label">单况</label>
 		<div class="layui-input-inline">
 			<select name="city" lay-verify="required" v-model="temp.billstatus ">
-				<option value=""></option>
-				<option value="1">未结案</option>
-				<option value="2">已结案</option>
-				<option value="3">无效</option>
+                <option :selected="1" value="默认值">未结案</option>
+z
+				<option :selected="2">已结案</option>
+				<option :selected="3">无效</option>
 			</select>
 		</div>
 		<label class="layui-form-label">单据号码</label>
@@ -218,7 +218,7 @@
         timeout: 6000
     });
     $(document).ajaxError(function() {
-        showAlertDialog('服务器异常');
+        alert('服务器异常');
     });
     //构建VM渲染引擎
     var vm = new Vue({
