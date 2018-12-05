@@ -50,8 +50,7 @@ public class ChAction {
 
     @GetMapping("/queryPerson")
     @ResponseBody
-    public List<T_PERSONNEL> queryPerson() throws InterruptedException{
-        Thread.sleep(5000);
+    public List<T_PERSONNEL> queryPerson(){
         return chbiz.queryPerson();
     }
 
