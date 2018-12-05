@@ -75,16 +75,17 @@
 			<div class="layui-inline">
 				<label class="layui-form-label">客户</label>
 				<div class="layui-input-inline">
-					<input style="width: 250px" type="text" class="layui-input">
+					<input id="customer" style="width: 250px" type="text" class="layui-input" ondblclick="customer()">
 				</div>
 			</div>
 			<div class="layui-inline" style="margin-left: 20px">
 				<label class="layui-form-label">单据日期</label>
 				<div class="layui-input-inline">
+
 					<input style="width: 250px" type="text" class="layui-input"
 					       placeholder="yyyy-MM-dd" onclick="layui.laydate({elem:this});">
 				</div>
-			</div>
+			</div>slkjdgdfulksefg
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-inline">
@@ -330,10 +331,15 @@
         dataType:"json",
         success:function(result){
             $.each(result,function(i,obj){
-
                 $("#billno").val(obj.billno);
             });
         }
     });
+	function customer(){
+        layer.open({
+            title:'在线调试'
+            ,content:'123'
+        });
+    };
 </script>
 </html>

@@ -7,4 +7,5 @@ import java.util.List;
 public interface LyfDao {
 
     public List<T_SALESORDER> queryAllSalesorder();
+
 }
