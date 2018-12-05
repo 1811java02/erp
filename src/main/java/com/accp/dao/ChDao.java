@@ -49,4 +49,10 @@ public interface ChDao {
      * @return
      */
     public List<T_DSDATASET1> queryShort();
+
+    /**
+     * 查询所属部门
+     * @return
+     */
+    public String querySubordinateDept(String personname);
 }

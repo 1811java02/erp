@@ -59,4 +59,11 @@ public class ChAction {
     public List<T_DSDATASET1> queryShort(){
         return chbiz.queryShort();
     }
+
+    @GetMapping("/querySubordinateDept")
+    @ResponseBody
+    public String querySubordinateDept(String personname){
+        System.out.print(personname+"========================");
+        return chbiz.querySubordinateDept(personname);
+    }
 }

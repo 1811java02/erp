@@ -156,11 +156,12 @@
                 <li class="layui-this">内容</li>
                 <li>账款</li>
                 <li>备注</li>
+                <a href="javascript:void(0)" id="addLine"><i class="layui-icon" style="font-size: 20px;float: right;position: relative;right: 10px;top: 8px;">&#xe654;</i></a>
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
                     <div style="overflow-x: scroll;">
-                        <table class="layui-table" style="width: 3000px">
+                        <table class="layui-table" style="width: 3000px;" id="detailinfo">
                             <thead>
                             <tr>
                                 <td>(栏号)</td>
@@ -187,20 +188,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td colspan="21" style="font-size: 14px;color: #8D8D8D;">
-                                        没有可以显示的数据，在编辑状态下双击增加新的一行
-                                    </td>
-                                </tr>
                             </tbody>
                             <tfoot>
                             <tr>
-                                <td colspan="4">合计：</td>
-                                <td colspan="4"></td>
-                                <td colspan="4"></td>
-                                <td colspan="3"></td>
-                                <td colspan="3"></td>
-                                <td colspan="3"></td>
+                                <td colspan="5">合计</td>
+                                <td colspan="4">数量：</td>
+                                <td colspan="2">金额：</td>
+                                <td colspan="1">税额：</td>
+                                <td colspan="8">含税金额：</td>
+                                <td colspan="1">分摊金额：</td>
                             </tr>
                             </tfoot>
                         </table>
@@ -274,7 +270,7 @@
             <label class="layui-form-label">制单人员</label>
             <div class="layui-input-inline">
                 <input type="text" name="maker" lay-verify="maker" autocomplete="off"
-                       class="layui-input" readonly="readonly"/>
+                       class="layui-input" readonly="readonly" value="Admin"/>
             </div>
         </div>
         <div class="layui-form-item">
@@ -315,12 +311,16 @@
 <script type="text/javascript" src="../../js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="../../layui/lay/dest/layui.all.js"></script>
 <script>
-    var dbl=0;
+    var dbl=false;
     var dblparam=null;
     var layer = layui.layer
+    var form=layui.form();
     getLocalDate();
     if (jQuery("[name=billdate]").val() != "") {
         getBillNo();
+    }
+    if(jQuery("[name=person]").val()!=""){
+        querySubordinateDept();
     }
 
     function getLocalDate() {
@@ -409,35 +409,39 @@
             },
             cancel: function(index){
                 layer.close(index);
+            },
+            end:function () {
                 jQuery("#wrapper").hide();
             }
         });
     }
 
     jQuery("[name=cust]").dblclick(function () {
-        if(dbl==1){
+        if(dbl==true){
             showWrapper("cust");
         }
     })
     jQuery("[name=billtype]").dblclick(function () {
-        if(dbl==1) {
+        if(dbl==true) {
             showWrapper("billtype");
         }
     })
     jQuery("[name=ware]").dblclick(function () {
-        if(dbl==1) {
+        if(dbl==true) {
             showWrapper("ware");
         }
     })
     jQuery("[name=person]").dblclick(function () {
-        if(dbl==1) {
+        if(dbl==true) {
             showWrapper("person");
         }
     })
 
     jQuery("#menu-add").click(function () {
-        dbl = 1;
+        dbl = true;
         jQuery("[name=add_overRead]").removeAttr("readonly");
+        jQuery("[name=shui]").removeAttr("disabled");
+        form.render('select');
     })
 
     jQuery(document.body).on("dblclick",".chooseInfo",function () {
@@ -449,10 +453,53 @@
             jQuery("[name=billtype]").val(name).attr("id",id);
         }else if(dblparam=="person"){
             jQuery("[name=person]").val(name).attr("id",id);
+            jQuery("[name=person]").change();
         }else if(dblparam=="cust"){
             jQuery("[name=cust]").val(name).attr("id",id);
         }
         layer.close(winWrapper)
+    })
+    
+    function querySubordinateDept() {
+        jQuery.getJSON("/ch/querySubordinateDept", {"personname": jQuery("[name=person]").val()}, function (data) {
+            console.info(data);
+            jQuery("[name=deptName]").val(data);
+        })
+    }
+
+    jQuery("[name=person]").change(function () {
+        querySubordinateDept();
+    })
+
+    var lineid=0;
+    jQuery("#addLine").click(function () {
+        if(dbl==true) {
+            lineid++;
+            var $tr = jQuery("<tr></tr>");
+            $tr.append("<td>" + lineid + "</td>");
+            $tr.append("<td></td>");
+            $tr.append("<td></td>");
+            $tr.append("<td></td>");
+            $tr.append("<td></td>");
+            $tr.append("<td>0</td>");
+            $tr.append("<td>0.00</td>");
+            $tr.append("<td>100.00</td>");
+            $tr.append("<td>0.00</td>");
+            $tr.append("<td>0.00</td>");
+            $tr.append("<td>0.00</td>");
+            $tr.append("<td>0.00</td>");
+            $tr.append("<td>0.00</td>");
+            $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\" name=\"iszp\"/></td>");
+            $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\"/> </td>");
+            $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\"/></td>");
+            $tr.append("<td>0</td>");
+            $tr.append("<td></td>");
+            $tr.append("<td></td>");
+            $tr.append("<td></td>");
+            $tr.append("<td>0.00</td>");
+            jQuery("#detailinfo tbody").append($tr);
+            form.render("checkbox");
+        }
     })
 </script>
 </html>
