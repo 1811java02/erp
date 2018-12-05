@@ -52,4 +52,8 @@ public class ChBiz {
     public List<T_DSDATASET1> queryShort(){
         return chdao.queryShort();
     }
+
+    public String querySubordinateDept(String personname){
+        return chdao.querySubordinateDept(personname);
+    }
 }

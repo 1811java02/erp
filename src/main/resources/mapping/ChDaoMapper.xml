@@ -8,7 +8,7 @@
     </select>
 
     <!--查询单据类型-->
-    <select id="queryBillType" resultType="T_BILLTYPE">
+    <select id="queryBillType" resultType="T_BILLTYPE" parameterType="int">
         SELECT * FROM T_BILLTYPE
     </select>
 
@@ -35,5 +35,10 @@
     <!--查询供应商 -->
     <select id="queryShort" resultType="T_DSDATASET1">
         SELECT  * FROM T_DSDATASET1
+    </select>
+
+    <!--查询采购人员所属部门 -->
+    <select id="querySubordinateDept" resultType="string" parameterType="string">
+        SELECT DEPARTNAME FROM T_DEPARTMENT WHERE DEPARTID=(SELECT DEPARTID FROM T_PERSONNEL WHERE PERSONNAME=#{personname})
     </select>
 </mapper>
