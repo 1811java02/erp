@@ -1,6 +1,8 @@
 package com.accp.pojo;
 
 public class T_SALEPRICE_DETAILS {
+    private String detailid;
+
     private String billno;
 
     private String prodid;
@@ -32,6 +34,14 @@ public class T_SALEPRICE_DETAILS {
     private Integer isgift;
 
     private String itemremark;
+
+    public String getDetailid() {
+        return detailid;
+    }
+
+    public void setDetailid(String detailid) {
+        this.detailid = detailid == null ? null : detailid.trim();
+    }
 
     public String getBillno() {
         return billno;
