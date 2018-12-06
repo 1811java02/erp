@@ -25,10 +25,13 @@
 	<link rel="stylesheet" href="../../layui/css/layui.css">
 	<link rel="stylesheet" href="../../css/common.css">
 
+
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
-<form class="layui-form" style="margin: 0px auto;" action="">
-	<div class="layui-form-item">
+<form class="layui-form" style="margin: 0px auto;" action="" id="vmindexCnt">
+	<div v-for="(temp,index) in pageInfo.list">
+
+	<div class="layui-form-item" >
 		<div class="layui-input-block" style="margin-left: 0">
 			<ul class="layui-nav" style="background-color: transparent;">
 				<li class="layui-nav-item">
@@ -78,7 +81,7 @@
 						<dd><a href="">载入多币别账款</a></dd>
 						<dd><a href="">载入预付</a></dd>
 					</dl>
-				</li>
+                </li>
 				<li class="layui-nav-item" style="margin-left: 20px;">
 					<a href="javascript:;">自动计算</a>
 					<dl class="layui-nav-child">
@@ -93,48 +96,54 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">供应商</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" name="title"  id="customername"   required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 		<label class="layui-form-label">单据日期</label>
 		<div class="layui-input-inline">
-			<input type="date" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="date" name="title"  id="fundbilldate" required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">结算方式一</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" name="title" id="cashstylename"  required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
+            <input type="text" name="title" id="cash"  required lay-verify="required" placeholder="请输入标题"
+                   autocomplete="off" class="layui-input">
 		</div>
 		<label class="layui-form-label">单据号码</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" name="title" id="fundbillid"  required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">结算方式二</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" name="title" id="visastylename"  required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
+            <input type="text" name="title" id=""  required lay-verify="required" placeholder="请输入标题"
+                   autocomplete="off" class="layui-input">
 		</div>
 		<label class="layui-form-label">币别</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" name="title" id="bcurrencyname"  required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">算方式三</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" name="title" id="otherpaystylename"  required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
+            <input type="text" name="title" id="otherpay"  required lay-verify="required" placeholder="请输入标题"
+                   autocomplete="off" class="layui-input">
 		</div>
 		<label class="layui-form-label">汇率</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" name="title" id="exchangerate"  required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 	</div>
@@ -142,32 +151,15 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">折扣率</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" name="title" id="discountper"  required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
-		<label class="layui-form-label">应收冲款类型</label>
-		<div class="layui-input-inline">
-			<select name="city" lay-verify="required">
-				<option value=""></option>
-				<option value="0">预收款</option>
-				<option value="1">收款冲账</option>
-				<option value="2">预收冲应帐</option>
-			</select>
-		</div>
-	</div>
-
-
-	<div class="layui-form-item">
 		<label class="layui-form-label">终止账月</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" name="title"id="accmonthtomonth" required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
-		<label class="layui-form-label">凭证编号</label>
-		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
-			       autocomplete="off" class="layui-input">
-		</div>
+
 	</div>
 
 	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="overflow: scroll;">
@@ -177,7 +169,7 @@
 			<li>备注</li>
 		</ul>
 		<div class="layui-tab-content" >
-			<div class="layui-tab-item layui-show" style="width: 4500px;">
+			<div class="layui-tab-item layui-show" style="width: 2000px;">
 				<table class="layui-table">
 					<colgroup>
 						<col width="85">
@@ -185,20 +177,12 @@
 						<col>
 					</colgroup>
 					<thead>
-					<tr>
+					<tr >
 						<th>(栏号)</th>
 						<th>单别</th>
 						<th>(原单日期)</th>
 						<th>(原单编号)</th>
-						<th>(发票号码)</th>
-						<th>(交易对象)</th>
-						<th>(交易对象名称)</th>
-						<th>(部门编号)</th>
-						<th>(部门名称)</th>
-						<th>(采购人员)</th>
-						<th>(项目名称)</th>
-						<th>(币别)</th>
-						<th>(汇率)</th>
+
 						<th>(原单金额)</th>
 						<th>(现行余额)</th>
 						<th>折让金额</th>
@@ -206,7 +190,7 @@
 						<th>冲抵金额</th>
 					</tr>
 					</thead>
-					<tbody>
+					<tbody id="list">
 
 					</tbody>
 				</table>
@@ -225,13 +209,11 @@
 						<th>(来源类别)</th>
 						<th>(来源单号)</th>
 						<th>(预付余额)</th>
-						<th>(部门编号)</th>
-						<th>(部门名称)</th>
 						<th>取用预付金额</th>
 						<th>（来源摘要）</th>
 					</tr>
 					</thead>
-					<tbody>
+					<tbody id="list1">
 
 					</tbody>
 				</table>
@@ -264,12 +246,12 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">所属部门</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" name="title" id="departnamefrom" required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 		<label class="layui-form-label">制单人员</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" name="title" id="makersign" required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 	</div>
@@ -281,18 +263,67 @@
 		</div>
 		<label class="layui-form-label">复核人员</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input type="text" name="title" id="fermittersign" required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 	</div>
+	</div>
 </form>
 </body>
+
+<script src="../../js/jquery-1.12.4.js"></script>
 <script src="../../layui/layui.js"></script>
-<script>
-	//Demo
-	layui.use(['form', 'element'], function () {
-		var form = layui.form,
-			element = layui.element;
-	});
+<script src="../../layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript">
+    var num=1;
+    var pageinfo={};
+    function load(num){
+        $.post("/query/queryyingfu",{
+            "page":num
+        },function (data) {
+            pageinfo=data;
+            $.each(data.list,function (i,obj) {
+
+                $("#customername").val(obj.customername);
+                $("#fundbilldate").val(obj.fundbilldate);
+                $("#cashstylename").val(obj.cashstylename);
+                $("#cash").val(obj.cash);
+                $("#fundbillid").val(obj.fundbillid);
+                $("#visastylename").val(obj.visastylename);
+                $("#bcurrencyname").val(obj.bcurrencyname);
+                $("#otherpaystylename").val(obj.otherpaystylename);
+                $("#otherpay").val(obj.otherpay);
+                $("#exchangerate").val(obj.exchangerate);
+                $("#discountper").val(obj.discountper);
+                $("#accmonthtomonth").val(obj.accmonthtomonth);
+                $.each(obj.ru,function (j,objs) {
+                    $("#list").html("");
+                    var $row=("<tr><td>"+(i+1)+"</td><td> "+objs.sourcelist+"</td><td></td><td>"+objs.fundbillid+"</td><td>"+objs.originalamount+"</td><td>"+objs.allowanceamount+"</td><td>"+objs.moneycharged+"</td><td>"+objs.offsetamount+"</td></tr>");
+                    $("#list").append($row);
+
+                });
+                $.each(obj.pre,function (j,objs) {
+                    $("#list1").html("");
+                    var $row=("<tr><td>"+(i+1)+"</td><td> "+objs.fundbillid+"</td><td>"+objs.sourcelist+"</td><td>"+objs.sourceorder+"</td><td>"+objs.curprerecv+"</td><td>"+objs.prepaidamount+"</td><td>"+objs.remarks+"</td></tr>");
+                    $("#list1").append($row);
+
+                });
+
+            })
+
+
+
+        });
+    }
+    load(num);
+
+
+    $("#menu-prev").click(function () {
+        load(pageinfo.prePage==0?1:pageinfo.prePage);
+    });
+    $("#menu-next").click(function () {
+        load(pageinfo.pageNum==pageinfo.lastPage?pageinfo.lastPage:pageinfo.nextPage);
+    })
+
 </script>
 </html>

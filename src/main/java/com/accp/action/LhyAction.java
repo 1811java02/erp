@@ -18,41 +18,41 @@ import java.util.List;
 @RestController
 @RequestMapping("/lhy")
 public class LhyAction {
-	@Autowired
-	private LhyBiz biz;
+    @Autowired
+    private LhyBiz biz;
 
-	@RequestMapping("/query/dsproduct")
-	public PageInfo<T_DSPRODUCT> queryDsproduct(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "1") Integer size) {
-		return biz.queryDsproduct(page, size);
-	}
+    @RequestMapping("/query/dsproduct")
+    public PageInfo<T_DSPRODUCT> queryDsproduct(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "1") Integer size) {
+        return biz.queryDsproduct(page, size);
+    }
 
-	@RequestMapping("/query/dsproductclass")
-	public PageInfo<T_DSPRODUCTCLASS> queryDsproductclass(@RequestParam(defaultValue = "1") Integer page) {
-		return biz.queryDsproductclass(page);
-	}
+    @RequestMapping("/query/dsproductclass")
+    public PageInfo<T_DSPRODUCTCLASS> queryDsproductclass(@RequestParam(defaultValue = "1") Integer page) {
+        return biz.queryDsproductclass(page);
+    }
 
-	@RequestMapping("/query/customer")
-	public List<T_CUSTOMER_INFORMATION> queryCustomer() {
-		return biz.queryCustomer();
-	}
+    @RequestMapping("/query/customer")
+    public List<T_CUSTOMER_INFORMATION> queryCustomer() {
+        return biz.queryCustomer();
+    }
 
-	@RequestMapping("/query/warehouse")
-	public List<T_WAREHOUSE> queryWarehouse() {
-		return biz.queryWarehouse();
-	}
+    @RequestMapping("/query/warehouse")
+    public List<T_WAREHOUSE> queryWarehouse() {
+        return biz.queryWarehouse();
+    }
 
-	@RequestMapping("/query/personnel")
-	public List<T_PERSONNEL> queryPersonnel() {
-		return biz.queryPersonnel();
-	}
+    @RequestMapping("/query/personnel")
+    public List<T_PERSONNEL> queryPersonnel() {
+        return biz.queryPersonnel();
+    }
 
-	@RequestMapping("/query/dsdssalemainId")
-	public String queryDsdssalemainId(String date) {
-		return biz.queryDsdssalemainId(date);
-	}
+    @RequestMapping("/query/dsdssalemainId")
+    public String queryDsdssalemainId(String date) {
+        return biz.queryDsdssalemainId(date);
+    }
 
-	@RequestMapping("/query/billtype")
-	public List<T_BILLTYPE> queryBilltype() {
-		return biz.queryBilltype();
-	}
+    @RequestMapping("/query/billtype")
+    public List<T_BILLTYPE> queryBilltype() {
+        return biz.queryBilltype();
+    }
 }

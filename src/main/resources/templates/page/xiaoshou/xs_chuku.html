@@ -1,225 +1,271 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>销售出库单</title>
-	<link rel="stylesheet" href="../../css/xiaoshou/xs_chuku.css">
-	<link rel="stylesheet" href="../../layui/css/layui.css">
-	<link rel="stylesheet" href="../../css/common.css">
-	<style>
-		[readonly] {
-			cursor: default;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <title>销售出库单</title>
+    <link rel="stylesheet" href="../../css/xiaoshou/xs_chuku.css">
+    <link rel="stylesheet" href="../../layui/css/layui.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <style>
+        th, td {
+            white-space: nowrap;
+            overflow: hidden;
+            max-width: 150px;
+        }
+    </style>
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
 <form class="layui-form pic-ok">
-	<div class="layui-form-item">
-		<div class="layui-input-block" style="margin-left: 0">
-			<ul class="layui-nav" style="background-color: transparent;">
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
-						<i class="layui-icon">&#xe603;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
-						<i class="layui-icon">&#xe602;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="新增" id="menu-add">
-						<i class="layui-icon">&#xe654;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="修改" id="menu-update"
-					   disabled>
-						<i class="layui-icon">&#xe642;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="删除" id="menu-delete">
-						<i class="layui-icon">&#xe640;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="审核" id="menu-adopt"
-					   disabled="">
-						<i class="layui-icon">&#xe605;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="反审核" id="menu-refuse">
-						<i class="layui-icon">&#x1006;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="刷新" id="menu-refresh">
-						<i class="layui-icon">&#x1002;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item" style="margin-left: 20px;">
-					<a href="javascript:;">查询</a>
-					<dl class="layui-nav-child">
-						<dd><a href="" disabled="">历史交易查询</a></dd>
-						<dd><a href="">单据状况查询</a></dd>
-					</dl>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;">转单</a>
-					<dl class="layui-nav-child">
-						<dd><a href="">销售报价转入</a></dd>
-						<dd><a href="">销售订单转入</a></dd>
-					</dl>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">客户</label>
-		<div class="layui-input-inline">
-			<input type="text" class="layui-input" id="custid" readonly>
-		</div>
-		<label class="layui-form-label">单据日期</label>
-		<div class="layui-input-inline">
-			<input id="date" type="text" class="layui-input" id="billdate"
-				   onclick="layui.laydate({elem: this, choose: queryId})" readonly>
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">送货地址</label>
-		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
-		</div>
-		<label class="layui-form-label">单据号码</label>
-		<div class="layui-input-inline">
-			<input type="text" class="layui-input" id="billno" readonly>
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">销售出库类型</label>
-		<div class="layui-input-inline">
-			<input type="text" class="layui-input" id="saleclassid" readonly>
-		</div>
-		<label class="layui-form-label">币别</label>
-		<div class="layui-input-inline">
-			<input type="text" class="layui-input" value="人民币" readonly>
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">单价是否含税</label>
-		<div class="layui-input-inline">
-			<select id="shui" disabled>
-				<option value="0" selected>含税</option>
-				<option value="1">未税</option>
-			</select>
-		</div>
-		<label class="layui-form-label">汇率</label>
-		<div class="layui-input-inline">
-			<input type="text" class="layui-input" value="1.0000" readonly>
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">仓库</label>
-		<div class="layui-input-inline">
-			<input type="text" class="layui-input" id="wareid" readonly>
-		</div>
-	</div>
+    <div class="layui-form-item">
+        <div class="layui-input-block" style="margin-left: 0">
+            <ul class="layui-nav" style="background-color: transparent;">
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
+                        <i class="layui-icon">&#xe603;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
+                        <i class="layui-icon">&#xe602;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="新增" id="menu-add" onclick="openForm()">
+                        <i class="layui-icon">&#xe654;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="修改" id="menu-update"
+                       disabled>
+                        <i class="layui-icon">&#xe642;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="删除" id="menu-delete">
+                        <i class="layui-icon">&#xe640;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="审核" id="menu-adopt"
+                       disabled="">
+                        <i class="layui-icon">&#xe605;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="反审核" id="menu-refuse">
+                        <i class="layui-icon">&#x1006;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="刷新" id="menu-refresh">
+                        <i class="layui-icon">&#x1002;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item" style="margin-left: 20px;">
+                    <a href="javascript:;">查询</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="" disabled="">历史交易查询</a></dd>
+                        <dd><a href="">单据状况查询</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">转单</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">销售报价转入</a></dd>
+                        <dd><a href="">销售订单转入</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="custid" disabled>
+        </div>
+        <label class="layui-form-label">单据日期</label>
+        <div class="layui-input-inline">
+            <input id="date" type="text" class="layui-input" id="billdate"
+                   onclick="layui.laydate({elem: this, choose: queryId})" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">送货地址</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="addrid" disabled>
+        </div>
+        <label class="layui-form-label">单据号码</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="billno" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">销售出库类型</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="saleclassid" disabled>
+        </div>
+        <label class="layui-form-label">币别</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" value="人民币" id="currid" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">单价是否含税</label>
+        <div class="layui-input-inline">
+            <select id="priceoftax" disabled>
+                <option value="0" selected>含税</option>
+                <option value="1">未税</option>
+            </select>
+        </div>
+        <label class="layui-form-label">汇率</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" value="1.0000" id="exchrate" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">仓库</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="wareid" disabled>
+        </div>
+    </div>
 </form>
 <div class="layui-tab layui-tab-brief">
-	<ul class="layui-tab-title">
-		<li class="layui-this" lay-id="1">内容</li>
-		<li lay-id="2">备注</li>
-	</ul>
-	<div class="layui-tab-content" style="height: 300px;overflow: scroll;padding: 0;">
-		<div class="layui-tab-item layui-show">
-			<table class="layui-table" style="margin: 0;width: 4000px;">
-				<thead>
-				<tr>
-					<th>栏号</th>
-					<th>物料编号</th>
-					<th>物料名称</th>
-					<th>规格型号</th>
-					<th>单位名称</th>
-					<th>数量</th>
-					<th>折扣前单价</th>
-					<th>折数</th>
-					<th>单价</th>
-					<th>金额</th>
-					<th>税率</th>
-					<th>税额</th>
-					<th>含税金额</th>
-					<th>批号</th>
-					<th>物料组合</th>
-					<th>赠品</th>
-					<th>分录备注</th>
-					<th>来源单别</th>
-					<th>来源单号</th>
-					<th>客户订单</th>
-				</tr>
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
-		</div>
-		<div class="layui-tab-item" style="padding-top: 10px;padding-right: 10px;">
-			<form class="layui-form">
-				<div class="layui-form-item">
-					<label class="layui-form-label">自定栏1</label>
-					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
-					</div>
-					<label class="layui-form-label">自定栏2</label>
-					<div class="layui-input-inline">
-						<input type="text" class="layui-input">
-					</div>
-				</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label">收款条件</label>
-					<div class="layui-input-block">
-						<textarea name="desc" placeholder="请输入内容"
-								  class="layui-textarea"></textarea>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
+    <ul class="layui-tab-title">
+        <li class="layui-this" lay-id="1">内容</li>
+        <li lay-id="2">备注</li>
+    </ul>
+    <div class="layui-tab-content" style="height: 300px;overflow: scroll;padding: 0;">
+        <div class="layui-tab-item layui-show">
+            <table class="layui-table" style="margin: 0;">
+                <thead>
+                <tr>
+                    <th>栏号</th>
+                    <th>物料编号</th>
+                    <th>物料名称</th>
+                    <th>规格型号</th>
+                    <th>单位名称</th>
+                    <th>数量</th>
+                    <th>折扣前单价</th>
+                    <th>折数</th>
+                    <th>单价</th>
+                    <th>金额</th>
+                    <th>税率</th>
+                    <th>税额</th>
+                    <th>含税金额</th>
+                    <th>批号</th>
+                    <th>物料组合</th>
+                    <th>赠品</th>
+                    <th>分录备注</th>
+                    <th>来源单别</th>
+                    <th>来源单号</th>
+                    <th>客户订单</th>
+                </tr>
+                </thead>
+                <tbody id="list">
+                <tr>
+                    <td></td>
+                    <td class="list-prodid"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td contenteditable>6</td>
+                    <td contenteditable>7</td>
+                    <td contenteditable>8</td>
+                    <td contenteditable>9</td>
+                    <td contenteditable>10</td>
+                    <td contenteditable>11</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td contenteditable>17</td>
+                    <td></td>
+                    <td></td>
+                    <td contenteditable>20</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="layui-tab-item" style="padding-top: 10px;padding-right: 10px;">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">自定栏1</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="udef1" disabled>
+                    </div>
+                    <label class="layui-form-label">自定栏2</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="udef2" disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">收款条件</label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入内容" class="layui-textarea" id="remark" disabled></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <form class="layui-form">
-	<div class="layui-form-item">
-		<label class="layui-form-label">业务人员</label>
-		<div class="layui-input-inline">
-			<input type="text" class="layui-input" id="salesid" readonly>
-		</div>
-		<label class="layui-form-label">制单人员</label>
-		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">所属部门</label>
-		<div class="layui-input-inline">
-			<input type="text" class="layui-input" id="departid" readonly>
-		</div>
-		<label class="layui-form-label">复核人员</label>
-		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">所属项目</label>
-		<div class="layui-input-inline">
-			<input type="text" class="layui-input">
-		</div>
-	</div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">业务人员</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="salesid" disabled>
+        </div>
+        <label class="layui-form-label">制单人员</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="maker" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属部门</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="departid" disabled>
+        </div>
+        <label class="layui-form-label">复核人员</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="permitter" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属项目</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="projectid" disabled>
+        </div>
+    </div>
 </form>
+
+<div id="windowList">
+    <table id="windowTable" class="layui-table" style="margin: 0;overflow-y: scroll;display: none;">
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>名称</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 
 <script src="../../layui/lay/dest/layui.all.js"></script>
 <script src="../../js/jquery-1.12.4.js"></script>
 <script src="../../js/xiaoshou/xs_chuku.js"></script>
 <script>
-    getDate();
+    function openForm() {
+        $("#custid,#addrid,#saleclassid,#wareid,#date,#salesid,#departid").removeAttr("disabled").attr("readonly", true);
+        $("#udef1,#udef2,#remark,#priceoftax").removeAttr("disabled");
+        layui.form().render();
+        emptyForm();
+        getDate();
+    }
+
+    function emptyForm() {
+        $("#custid,#addrid,#saleclassid,#wareid,#date,#salesid,#departid").html(null);
+    }
 
     function getDate() {
         var date = new Date();
@@ -241,151 +287,80 @@
         })
     }
 
-    var windowCustid, windowWareid, windowSalesid, windowSaleclassid;
+    function openWindow(title, content) {
+        var index = layer.open({
+            type: 1,
+            shade: 0,
+            area: ['500px', '300px'],
+            title: title,
+            content: content,
+            zIndex: layer.zIndex,
+            success: function (layero) {
+                layer.setTop(layero);
+            },
+            cancel: function () {
+                closeWindow({index: index, elem: content});
+            },
+            end: function () {
+                closeWindow({index: index, elem: content});
+            }
+        });
+        return index;
+    }
+
+    function closeWindow(data) {
+        layer.close(data.index);
+        $(data.elem).remove();
+    }
+
+    function queryList(url, params, prop, id, name, title, fun) {
+        $("#windowTable tbody").empty();
+        var table = $("#windowTable").clone().removeAttr("id").appendTo("#windowList");
+        var index = openWindow(title, table);
+        $.getJSON(url, params, function (data) {
+            data = prop == null ? data : data[prop];
+            $(data).each(function (i, obj) {
+                var tr = $("<tr></tr>").dblclick(function () {
+                    fun({obj: obj, index: index, elem: table});
+                });
+                var td1 = $("<td></td>").text(obj[id]);
+                var td2 = $("<td></td>").text(obj[name]);
+                tr.append(td1, td2);
+                table.append(tr);
+            })
+        })
+    }
+
     $("#custid").dblclick(function () {
-        checkCustid();
-    })
-    $("#wareid").dblclick(function () {
-        checkWareid();
-    })
-    $("#salesid").dblclick(function () {
-        checkSalesid();
+        queryList('/lhy/query/customer', {}, null, 'customerid', 'customerfllnae', '选择客户', function (data) {
+            $("#custid").val(data.obj.customerfllnae);
+            closeWindow(data);
+        });
     })
     $("#saleclassid").dblclick(function () {
-        checkSaleclassid();
+        queryList('/lhy/query/billtype', {}, null, 'classid', 'classname', '选择销售出库类型', function (data) {
+            $("#saleclassid").val(data.obj.classname);
+            closeWindow(data);
+        });
     })
-
-    function checkCustid() {
-        $.getJSON('/lhy/query/customer', function (data) {
-            var table = $("<table class='layui-table' style='margin: 0;overflow-y: scroll'></table>");
-            var thead = $("<thead></thead>");
-            var tbody = $("<tbody></tbody>");
-            var th1 = $("<th></th>").text("编号");
-            var th2 = $("<th></th>").text("名称");
-            thead.append(th1, th2);
-            $(data).each(function (i, obj) {
-                var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowCustid,'#custid','" + obj.customerfllnae + "')");
-                var td1 = $("<td></td>").text(obj.customerid);
-                var td2 = $("<td></td>").text(obj.customerfllnae);
-                tr.append(td1, td2);
-                tbody.append(tr);
-            })
-            table.append(thead, tbody);
-            windowCustid = layer.open({
-                type: 1,
-                area: ["500px", "300px"],
-                title: "选择客户",
-                content: nodeToString(table[0]),
-                btn: ['取消'],
-                yes: function (index, layero) {
-                    layer.close(windowCustid);
-                }
-            });
-        })
-    }
-
-    function checkWareid() {
-        $.getJSON('/lhy/query/warehouse', function (data) {
-            var table = $("<table class='layui-table' style='margin: 0;overflow-y: scroll'></table>");
-            var thead = $("<thead></thead>");
-            var tbody = $("<tbody></tbody>");
-            var th1 = $("<th></th>").text("编号");
-            var th2 = $("<th></th>").text("名称");
-            thead.append(th1, th2);
-            $(data).each(function (i, obj) {
-                var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowWareid,'#wareid','" + obj.warename + "')");
-                var td1 = $("<td></td>").text(obj.wareid);
-                var td2 = $("<td></td>").text(obj.warename);
-                tr.append(td1, td2);
-                tbody.append(tr);
-            })
-            table.append(thead, tbody);
-            windowWareid = layer.open({
-                type: 1,
-                area: ["500px", "300px"],
-                title: "选择仓库",
-                content: nodeToString(table[0]),
-                btn: ['取消'],
-                yes: function (index, layero) {
-                    layer.close(windowWareid);
-                }
-            });
-        })
-    }
-
-    function checkSalesid() {
-        $.getJSON('/lhy/query/personnel', function (data) {
-            var table = $("<table class='layui-table' style='margin: 0;overflow-y: scroll'></table>");
-            var thead = $("<thead></thead>");
-            var tbody = $("<tbody></tbody>");
-            var th1 = $("<th></th>").text("编号");
-            var th2 = $("<th></th>").text("姓名");
-            thead.append(th1, th2);
-            $(data).each(function (i, obj) {
-                console.info(obj)
-                var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowSalesid,'#salesid','" + obj.personname + "','#departid','" + obj.department.departname + "')");
-                var td1 = $("<td></td>").text(obj.personid);
-                var td2 = $("<td></td>").text(obj.personname);
-                tr.append(td1, td2);
-                tbody.append(tr);
-            })
-            table.append(thead, tbody);
-            windowSalesid = layer.open({
-                type: 1,
-                area: ["500px", "300px"],
-                title: "选择人员",
-                content: nodeToString(table[0]),
-                btn: ['取消'],
-                yes: function (index, layero) {
-                    layer.close(windowSalesid);
-                }
-            });
-        })
-    }
-
-    function checkSaleclassid() {
-        $.getJSON('/lhy/query/billtype', function (data) {
-            var table = $("<table class='layui-table' style='margin: 0;overflow-y: scroll'></table>");
-            var thead = $("<thead></thead>");
-            var tbody = $("<tbody></tbody>");
-            var th1 = $("<th></th>").text("编号");
-            var th2 = $("<th></th>").text("类型");
-            thead.append(th1, th2);
-            $(data).each(function (i, obj) {
-                console.info(obj)
-                var tr = $("<tr></tr>").attr("ondblclick", "putValue(windowSaleclassid,'#saleclassid','" + obj.classname + "')");
-                var td1 = $("<td></td>").text(obj.classid);
-                var td2 = $("<td></td>").text(obj.classname);
-                tr.append(td1, td2);
-                tbody.append(tr);
-            })
-            table.append(thead, tbody);
-            windowSaleclassid = layer.open({
-                type: 1,
-                area: ["500px", "300px"],
-                title: "选择单据类型",
-                content: nodeToString(table[0]),
-                btn: ['取消'],
-                yes: function (index, layero) {
-                    layer.close(windowSaleclassid);
-                }
-            });
-        })
-    }
-
-    function putValue(window, dom, value, dom2, value2) {
-        $(dom).val(value);
-        $(dom2).val(value2);
-        layer.close(window);
-    }
-
-    function nodeToString(node) {
-        var tmpNode = document.createElement("div");
-        tmpNode.appendChild(node.cloneNode(true));
-        var str = tmpNode.innerHTML;
-        tmpNode = node = null;
-        return str;
-    }
+    $("#wareid").dblclick(function () {
+        queryList('/lhy/query/warehouse', {}, null, 'wareid', 'warename', '选择仓库', function (data) {
+            $("#wareid").val(data.obj.warename);
+            closeWindow(data);
+        });
+    })
+    $("#salesid").dblclick(function () {
+        queryList('/lhy/query/personnel', {}, null, 'personid', 'personname', '选择业务人员', function (data) {
+            $("#salesid").val(data.obj.personname);
+            $("#departid").val(data.obj.department.departname);
+            closeWindow(data);
+        });
+    })
+    $(".list-prodid").dblclick(function () {
+        queryList('/lhy/query/dsproduct', {size: -1}, 'list', 'prodid', 'prodname', '选择物料', function (data) {
+            closeWindow(data);
+        });
+    })
 </script>
 </body>
 </html>

@@ -63,7 +63,18 @@ public class ChAction {
     @GetMapping("/querySubordinateDept")
     @ResponseBody
     public String querySubordinateDept(String personname){
-        System.out.print(personname+"========================");
         return chbiz.querySubordinateDept(personname);
+    }
+
+    @GetMapping("/queryProdct")
+    @ResponseBody
+    public List<T_DSPRODUCT> queryProdct() {
+        return chbiz.queryProdct();
+    }
+
+    @GetMapping("/queryProdctInfo")
+    @ResponseBody
+    public T_DSPRODUCT queryProdctInfo(String prodid){
+        return chbiz.queryProdctInfo(prodid);
     }
 }

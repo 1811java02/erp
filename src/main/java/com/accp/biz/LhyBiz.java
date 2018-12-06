@@ -17,42 +17,42 @@ import java.util.List;
 
 @Service
 public class LhyBiz {
-	@Autowired
-	private LhyDao dao;
+    @Autowired
+    private LhyDao dao;
 
-	public PageInfo<T_DSPRODUCT> queryDsproduct(int page, int size) {
-		if (size > 0)
-			PageHelper.startPage(page, size);
-		return new PageInfo<T_DSPRODUCT>(dao.queryDsproduct());
-	}
+    public PageInfo<T_DSPRODUCT> queryDsproduct(int page, int size) {
+        if (size > 0)
+            PageHelper.startPage(page, size);
+        return new PageInfo<T_DSPRODUCT>(dao.queryDsproduct());
+    }
 
-	public PageInfo<T_DSPRODUCTCLASS> queryDsproductclass(int page) {
-		PageHelper.startPage(page, 1);
-		return new PageInfo<T_DSPRODUCTCLASS>(dao.queryDsproductclass());
-	}
+    public PageInfo<T_DSPRODUCTCLASS> queryDsproductclass(int page) {
+        PageHelper.startPage(page, 1);
+        return new PageInfo<T_DSPRODUCTCLASS>(dao.queryDsproductclass());
+    }
 
-	public List<T_CUSTOMER_INFORMATION> queryCustomer() {
-		return dao.queryCustomer();
-	}
+    public List<T_CUSTOMER_INFORMATION> queryCustomer() {
+        return dao.queryCustomer();
+    }
 
-	public List<T_WAREHOUSE> queryWarehouse() {
-		return dao.queryWarehouse();
-	}
+    public List<T_WAREHOUSE> queryWarehouse() {
+        return dao.queryWarehouse();
+    }
 
-	public List<T_PERSONNEL> queryPersonnel() {
-		return dao.queryPersonnel();
-	}
+    public List<T_PERSONNEL> queryPersonnel() {
+        return dao.queryPersonnel();
+    }
 
-	public String queryDsdssalemainId(String date) {
-		T_DSDSSALEMAIN dsdssalemain = dao.queryDsdssalemainByDate(date);
-		if (dsdssalemain == null) {
-			return date.replace("-", "") + "001";
-		} else {
-			return String.valueOf(Integer.valueOf(dsdssalemain.getBillno()) + 1);
-		}
-	}
+    public String queryDsdssalemainId(String date) {
+        T_DSDSSALEMAIN dsdssalemain = dao.queryDsdssalemainByDate(date);
+        if (dsdssalemain == null) {
+            return date.replace("-", "") + "001";
+        } else {
+            return String.valueOf(Integer.valueOf(dsdssalemain.getBillno()) + 1);
+        }
+    }
 
-	public List<T_BILLTYPE> queryBilltype() {
-		return dao.queryBilltype();
-	}
+    public List<T_BILLTYPE> queryBilltype() {
+        return dao.queryBilltype();
+    }
 }

@@ -43,6 +43,11 @@
                         </a>
                     </li>
                     <li class="layui-nav-item">
+                        <a href="javascript:void(0);" class="iconfont menu-list" title="保存" id="menu-save">
+                            <i class="layui-icon">&#xe61d;</i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item">
                         <a href="javascript:void(0);" class="iconfont menu-list" title="审核" id="menu-adopt" disabled="">
                             <i class="layui-icon">&#xe605;</i>
                         </a>
@@ -295,7 +300,7 @@
     </form>
 </div>
 <div id="wrapper" style="display: none;">
-    <table class="layui-table"  id="content" style="overflow-y: scroll;">
+    <table class="layui-table"  id="content" name="content" style="overflow-y: scroll;">
         <thead>
             <tr>
                 <th>编号</th>
@@ -388,6 +393,19 @@
         })
     }
 
+    function queryProdct() {
+        jQuery.getJSON("/ch/queryProdct", {}, function (data) {
+            console.info(data);
+            jQuery("#content tbody").empty();
+            jQuery.each(data,function (i,obj) {
+                var $tr=jQuery("<tr class='chooseInfo'></tr>");
+                $tr.append("<td>"+obj.prodid+"</td>");
+                $tr.append("<td>"+obj.prodname+"</td>");
+                jQuery("#content tbody").append($tr);
+            })
+        })
+    }
+
     var winWrapper;
     function showWrapper(param) {
         dblparam=param;
@@ -405,6 +423,8 @@
                     queryPerson();
                 }else if(param=="cust"){
                     queryShort();
+                }else if(param=="prod"){
+                    queryProdct();
                 }
             },
             cancel: function(index){
@@ -456,6 +476,9 @@
             jQuery("[name=person]").change();
         }else if(dblparam=="cust"){
             jQuery("[name=cust]").val(name).attr("id",id);
+        }else if(dblparam=="prod"){
+            jQuery(proddom).text(id);
+            queryProdctInfo(id,proddom);
         }
         layer.close(winWrapper)
     })
@@ -475,31 +498,79 @@
     jQuery("#addLine").click(function () {
         if(dbl==true) {
             lineid++;
-            var $tr = jQuery("<tr></tr>");
-            $tr.append("<td>" + lineid + "</td>");
-            $tr.append("<td></td>");
-            $tr.append("<td></td>");
-            $tr.append("<td></td>");
-            $tr.append("<td></td>");
-            $tr.append("<td>0</td>");
-            $tr.append("<td>0.00</td>");
-            $tr.append("<td>100.00</td>");
-            $tr.append("<td>0.00</td>");
-            $tr.append("<td>0.00</td>");
-            $tr.append("<td>0.00</td>");
-            $tr.append("<td>0.00</td>");
-            $tr.append("<td>0.00</td>");
+            var $tr = jQuery("<tr class='cgrkdateil'></tr>");
+            $tr.append("<td contenteditable='true'>" + lineid + "</td>");
+            $tr.append("<td class='prodid'></td>");
+            $tr.append("<td class='prodname' contenteditable='true'></td>");
+            $tr.append("<td contenteditable='true'></td>");
+            $tr.append("<td contenteditable='true'></td>");
+            $tr.append("<td class='num' contenteditable='true'>0</td>");
+            $tr.append("<td class='disprice' contenteditable='true'>0.00</td>");
+            $tr.append("<td class='discount' contenteditable='true'>100.00</td>");
+            $tr.append("<td class='price' contenteditable='true'>0.00</td>");
+            $tr.append("<td contenteditable='true'>0.00</td>");
+            $tr.append("<td contenteditable='true'>17.00</td>");
+            $tr.append("<td contenteditable='true'>0.00</td>");
+            $tr.append("<td contenteditable='true'>0.00</td>");
             $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\" name=\"iszp\"/></td>");
             $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\"/> </td>");
             $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\"/></td>");
-            $tr.append("<td>0</td>");
-            $tr.append("<td></td>");
-            $tr.append("<td></td>");
-            $tr.append("<td></td>");
-            $tr.append("<td>0.00</td>");
+            $tr.append("<td contenteditable='true'>0</td>");
+            $tr.append("<td contenteditable='true'></td>");
+            $tr.append("<td contenteditable='true'></td>");
+            $tr.append("<td contenteditable='true'></td>");
+            $tr.append("<td contenteditable='true'>0.00</td>");
             jQuery("#detailinfo tbody").append($tr);
             form.render("checkbox");
         }
     })
+
+    var proddom=null;
+    jQuery(document.body).on("dblclick",".prodid",function () {
+        proddom=jQuery(this);
+        showWrapper("prod");
+    })
+    
+    function queryProdctInfo(prodid,dom) {
+        var zk=jQuery(dom).parent().find("td").eq(7).text();
+        jQuery.getJSON("/ch/queryProdctInfo", {"prodid": prodid}, function (data) {
+            console.info(data);
+            var dj=data.suggestprice*parseFloat(zk)/100;
+            jQuery(dom).parent().find("td").eq(2).text(data.majorsuppliername);
+            jQuery(dom).parent().find("td").eq(3).text(data.prodsize);
+            jQuery(dom).parent().find("td").eq(4).text(data.unit);
+            jQuery(dom).parent().find("td").eq(6).text(data.suggestprice.toFixed(2));
+            jQuery(dom).parent().find("td").eq(8).text(dj.toFixed(2));
+        })
+    }
+
+    jQuery(document.body).on("blur",".discount",function () {
+        Calculation(jQuery(this).parent());
+    })
+
+    jQuery(document.body).on("blur",".disprice",function () {
+        Calculation(jQuery(this).parent());
+    })
+
+    jQuery(document.body).on("blur",".num",function () {
+        Calculation(jQuery(this).parent());
+    })
+    
+    function Calculation(dom) {
+        var num=parseFloat(jQuery(dom).find("td").eq(5).text());
+        var disbeforeprice=parseFloat(jQuery(dom).find("td").eq(6).text());
+        var discount=parseFloat(jQuery(dom).find("td").eq(7).text());
+        var price=parseFloat(jQuery(dom).find("td").eq(8).text());
+        var taxrate=parseFloat(jQuery(dom).find("td").eq(10).text())/100;
+        var taxamounts=parseFloat(jQuery(dom).find("td").eq(12).text());
+        jQuery(dom).find("td").eq(7).text((price/disbeforeprice*100).toFixed(2))
+        jQuery(dom).find("td").eq(8).text((disbeforeprice*discount/100).toFixed(2));
+        jQuery(dom).find("td").eq(9).text(price*num.toFixed(2));
+        var aount=parseFloat(jQuery(dom).find("td").eq(9).text());
+        jQuery(dom).find("td").eq(11).text(aount*taxrate.toFixed(2));
+        var taxamount=parseFloat(jQuery(dom).find("td").eq(11).text());
+        jQuery(dom).find("td").eq(10).text((taxamount / aount * 100).toFixed(2));
+        jQuery(dom).find("td").eq(12).text((aount+taxamount/aount*10).toFixed(2));
+    }
 </script>
 </html>

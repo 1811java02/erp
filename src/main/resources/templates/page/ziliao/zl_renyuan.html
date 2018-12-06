@@ -5,19 +5,21 @@
 	<title>人员主文件</title>
 	<link rel="stylesheet" href="../../layui/css/layui.css">
 	<link rel="stylesheet" href="../../css/common.css">
+
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
-<form class="layui-form" action="">
+<form class="layui-form" action="" id="vmindexCnt">
+	<div v-for="(temp,index) in pageInfo.list">
 	<div class="layui-form-item">
 		<div class="layui-input-block" style="margin-left: 0">
 			<ul class="layui-nav" style="background-color: transparent;">
 				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
+					<a @click="goToPage($event,(pageInfo.prePage==0?1:pageInfo.prePage))" href="javascript:void(0)" class="iconfont menu-list" title="上一条" id="menu-prev">
 						<i class="layui-icon">&#xe603;</i>
 					</a>
 				</li>
 				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
+					<a @click="goToPage($event,(pageInfo.pageNum==pageInfo.lastPage?pageInfo.lastPage:pageInfo.nextPage))" href="javascript:void(0)" class="iconfont menu-list" title="下一条" id="menu-next">
 						<i class="layui-icon">&#xe602;</i>
 					</a>
 				</li>
@@ -57,26 +59,28 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">人员编号</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input v-model="temp.personid" type="text" name="title"  id="personid"   required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 		<label class="layui-form-label">所属部门</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input  v-model="temp.departid"  type="text" name="title"  id="departid"     required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">人员姓名</label>
 		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+			<input  v-model="temp.personname" type="text" name="title" id="personname"   required lay-verify="required" placeholder="请输入标题"
 			       autocomplete="off" class="layui-input">
 		</div>
 		<label class="layui-form-label">性别</label>
 		<div class="layui-input-inline">
 			<select name="city" lay-verify="required">
-				<option value="">男</option>
+				<option value="1">男</option>
 				<option value="0">女</option>
+
+
 			</select>
 		</div>
 	</div>
@@ -122,10 +126,10 @@
 					<label class="layui-form-label">血型</label>
 					<div class="layui-input-inline">
 						<select name="city" lay-verify="required">
-							<option value=""></option>
 							<option value="0"></option>
-							<option value="0"></option>
-							<option value="0"></option>
+							<option value="1"></option>
+							<option value="2"></option>
+							<option value="3"></option>
 
 						</select>
 					</div>
@@ -170,10 +174,10 @@
 					<label class="layui-form-label">民族</label>
 					<div class="layui-input-inline">
 						<select name="city" lay-verify="required">
-							<option value=""></option>
 							<option value="0"></option>
-							<option value="0"></option>
-							<option value="0"></option>
+							<option value="1"></option>
+							<option value="2"></option>
+							<option value="3"></option>
 
 						</select>
 					</div>
@@ -435,10 +439,47 @@
 					</div>
 				</div>
 			</div>
-			<div class="layui-tab-item">内容5</div>
+			<div class="layui-tab-item">内容</div>
 		</div>
 	</div>
+	</div>
 </form>
-<script src="../../layui/lay/dest/layui.all.js"></script>
+
 </body>
+<script src="../../layui/lay/dest/layui.all.js"></script>
+<script src="../../js/jquery-1.12.4.js"></script>
+<script src="../../js/vue.js"></script>
+
+<script type="text/javascript">
+    //ajax全局设置
+    $.ajaxSetup({
+        timeout: 6000
+    });
+    $(document).ajaxError(function() {
+        alert('服务器异常');
+    });
+    //构建VM渲染引擎
+    var vm = new Vue({
+        el: "#vmindexCnt",
+        data: {
+            pageInfo: {}
+        },
+        created: function() {
+            var vm = this;
+            //读取restful
+            vm.goToPage(null, 1);
+        },
+        methods: {
+            goToPage: function(e, n) {
+                $.post("http://172.20.0.114/query/queryPersonnel",{
+                    "page":n
+                }, function(data) {
+
+                    vm.pageInfo = data;
+                },"json");
+            }
+        }
+    });
+</script>
+
 </html>
