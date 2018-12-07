@@ -2,8 +2,10 @@ package com.accp.biz;
 
 import com.accp.dao.ChDao;
 import com.accp.pojo.*;
+import com.accp.vo.ch.PurcahseVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,5 +65,13 @@ public class ChBiz {
 
     public T_DSPRODUCT queryProdctInfo(String prodid){
         return chdao.queryProdctInfo(prodid);
+    }
+
+    public int savePurchase(PurcahseVo pm){
+        return chdao.savePurchase(pm);
+    }
+
+    public int savePurchaseDetail(T_PURCHASE_DETAIL d){
+        return chdao.savePurchaseDetail(d);
     }
 }

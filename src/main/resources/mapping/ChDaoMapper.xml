@@ -19,7 +19,7 @@
 
     <!--查询当前时间最大单据号 -->
     <select id="getBillNo" resultType="long" parameterType="string">
-        SELECT MAX(BILLNO) FROM T_PURCHASE_MASTER WHERE BILLDATE=#{date}
+        SELECT MAX(BILLNO) FROM T_PURCHASE_MASTER WHERE BILLDATE=to_date(#{date},'yyyy-MM-dd')
     </select>
 
     <!--查询采购入库单的单据类型 -->
@@ -51,4 +51,27 @@
     <select id="queryProdctInfo" resultType="T_DSPRODUCT" parameterType="string">
         SELECT * FROM T_DSPRODUCT WHERE PRODID=#{prodid}
     </select>
+    
+    <insert id="savePurchase">
+        INSERT  INTO T_PURCHASE_MASTER(BILLNO,BILLDATE,CUSTID,CUSTNAME,ADDRID,CUSTADDRESS,SALECLASSID,SALECLASSNAME,CURRID,
+        CURRNAME,PRICEOFTAX,EXCHRATE,WAREID,WARENAME,SALESID,SALESNAME,MAKER,MAKERNAME,PERMITTER,PERMITTERNAME,DEPARTID,
+        DEPARTNAME,PROJECTID,PROJECTNAME,UDEF1,UDEF2,REMARK,EAMINESTATE)
+        VALUES (#{pm.billno,jdbcType=VARCHAR},#{pm.billdate,jdbcType=DATE},#{pm.custid,jdbcType=VARCHAR},#{pm.custname,jdbcType=VARCHAR},#{pm.addrid,jdbcType=VARCHAR}
+        ,#{pm.custaddress,jdbcType=VARCHAR},#{pm.saleclassid,jdbcType=VARCHAR},#{pm.saleclassname,jdbcType=VARCHAR},
+        #{pm.currid,jdbcType=VARCHAR},#{pm.currname,jdbcType=VARCHAR},#{pm.priceoftax,jdbcType=INTEGER},#{pm.exchrate,jdbcType=FLOAT},#{pm.wareid,jdbcType=VARCHAR}
+        ,#{pm.warename,jdbcType=VARCHAR},#{pm.salesid,jdbcType=VARCHAR},#{pm.salesname,jdbcType=VARCHAR},#{pm.maker,jdbcType=VARCHAR},
+        #{pm.makername,jdbcType=VARCHAR},#{pm.permitter,jdbcType=VARCHAR},#{pm.permittername,jdbcType=VARCHAR},#{pm.departid,jdbcType=VARCHAR},
+        #{pm.departname,jdbcType=VARCHAR},#{pm.projectid,jdbcType=VARCHAR},#{pm.projectname,jdbcType=VARCHAR},#{pm.udef1,jdbcType=VARCHAR},#{pm.udef2,jdbcType=VARCHAR},
+        #{pm.remark,jdbcType=VARCHAR},#{pm.eaminestate,jdbcType=INTEGER})
+    </insert>
+    
+    <insert id="savePurchaseDetail">
+        INSERT INTO T_PURCHASE_DETAIL(LINEID,BILLNO,PRODID,PRODNAME,PRODSIZE,SUNIT,SQUANTITY,OLDPRICE,DISCOUNT,SPRICE,
+        AMOUNT,TAXRATE,TAXAMT,AMOUNTATAX,ISGIFT,ITEMREMARK,TRANTYPE,FORMNO,MLAMOUNT)
+        VALUES(LINEIDADD.Nextval,#{d.billno,jdbcType=VARCHAR},#{d.prodid,jdbcType=VARCHAR},#{d.prodname,jdbcType=VARCHAR},#{d.prodsize,jdbcType=VARCHAR},
+                #{d.sunit,jdbcType=VARCHAR},#{d.squantity,jdbcType=INTEGER},#{d.oldprice,jdbcType=FLOAT},
+                #{d.discount,jdbcType=FLOAT},#{d.sprice,jdbcType=FLOAT},#{d.amount,jdbcType=FLOAT},#{d.taxrate,jdbcType=FLOAT},#{d.taxamt,jdbcType=FLOAT},
+                #{d.amountatax,jdbcType=FLOAT},#{d.isgift,jdbcType=INTEGER},#{d.itemremark,jdbcType=VARCHAR},
+                #{d.trantype,jdbcType=VARCHAR},#{d.formno,jdbcType=VARCHAR},#{d.mlamount,jdbcType=FLOAT})
+    </insert>
 </mapper>

@@ -97,7 +97,7 @@
             <label class="layui-form-label">供应商地址</label>
             <div class="layui-input-inline">
                 <input type="text"  lay-verify="title" autocomplete="off"
-                       class="layui-input" readonly="readonly" name="add_overRead">
+                       class="layui-input" readonly="readonly" name="add_overRead" id="custaddress">
             </div>
             <label class="layui-form-label">单据号码</label>
             <div class="layui-input-inline">
@@ -113,7 +113,7 @@
             </div>
             <label class="layui-form-label">币别</label>
             <div class="layui-input-inline">
-                <input type="text" name="" lay-verify="title" autocomplete="off"
+                <input type="text" name="curr" lay-verify="title" autocomplete="off"
                        class="layui-input" value="人民币" readonly="readonly">
             </div>
         </div>
@@ -121,13 +121,13 @@
             <label class="layui-form-label">单价是否含税</label>
             <div class="layui-input-inline">
                 <select name="shui"  disabled="disabled">
-                    <option value="未税">未税</option>
-                    <option value="含税">含税</option>
+                    <option value="0">未税</option>
+                    <option value="1">含税</option>
                 </select>
             </div>
             <label class="layui-form-label">汇率</label>
             <div class="layui-input-inline">
-                <input type="text" name="" lay-verify="title" autocomplete="off"
+                <input type="text" name="exchrate" lay-verify="title" autocomplete="off"
                        class="layui-input" value="0.0000" readonly="readonly">
             </div>
         </div>
@@ -197,11 +197,11 @@
                             <tfoot>
                             <tr>
                                 <td colspan="5">合计</td>
-                                <td colspan="4">数量：</td>
-                                <td colspan="2">金额：</td>
-                                <td colspan="1">税额：</td>
-                                <td colspan="8">含税金额：</td>
-                                <td colspan="1">分摊金额：</td>
+                                <td colspan="4">数量：<span class="sumnum"></span></td>
+                                <td colspan="2">金额：<span class="sumamount"></span></td>
+                                <td colspan="1">税额：<span class="sumtaxprice"></span></td>
+                                <td colspan="8">含税金额：<span class="sumtaxprices"></span></td>
+                                <td colspan="1">分摊金额：<span></span></td>
                             </tr>
                             </tfoot>
                         </table>
@@ -250,17 +250,17 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">自定栏一</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input" readonly="readonly" name="add_overRead">
+                            <input type="text" id="udef1" class="layui-input" readonly="readonly" name="add_overRead">
                         </div>
                         <label class="layui-form-label">自定栏二</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input" readonly="readonly" name="add_overRead">
+                            <input type="text" id="udef2" class="layui-input" readonly="readonly" name="add_overRead">
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">备注</label>
                         <div class="layui-input-block">
-                            <textarea placeholder="请输入内容" class="layui-textarea" readonly="readonly" name="add_overRead"></textarea>
+                            <textarea placeholder="请输入内容" id="remark" class="layui-textarea" readonly="readonly" name="add_overRead"></textarea>
                         </div>
                     </div>
                 </div>
@@ -286,7 +286,7 @@
             </div>
             <label class="layui-form-label">复核人员</label>
             <div class="layui-input-inline">
-                <input type="text" name="" lay-verify="title" autocomplete="off"
+                <input type="text" name="permitter" lay-verify="title" autocomplete="off"
                        class="layui-input" readonly="readonly"/>
             </div>
         </div>
@@ -330,8 +330,15 @@
 
     function getLocalDate() {
         var date = new Date();
-        var localDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-        jQuery("[name=billdate]").val(localDate);
+        var year = date.getFullYear();
+        var month = date.getMonth();
+        if (month < 10)
+            month = "0" + month;
+        var day = date.getDate();
+        if (day < 10)
+            day = "0" + day;
+        date = year + "-" + month + "-" + day;
+        jQuery("[name=billdate]").val(date);
     }
 
     function getBillNo() {
@@ -497,31 +504,33 @@
     var lineid=0;
     jQuery("#addLine").click(function () {
         if(dbl==true) {
-            lineid++;
-            var $tr = jQuery("<tr class='cgrkdateil'></tr>");
-            $tr.append("<td contenteditable='true'>" + lineid + "</td>");
-            $tr.append("<td class='prodid'></td>");
-            $tr.append("<td class='prodname' contenteditable='true'></td>");
-            $tr.append("<td contenteditable='true'></td>");
-            $tr.append("<td contenteditable='true'></td>");
-            $tr.append("<td class='num' contenteditable='true'>0</td>");
-            $tr.append("<td class='disprice' contenteditable='true'>0.00</td>");
-            $tr.append("<td class='discount' contenteditable='true'>100.00</td>");
-            $tr.append("<td class='price' contenteditable='true'>0.00</td>");
-            $tr.append("<td contenteditable='true'>0.00</td>");
-            $tr.append("<td contenteditable='true'>17.00</td>");
-            $tr.append("<td contenteditable='true'>0.00</td>");
-            $tr.append("<td contenteditable='true'>0.00</td>");
-            $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\" name=\"iszp\"/></td>");
-            $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\"/> </td>");
-            $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\"/></td>");
-            $tr.append("<td contenteditable='true'>0</td>");
-            $tr.append("<td contenteditable='true'></td>");
-            $tr.append("<td contenteditable='true'></td>");
-            $tr.append("<td contenteditable='true'></td>");
-            $tr.append("<td contenteditable='true'>0.00</td>");
-            jQuery("#detailinfo tbody").append($tr);
-            form.render("checkbox");
+            if(jQuery("[name=cust]").val()!=""&&jQuery("[name=ware]").val()!=""){
+                lineid++;
+                var $tr = jQuery("<tr class='cgrkdateil'></tr>");
+                $tr.append("<td contenteditable='true'>" + lineid + "</td>");
+                $tr.append("<td class='prodid'></td>");
+                $tr.append("<td class='prodname' contenteditable='true'></td>");
+                $tr.append("<td contenteditable='true'></td>");
+                $tr.append("<td contenteditable='true'></td>");
+                $tr.append("<td class='num' contenteditable='true'>0</td>");
+                $tr.append("<td class='disprice' contenteditable='true'>0.00</td>");
+                $tr.append("<td class='discount' contenteditable='true'>100.00</td>");
+                $tr.append("<td class='price' contenteditable='true'>0.00</td>");
+                $tr.append("<td class='amout' contenteditable='true'>0.00</td>");
+                $tr.append("<td class='taxrate' contenteditable='true'>17.00</td>");
+                $tr.append("<td class='taxamout'contenteditable='true'>0.00</td>");
+                $tr.append("<td contenteditable='true'>0.00</td>");
+                $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\" name=\"iszp\"/></td>");
+                $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\"/> </td>");
+                $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\"/></td>");
+                $tr.append("<td contenteditable='true'>0</td>");
+                $tr.append("<td contenteditable='true'></td>");
+                $tr.append("<td contenteditable='true'></td>");
+                $tr.append("<td contenteditable='true'></td>");
+                $tr.append("<td contenteditable='true'>0.00</td>");
+                jQuery("#detailinfo tbody").append($tr);
+                form.render("checkbox");
+            }
         }
     })
 
@@ -536,7 +545,7 @@
         jQuery.getJSON("/ch/queryProdctInfo", {"prodid": prodid}, function (data) {
             console.info(data);
             var dj=data.suggestprice*parseFloat(zk)/100;
-            jQuery(dom).parent().find("td").eq(2).text(data.majorsuppliername);
+            jQuery(dom).parent().find("td").eq(2).text(data.prodname);
             jQuery(dom).parent().find("td").eq(3).text(data.prodsize);
             jQuery(dom).parent().find("td").eq(4).text(data.unit);
             jQuery(dom).parent().find("td").eq(6).text(data.suggestprice.toFixed(2));
@@ -545,32 +554,191 @@
     }
 
     jQuery(document.body).on("blur",".discount",function () {
-        Calculation(jQuery(this).parent());
+        Calculation(jQuery(this).parent(),"discount");
     })
 
     jQuery(document.body).on("blur",".disprice",function () {
-        Calculation(jQuery(this).parent());
+        Calculation(jQuery(this).parent(),"disprice");
     })
 
     jQuery(document.body).on("blur",".num",function () {
-        Calculation(jQuery(this).parent());
+        Calculation(jQuery(this).parent(),"num");
+    })
+
+    jQuery(document.body).on("blur",".price",function () {
+        Calculation(jQuery(this).parent(),"price");
+    })
+    jQuery(document.body).on("blur",".amout",function () {
+        Calculation(jQuery(this).parent(),"amout");
+    })
+
+    jQuery(document.body).on("blur",".taxamut",function () {
+        Calculation(jQuery(this).parent(),"taxamut");
+    })
+
+    jQuery(document.body).on("blur",".taxrate",function () {
+        Calculation(jQuery(this).parent(),"taxrate");
     })
     
-    function Calculation(dom) {
+    function Calculation(dom,val) {
         var num=parseFloat(jQuery(dom).find("td").eq(5).text());
         var disbeforeprice=parseFloat(jQuery(dom).find("td").eq(6).text());
         var discount=parseFloat(jQuery(dom).find("td").eq(7).text());
         var price=parseFloat(jQuery(dom).find("td").eq(8).text());
-        var taxrate=parseFloat(jQuery(dom).find("td").eq(10).text())/100;
-        var taxamounts=parseFloat(jQuery(dom).find("td").eq(12).text());
-        jQuery(dom).find("td").eq(7).text((price/disbeforeprice*100).toFixed(2))
-        jQuery(dom).find("td").eq(8).text((disbeforeprice*discount/100).toFixed(2));
-        jQuery(dom).find("td").eq(9).text(price*num.toFixed(2));
         var aount=parseFloat(jQuery(dom).find("td").eq(9).text());
-        jQuery(dom).find("td").eq(11).text(aount*taxrate.toFixed(2));
+        var taxrate=parseFloat(jQuery(dom).find("td").eq(10).text())/100;
         var taxamount=parseFloat(jQuery(dom).find("td").eq(11).text());
-        jQuery(dom).find("td").eq(10).text((taxamount / aount * 100).toFixed(2));
-        jQuery(dom).find("td").eq(12).text((aount+taxamount/aount*10).toFixed(2));
+        if(val=="num"){
+            num=parseFloat(jQuery(dom).find("td").eq(5).text());
+            price=parseFloat(jQuery(dom).find("td").eq(8).text());
+            jQuery(dom).find("td").eq(9).text(price*num.toFixed(2));
+            aount=parseFloat(jQuery(dom).find("td").eq(9).text());
+            jQuery(dom).find("td").eq(11).text(aount*taxrate.toFixed(2));
+            taxamount=parseFloat(jQuery(dom).find("td").eq(11).text());
+            jQuery(dom).find("td").eq(12).text((aount+taxamount).toFixed(2));
+        }else if(val=="discount"){
+            discount=parseFloat(jQuery(dom).find("td").eq(7).text());
+            aount=parseFloat(jQuery(dom).find("td").eq(9).text());
+            taxamount=parseFloat(jQuery(dom).find("td").eq(11).text());
+            jQuery(dom).find("td").eq(8).text((aount/num).toFixed(2));
+            price=parseFloat(jQuery(dom).find("td").eq(8).text());
+            jQuery(dom).find("td").eq(10).text((taxamount / aount * 100).toFixed(2));
+            jQuery(dom).find("td").eq(12).text((aount+taxamount).toFixed(2));
+        }else if(val=="price"){
+            price=parseFloat(jQuery(dom).find("td").eq(8).text());
+            aount=parseFloat(jQuery(dom).find("td").eq(9).text());
+            taxamount=parseFloat(jQuery(dom).find("td").eq(11).text());
+            jQuery(dom).find("td").eq(7).text((price/disbeforeprice*100).toFixed(2))
+            jQuery(dom).find("td").eq(10).text((taxamount / aount * 100).toFixed(2));
+            jQuery(dom).find("td").eq(12).text((aount+taxamount).toFixed(2));
+        }else if(val=="amout"){
+            aount=parseFloat(jQuery(dom).find("td").eq(9).text());
+            jQuery(dom).find("td").eq(8).text((aount/num).toFixed(2));
+            price=parseFloat(jQuery(dom).find("td").eq(8).text());
+            jQuery(dom).find("td").eq(7).text((price/disbeforeprice*100).toFixed(2))
+            jQuery(dom).find("td").eq(11).text(aount*taxrate.toFixed(2));
+            taxamount=parseFloat(jQuery(dom).find("td").eq(11).text());
+            jQuery(dom).find("td").eq(12).text((aount+taxamount).toFixed(2));
+        }else if(val=="taxrate"){
+            aount=parseFloat(jQuery(dom).find("td").eq(9).text());
+            taxamount=parseFloat(jQuery(dom).find("td").eq(11).text());
+            jQuery(dom).find("td").eq(11).text(aount*taxrate.toFixed(2));
+            jQuery(dom).find("td").eq(12).text((aount+taxamount).toFixed(2));
+        }else if(val=="taxamout"){
+            aount=parseFloat(jQuery(dom).find("td").eq(9).text());
+            taxamount=parseFloat(jQuery(dom).find("td").eq(11).text());
+            jQuery(dom).find("td").eq(10).text((taxamount / aount * 100).toFixed(2));
+            jQuery(dom).find("td").eq(12).text((aount+taxamount).toFixed(2));
+        }
+        sum();
+    }
+
+
+    function sum(){
+        var sumnum=0;
+        var sumamount=0;
+        var sumtaxprice=0;
+        var sumtaxprices=0;
+        jQuery("#detailinfo tbody tr").each(function (i,obj) {
+            sumnum+=parseInt(jQuery(obj).find("td").eq(5).text());
+            sumamount+=parseInt(jQuery(obj).find("td").eq(9).text());
+            sumtaxprice+=parseInt(jQuery(obj).find("td").eq(11).text());
+            sumtaxprices+=parseInt(jQuery(obj).find("td").eq(12).text());
+        })
+        jQuery(".sumnum").text(sumnum);
+        jQuery(".sumamount").text(sumamount.toFixed(2));
+        jQuery(".sumtaxprice").text(sumtaxprice.toFixed(2));
+        jQuery(".sumtaxprices").text(sumtaxprices.toFixed(2));
+    }
+
+    jQuery("#menu-save").click(function () {
+        if(dbl==true){
+            save();
+        }
+    })
+
+    function save() {
+        if (jQuery("#detailinfo tbody tr").size()==0){
+            layer.msg("表身不允许空白！");
+            return false;
+        }else{
+            jQuery("#detailinfo tbody tr").each(function (i,obj) {
+                if(parseInt(jQuery(obj).find("td").eq(5).text())==0){
+                    layer.msg("数量不能为0！");
+                    return false;
+                }
+            })
+        }
+        var purchase={};
+        purchase["billno"]=jQuery("#billno").val();
+        purchase["billdate"]=jQuery("[name=billdate]").val();
+        purchase["custid"]=jQuery("[name=cust]").attr("id");
+        purchase["custname"]=jQuery("[name=cust]").val();
+        purchase["custaddress"]=jQuery("#custaddress").val();
+        purchase["saleclassid"]=jQuery("[name=billtype]").attr("id");
+        purchase["saleclassname"]=jQuery("[name=billtype]").val();
+        purchase["currid"]="01";
+        purchase["currname"]=jQuery("[name=curr]").val();
+        purchase["priceoftax"]=jQuery("[name=shui] option:selected").val();
+        purchase["exchrate"]=jQuery("[name=exchrate]").val();
+        purchase["wareid"]=jQuery("[name=ware]").attr("id");
+        purchase["warename"]=jQuery("[name=ware]").val();
+        purchase["salesid"]=jQuery("[name=person]").attr("id");
+        purchase["salesname"]=jQuery("[name=person]").val();
+        purchase["maker"]=jQuery("[name=maker]").attr("id");
+        purchase["makername"]=jQuery("[name=maker]").val();
+        purchase["permittername"]="Admin";
+        purchase["departname"]=jQuery("[name=deptName]").val();
+        purchase["projectname"]=jQuery("[name=project]").val();
+        purchase["udef1"]=jQuery("#udef1").val();
+        purchase["udef2"]=jQuery("#udef2").val();
+        purchase["remark"]=jQuery("#remark").val();
+        var dateils=new Array();
+        jQuery("#detailinfo tbody tr").each(function (i,obj) {
+            var dateil={};
+            // var lineid=new Date().getTime();
+            // dateil["lineid"]=parseInt(lineid);
+            dateil["billno"]=jQuery("#billno").val();
+            dateil["prodid"]=jQuery(obj).find("td").eq(1).text()
+            dateil["prodname"]=jQuery(obj).find("td").eq(2).text()
+            dateil["prodsize"]=jQuery(obj).find("td").eq(3).text()
+            dateil["sunit"]=jQuery(obj).find("td").eq(4).text()
+            dateil["squantity"]=jQuery(obj).find("td").eq(5).text()
+            dateil["oldprice"]=jQuery(obj).find("td").eq(6).text()
+            dateil["discount"]=jQuery(obj).find("td").eq(7).text()
+            dateil["sprice"]=jQuery(obj).find("td").eq(8).text()
+            dateil["amount"]=jQuery(obj).find("td").eq(9).text()
+            dateil["taxrate"]=jQuery(obj).find("td").eq(10).text()
+            dateil["taxamt"]=jQuery(obj).find("td").eq(11).text()
+            dateil["amountatax"]=jQuery(obj).find("td").eq(12).text()
+            if(jQuery(obj).find("td").eq(14).is(":checked")){
+                dateil["isgift"]=0;
+            }else{
+                dateil["isgift"]=1;
+            }
+            dateil["itemremark"]=jQuery(obj).find("td").eq(17).text()
+            dateil["trantype"]=jQuery(obj).find("td").eq(18).text()
+            dateil["formno"]=jQuery(obj).find("td").eq(19).text()
+            dateil["mlamount"]=jQuery(obj).find("td").eq(20).text()
+            dateils.push(dateil);
+        })
+        purchase["detaillist"]=dateils;
+        $.ajax({
+            url:"/ch/savePurchase",
+            type:"post",
+            contentType:"application/json",
+            data:JSON.stringify(purchase),
+            dataType:"json",
+            timeout:5000,
+            success:function(data){
+                console.info(data)
+                if(data.code=="200"){
+                    layer.msg("保存成功");
+                }else{
+                    layer.msg("保存失败");
+                }
+            }
+        })
     }
 </script>
 </html>

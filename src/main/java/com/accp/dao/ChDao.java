@@ -1,6 +1,8 @@
 package com.accp.dao;
 
 import com.accp.pojo.*;
+import com.accp.vo.ch.PurcahseVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -68,4 +70,19 @@ public interface ChDao {
      * @return
      */
     public T_DSPRODUCT queryProdctInfo(String prodid);
+
+    /**
+     * 保存新增采购入库主表
+     * @param
+     * @return
+     */
+    public int savePurchase(@Param("pm") PurcahseVo pm);
+
+
+    /**
+     * 新增采购入库明细表
+     * @param d
+     * @return
+     */
+    public int savePurchaseDetail(@Param("d") T_PURCHASE_DETAIL d);
 }

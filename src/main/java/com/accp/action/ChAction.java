@@ -2,15 +2,16 @@ package com.accp.action;
 
 import com.accp.biz.ChBiz;
 import com.accp.pojo.*;
+import com.accp.vo.ch.PurcahseVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/ch")
@@ -76,5 +77,25 @@ public class ChAction {
     @ResponseBody
     public T_DSPRODUCT queryProdctInfo(String prodid){
         return chbiz.queryProdctInfo(prodid);
+    }
+
+
+    @PostMapping("/savePurchase")
+    @ResponseBody
+    public Map<String,String> savePurchase(@RequestBody PurcahseVo pm){
+        Map<String,String> map=new HashMap<>();
+        try {
+            if (chbiz.savePurchase(pm)>0){
+                for (T_PURCHASE_DETAIL d:pm.getDetaillist()) {
+                    chbiz.savePurchaseDetail(d);
+                }
+                map.put("code","200");
+                map.put("msg","OK");
+            }
+        }catch (Exception e){
+            map.put("code","500");
+            map.put("Msg",e.getMessage());
+        }
+        return map;
     }
 }
