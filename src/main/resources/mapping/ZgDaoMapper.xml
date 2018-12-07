@@ -6,13 +6,28 @@
 
 <mapper namespace="com.accp.dao.ZgDao">
 
+    <!--查询部门 -->
+    <select id="queryDepartment" resultType="T_DEPARTMENT">
+        SELECT * FROM T_DEPARTMENT
+    </select>
 
-        <select  id="queryCustomeraccountdetails"  resultType="T_CUSTOMERACCOUNTDETAILS">
-                    select    *from   t_customeraccountdetails
+    <!--查询当前时间最大单据号 -->
+    <select id="getBillNo" resultType="long" parameterType="string">
+        SELECT MAX(BILLNO) FROM T_PURCHASE_MASTER WHERE BILLDATE=to_date(#{date},'yyyy-MM-dd')
+    </select>
+
+    <!--查询客户 -->
+    <select id="queryCUSTOMERINFORMATION" resultType="T_CUSTOMER_INFORMATION">
+        SELECT    * FROM    T_CUSTOMER_INFORMATION
+    </select>
+
+
+    <select  id="queryCustomeraccountdetails"  resultType="T_CUSTOMERACCOUNTDETAILS">
+                    select    * from   t_customeraccountdetails
            </select>
 
         <select id="queryCUSTOMER_INFORMATION"  resultType="T_CUSTOMER_INFORMATION">
-                  select cuw.CustomerID,cuw.CustomerAbreviation    *from  t_customer_information as cuw
+                  select     * from  t_customer_information
         </select>
 
     <resultMap id="AdvancereceiptMap" type="com.accp.vo.zg.AdvancereceiptVo">
@@ -47,6 +62,20 @@
     <select id="getAdvancereceiptDetail" resultType="T_ADVANCERECEIPTDETAILS">
         select * from t_advancereceiptdetails
     </select>
+
+    <delete id="deleteAdvancereceipt">
+          delete   from   t_advancereceiptdetails where  fundbillid=#{0};
+          delete   from    t_advancereceipt where  fundbillid=#{0};
+    </delete>
+   <insert id="saveAdvancereceipt">
+        insert into t_advancereceipt(fundbillid,fundbilldate,customerid,customername,cashstylename,cash,visastylename,visa,otherpaystylename,otherpay,bcurrencyname,exchangerate,discountper,accmonthtomonth,voucherno,departnamefrom,makersign,projectfrom,fermittersign,auditstatus,customcolumnone,customcolumntwo,remarks)
+        values(#{pojo.fundbillid,jdbcType=VARCHAR},#{pojo.fundbilldate,jdbcType=DATE},#{pojo.customerid,jdbcType=VARCHAR},#{pojo.customername,jdbcType=VARCHAR},#{pojo.cashstylename,jdbcType=VARCHAR},#{pojo.cash,jdbcType=FLOAT},#{pojo.visastylename,jdbcType=VARCHAR},#{pojo.visa,jdbcType=FLOAT},#{pojo.otherpaystylename,jdbcType=VARCHAR},#{pojo.otherpay,jdbcType=FLOAT},#{pojo.bcurrencyname,jdbcType=VARCHAR},#{pojo.exchangerate,jdbcType=FLOAT},#{pojo.discountper,jdbcType=FLOAT},#{pojo.accmonthtomonth,jdbcType=DATE},#{pojo.voucherno,jdbcType=VARCHAR},#{pojo.departnamefrom,jdbcType=VARCHAR},#{pojo.makersign,jdbcType=VARCHAR},#{pojo.projectfrom,jdbcType=VARCHAR},#{pojo.fermittersign,jdbcType=VARCHAR},0,#{pojo.customcolumnone,jdbcType=VARCHAR},#{pojo.customcolumntwo,jdbcType=VARCHAR},#{pojo.remarks,jdbcType=VARCHAR});
+
+    </insert>
+    <insert id="saveAdvancereceiptdateils">
+        insert into t_advancereceiptdetails(fundbillid,curprerecv,sourcelist,sourcenumber,remarks)
+        values(#{temp.fundbillid,jdbcType=VARCHAR},#{temp.curprerecv,jdbcType=FLOAT},#{temp.sourcelist,jdbcType=VARCHAR},#{temp.sourcenumber,jdbcType=VARCHAR},#{temp.remarks,jdbcType=VARCHAR})
+    </insert>
 
 
 </mapper>
