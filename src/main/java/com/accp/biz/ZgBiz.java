@@ -2,8 +2,7 @@ package com.accp.biz;
 
 
 import com.accp.dao.ZgDao;
-import com.accp.pojo.T_CUSTOMERACCOUNTDETAILS;
-import com.accp.pojo.T_CUSTOMER_INFORMATION;
+import com.accp.pojo.*;
 import com.accp.vo.zg.AdvancereceiptVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -15,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service("ZgBiz")
-@Transactional(propagation =Propagation.REQUIRED)
+@Transactional(propagation = Propagation.REQUIRED)
 public class ZgBiz {
 
         @Autowired
@@ -27,7 +26,7 @@ public class ZgBiz {
         }
 
     public List<T_CUSTOMER_INFORMATION> queryCUSTOMER_INFORMATION(){
-            return  zgDao.queryCUSTOMER_INFORMATION();
+            return  zgDao.queryCUSTOMERINFORMATION();
 
     }
 
@@ -37,7 +36,39 @@ public class ZgBiz {
             return new PageInfo<AdvancereceiptVo>(zgDao.getAdvancereceipt());
     }
 
+    public int deleteAdvancereceipt(String fundbillid){
+       return zgDao.deleteAdvancereceipt(fundbillid);
 
+    }
+
+
+    public List<T_DEPARTMENT> queryDepartment(){
+
+        return zgDao.queryDepartment();
+    }
+
+
+    public String getBillNo(String date){
+        Long billno=zgDao.getBillNo(date);
+        if (billno==null){
+            return date.replace("-","")+"001";
+        }else{
+            return String.valueOf(billno+1);
+        }
+    }
+
+
+    public int addAdvancereceipt(AdvancereceiptVo  Advancereceipt){
+            return zgDao.saveAdvancereceipt(Advancereceipt);
+
+    }
+
+
+
+    public int addAdvancereceiptdateils(T_ADVANCERECEIPTDETAILS AdvancereceiptDetails){
+        return zgDao.saveAdvancereceiptdateils(AdvancereceiptDetails);
+
+    }
 
 
 }

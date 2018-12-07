@@ -816,6 +816,8 @@
         var dateils=new Array();
         jQuery("#detailinfo tbody tr").each(function (i,obj) {
             var dateil={};
+            // var lineid=new Date().getTime();
+            // dateil["lineid"]=parseInt(lineid);
             dateil["billno"]=jQuery("#billno").val();
             dateil["prodid"]=jQuery(obj).find("td").eq(1).text()
             dateil["prodname"]=jQuery(obj).find("td").eq(2).text()
@@ -841,45 +843,22 @@
             dateils.push(dateil);
         })
         purchase["detaillist"]=dateils;
-        if(addorupdate=="add") {
-            $.ajax({
-                url: "/ch/savePurchase",
-                type: "post",
-                contentType: "application/json",
-                data: JSON.stringify(purchase),
-                dataType: "json",
-                timeout: 5000,
-                success: function (data) {
-                    console.info(data)
-                    if (data.code == "200") {
-                        layer.msg("保存成功");
-                        saveok = true;
-                        showPurchase(p);
-                    } else {
-                        layer.msg("保存失败");
-                    }
+        $.ajax({
+            url:"/ch/savePurchase",
+            type:"post",
+            contentType:"application/json",
+            data:JSON.stringify(purchase),
+            dataType:"json",
+            timeout:5000,
+            success:function(data){
+                console.info(data)
+                if(data.code=="200"){
+                    layer.msg("保存成功");
+                }else{
+                    layer.msg("保存失败");
                 }
-            })
-        }else if(addorupdate=="update"){
-            $.ajax({
-                url: "/ch/updatePurchase",
-                type: "post",
-                contentType: "application/json",
-                data: JSON.stringify(purchase),
-                dataType: "json",
-                timeout: 5000,
-                success: function (data) {
-                    console.info(data)
-                    if (data.code == "200") {
-                        layer.msg("修改成功");
-                        saveok = true;
-                        showPurchase(p);
-                    } else {
-                        layer.msg("修改失败");
-                    }
-                }
-            })
-        }
+            }
+        })
     }
 
     var saveok=true;
