@@ -85,4 +85,17 @@ public interface ChDao {
      * @return
      */
     public int savePurchaseDetail(@Param("d") T_PURCHASE_DETAIL d);
+
+    /**
+     * 查询单据分页
+     * @return
+     */
+    public List<PurcahseVo> queryPurchase();
+
+    /**
+     * 删除主详单据
+     * @param billno
+     * @return
+     */
+    public int deletePurchase(String billno);
 }

@@ -8,10 +8,14 @@ import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service("ChBiz")
+@Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.SUPPORTS,readOnly = true)
 public class ChBiz {
     @Autowired
     private ChDao chdao;
@@ -67,11 +71,23 @@ public class ChBiz {
         return chdao.queryProdctInfo(prodid);
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED,readOnly = false)
     public int savePurchase(PurcahseVo pm){
         return chdao.savePurchase(pm);
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED,readOnly = false)
     public int savePurchaseDetail(T_PURCHASE_DETAIL d){
         return chdao.savePurchaseDetail(d);
+    }
+
+    public PageInfo<PurcahseVo> queryPurchase(int pageNum){
+        PageHelper.startPage(pageNum,1);
+        return new PageInfo<PurcahseVo>(chdao.queryPurchase());
+    }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED,readOnly = false)
+    public int deletePurchase(String billno){
+        return chdao.deletePurchase(billno);
     }
 }
