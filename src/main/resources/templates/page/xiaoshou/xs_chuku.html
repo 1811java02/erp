@@ -1,402 +1,522 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>销售出库单</title>
-    <link rel="stylesheet" href="../../css/xiaoshou/xs_chuku.css">
-    <link rel="stylesheet" href="../../layui/css/layui.css">
-    <link rel="stylesheet" href="../../css/common.css">
-    <style>
-        th, td {
-            white-space: nowrap;
-            overflow: hidden;
-            max-width: 150px;
-        }
-    </style>
+	<meta charset="UTF-8">
+	<title>销售出库单</title>
+	<link rel="stylesheet" href="../../css/xiaoshou/xs_chuku.css">
+	<link rel="stylesheet" href="../../layui/css/layui.css">
+	<link rel="stylesheet" href="../../css/common.css">
+	<style>
+		th, td {
+			font-weight: normal;
+			white-space: nowrap;
+			overflow: hidden;
+			max-width: 150px;
+		}
+
+		th.list-must {
+			color: #009688;
+		}
+
+		#list td {
+			cursor: text;
+		}
+	</style>
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
 <form class="layui-form pic-ok">
-    <div class="layui-form-item">
-        <div class="layui-input-block" style="margin-left: 0">
-            <ul class="layui-nav" style="background-color: transparent;">
-                <li class="layui-nav-item">
-                    <a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
-                        <i class="layui-icon">&#xe603;</i>
-                    </a>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
-                        <i class="layui-icon">&#xe602;</i>
-                    </a>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;" class="iconfont menu-list" title="新增" id="menu-add" onclick="openForm()">
-                        <i class="layui-icon">&#xe654;</i>
-                    </a>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;" class="iconfont menu-list" title="修改" id="menu-update"
-                       disabled>
-                        <i class="layui-icon">&#xe642;</i>
-                    </a>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;" class="iconfont menu-list" title="删除" id="menu-delete">
-                        <i class="layui-icon">&#xe640;</i>
-                    </a>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;" class="iconfont menu-list" title="审核" id="menu-adopt"
-                       disabled="">
-                        <i class="layui-icon">&#xe605;</i>
-                    </a>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;" class="iconfont menu-list" title="反审核" id="menu-refuse">
-                        <i class="layui-icon">&#x1006;</i>
-                    </a>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;" class="iconfont menu-list" title="刷新" id="menu-refresh">
-                        <i class="layui-icon">&#x1002;</i>
-                    </a>
-                </li>
-                <li class="layui-nav-item" style="margin-left: 20px;">
-                    <a href="javascript:;">查询</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="" disabled="">历史交易查询</a></dd>
-                        <dd><a href="">单据状况查询</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">转单</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="">销售报价转入</a></dd>
-                        <dd><a href="">销售订单转入</a></dd>
-                    </dl>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">客户</label>
-        <div class="layui-input-inline">
-            <input type="text" class="layui-input" id="custid" disabled>
-        </div>
-        <label class="layui-form-label">单据日期</label>
-        <div class="layui-input-inline">
-            <input id="date" type="text" class="layui-input" id="billdate"
-                   onclick="layui.laydate({elem: this, choose: queryId})" disabled>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">送货地址</label>
-        <div class="layui-input-inline">
-            <input type="text" class="layui-input" id="addrid" disabled>
-        </div>
-        <label class="layui-form-label">单据号码</label>
-        <div class="layui-input-inline">
-            <input type="text" class="layui-input" id="billno" disabled>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">销售出库类型</label>
-        <div class="layui-input-inline">
-            <input type="text" class="layui-input" id="saleclassid" disabled>
-        </div>
-        <label class="layui-form-label">币别</label>
-        <div class="layui-input-inline">
-            <input type="text" class="layui-input" value="人民币" id="currid" disabled>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">单价是否含税</label>
-        <div class="layui-input-inline">
-            <select id="priceoftax" disabled>
-                <option value="0" selected>含税</option>
-                <option value="1">未税</option>
-            </select>
-        </div>
-        <label class="layui-form-label">汇率</label>
-        <div class="layui-input-inline">
-            <input type="text" class="layui-input" value="1.0000" id="exchrate" disabled>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">仓库</label>
-        <div class="layui-input-inline">
-            <input type="text" class="layui-input" id="wareid" disabled>
-        </div>
-    </div>
-    <div class="layui-tab layui-tab-brief">
-        <ul class="layui-tab-title">
-            <li class="layui-this" lay-id="1">内容</li>
-            <li lay-id="2">备注</li>
-            <div style="float: right;transform:translateX(-50%);">
-                <button class="layui-btn layui-btn-small" id="addrow" disabled>
-                    <i class="layui-icon">&#xe654;</i>
-                </button>
-            </div>
-        </ul>
-        <div class="layui-tab-content" style="height: 300px;overflow: scroll;padding: 0;">
-            <div class="layui-tab-item layui-show">
-                <table class="layui-table" style="margin: 0;">
-                    <thead>
-                    <tr>
-                        <th>栏号</th>
-                        <th>物料编号</th>
-                        <th>物料名称</th>
-                        <th>规格型号</th>
-                        <th>单位名称</th>
-                        <th>数量</th>
-                        <th>折扣前单价</th>
-                        <th>折数</th>
-                        <th>单价</th>
-                        <th>金额</th>
-                        <th>税率</th>
-                        <th>税额</th>
-                        <th>含税金额</th>
-                        <th>赠品</th>
-                        <th>分录备注</th>
-                        <th>来源单别</th>
-                        <th>来源单号</th>
-                        <th>客户订单</th>
-                    </tr>
-                    </thead>
-                    <tbody id="list">
-                    <tr id="list-default" style="display: none;">
-                        <td class="list-line"></td>
-                        <td class="list-prodid"></td>
-                        <td class="list-prodname"></td>
-                        <td class="list-prodsize"></td>
-                        <td class="list-sunit"></td>
-                        <td class="list-squantity" contenteditable>0</td>
-                        <td class="list-oldprice" contenteditable>0</td>
-                        <td class="list-discount" contenteditable>100</td>
-                        <td class="list-sprice">0</td>
-                        <td class="list-amount">0</td>
-                        <td class="list-taxrate" contenteditable>17.00</td>
-                        <td class="list-taxamt">0</td>
-                        <td class="list-amountatax">0</td>
-                        <td>
-                            <input class="list-isgift" type="checkbox">
-                        </td>
-                        <td class="list-itemremark" contenteditable></td>
-                        <td class="list-trantype"></td>
-                        <td class="list-formno"></td>
-                        <td class="list-custbillno" contenteditable></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="layui-tab-item" style="padding-top: 10px;padding-right: 10px;">
-                <form class="layui-form">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">自定栏1</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input" id="udef1" disabled>
-                        </div>
-                        <label class="layui-form-label">自定栏2</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input" id="udef2" disabled>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">收款条件</label>
-                        <div class="layui-input-block">
-                            <textarea placeholder="请输入内容" class="layui-textarea" id="remark" disabled></textarea>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">业务人员</label>
-        <div class="layui-input-inline">
-            <input type="text" class="layui-input" id="salesid" disabled>
-        </div>
-        <label class="layui-form-label">制单人员</label>
-        <div class="layui-input-inline">
-            <input type="text" class="layui-input" id="maker" disabled>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">所属部门</label>
-        <div class="layui-input-inline">
-            <input type="text" class="layui-input" id="departid" disabled>
-        </div>
-        <label class="layui-form-label">复核人员</label>
-        <div class="layui-input-inline">
-            <input type="text" class="layui-input" id="permitter" disabled>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">所属项目</label>
-        <div class="layui-input-inline">
-            <input type="text" class="layui-input" id="projectid" disabled>
-        </div>
-    </div>
+	<div class="layui-form-item">
+		<div class="layui-input-block" style="margin-left: 0">
+			<ul class="layui-nav" style="background-color: transparent;">
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
+						<i class="layui-icon">&#xe603;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
+						<i class="layui-icon">&#xe602;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="新增" id="menu-add" onclick="openForm()">
+						<i class="layui-icon">&#xe654;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="修改" id="menu-update">
+						<i class="layui-icon">&#xe642;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="删除" id="menu-delete">
+						<i class="layui-icon">&#xe640;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="审核" id="menu-adopt">
+						<i class="layui-icon">&#xe605;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="反审核" id="menu-refuse">
+						<i class="layui-icon">&#x1006;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="iconfont menu-list" title="刷新" id="menu-refresh">
+						<i class="layui-icon">&#x1002;</i>
+					</a>
+				</li>
+				<li class="layui-nav-item" style="margin-left: 20px;">
+					<a href="javascript:;">查询</a>
+					<dl class="layui-nav-child">
+						<dd><a href="" disabled="">历史交易查询</a></dd>
+						<dd><a href="">单据状况查询</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;">转单</a>
+					<dl class="layui-nav-child">
+						<dd><a href="">销售报价转入</a></dd>
+						<dd><a href="">销售订单转入</a></dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">客户</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" id="custid" disabled>
+		</div>
+		<label class="layui-form-label">单据日期</label>
+		<div class="layui-input-inline">
+			<input id="date" type="text" class="layui-input" id="billdate"
+				   onclick="layui.laydate({elem: this, choose: queryId})" disabled>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">送货地址</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" id="addrid" disabled>
+		</div>
+		<label class="layui-form-label">单据号码</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" id="billno" disabled>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">销售出库类型</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" id="saleclassid" disabled>
+		</div>
+		<label class="layui-form-label">币别</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" value="人民币" id="currid" disabled>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">单价是否含税</label>
+		<div class="layui-input-inline">
+			<select id="priceoftax" disabled>
+				<option value="0" selected>含税</option>
+				<option value="1">未税</option>
+			</select>
+		</div>
+		<label class="layui-form-label">汇率</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" value="1.0000" id="exchrate" disabled>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">仓库</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" id="wareid" disabled>
+		</div>
+	</div>
+	<div class="layui-tab layui-tab-brief">
+		<ul class="layui-tab-title">
+			<li class="layui-this" lay-id="1">内容</li>
+			<li lay-id="2">备注</li>
+			<div style="float: right;transform:translateX(-50%);">
+				<button class="layui-btn layui-btn-small" id="addrow" disabled>
+					<i class="layui-icon">&#xe654;</i>
+				</button>
+			</div>
+		</ul>
+		<div class="layui-tab-content" style="height: 300px;overflow: scroll;padding: 0;">
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table" style="margin: 0;">
+					<thead>
+					<tr>
+						<th>栏号</th>
+						<th class="list-must">物料编号</th>
+						<th>物料名称</th>
+						<th>规格型号</th>
+						<th>单位名称</th>
+						<th class="list-must">数量</th>
+						<th>折扣前单价</th>
+						<th>折数</th>
+						<th>单价</th>
+						<th>金额</th>
+						<th>税率</th>
+						<th>税额</th>
+						<th>含税金额</th>
+						<th>赠品</th>
+						<th>分录备注</th>
+						<th>来源单别</th>
+						<th>来源单号</th>
+						<th>客户订单</th>
+					</tr>
+					</thead>
+					<tbody id="list">
+					<tr id="list-default" style="display: none;">
+						<td title="删除" style="cursor: default;" class="list-line"></td>
+						<td class="list-prodid"></td>
+						<td class="list-prodname"></td>
+						<td class="list-prodsize"></td>
+						<td class="list-sunit"></td>
+						<td class="list-squantity" contenteditable>0</td>
+						<td class="list-oldprice" contenteditable>0</td>
+						<td class="list-discount" contenteditable>100</td>
+						<td class="list-sprice">0</td>
+						<td class="list-amount">0</td>
+						<td class="list-taxrate" contenteditable>17.00</td>
+						<td class="list-taxamt">0</td>
+						<td class="list-amountatax">0</td>
+						<td>
+							<input class="list-isgift" type="checkbox">
+						</td>
+						<td class="list-itemremark" contenteditable></td>
+						<td class="list-trantype"></td>
+						<td class="list-formno"></td>
+						<td class="list-custbillno" contenteditable></td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="layui-tab-item" style="padding-top: 10px;padding-right: 10px;">
+				<div class="layui-form-item">
+					<label class="layui-form-label">自定栏1</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input" id="udef1" disabled>
+					</div>
+					<label class="layui-form-label">自定栏2</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input" id="udef2" disabled>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">收款条件</label>
+					<div class="layui-input-block">
+						<textarea placeholder="请输入内容" class="layui-textarea" id="remark" disabled></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">业务人员</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" id="salesid" disabled>
+		</div>
+		<label class="layui-form-label">制单人员</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" id="maker" disabled>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">所属部门</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" id="departid" disabled>
+		</div>
+		<label class="layui-form-label">复核人员</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" id="permitter" disabled>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">所属项目</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" id="projectid" disabled>
+		</div>
+	</div>
 </form>
 
 <div id="windowList">
-    <table id="windowTable" class="layui-table" style="margin: 0;overflow-y: scroll;display: none;">
-        <thead>
-        <tr>
-            <th>编号</th>
-            <th>名称</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+	<table id="windowTable" class="layui-table" style="margin: 0;overflow-y: scroll;display: none;">
+		<thead>
+		<tr>
+			<th>编号</th>
+			<th>名称</th>
+		</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
 </div>
 
 <script src="../../layui/lay/dest/layui.all.js"></script>
 <script src="../../js/jquery-1.12.4.js"></script>
 <script src="../../js/xiaoshou/xs_chuku.js"></script>
 <script>
-    function openForm() {
-        $("#custid,#saleclassid,#wareid,#date,#salesid,#departid").removeAttr("disabled").attr("readonly", true);
-        $("#udef1,#udef2,#remark,#priceoftax,#addrid,#addrow").removeAttr("disabled");
-        layui.form().render();
-        emptyForm();
-        getDate();
-    }
+	toPage();
 
-    function emptyForm() {
-        $("#custid,#addrid,#saleclassid,#wareid,#date,#salesid,#departid").html(null);
-    }
+	function toPage(page) {
+		emptyForm();
+		var index = layer.load(1);
+		$.getJSON('/lhy/query/dsdssalemain', {page: page}, function (data) {
+			layer.close(index);
+			if (data.hasPreviousPage) {
+				$("#menu-prev").attr("onclick", "toPage(" + data.prePage + ")")
+			} else {
+				$("#menu-prev").removeAttr("onclick");
+			}
+			if (data.hasNextPage) {
+				$("#menu-next").attr("onclick", "toPage(" + data.nextPage + ")")
+			} else {
+				$("#menu-next").removeAttr("onclick");
+			}
+			var obj = data.list[0];
+			$('#custid').val(obj['custshortname']);
+			$('#addrid').val(obj['custaddress']);
+			$('#saleclassid').val(obj['saleclassname']);
+			$('#priceoftax').val(obj['priceoftax']);
+			$('#wareid').val(obj['warename']);
+			$('#date').val(obj['billdate']);
+			$('#billno').val(obj['billno']);
+			$('#currid').val(obj['currname']);
+			$('#exchrate').val(obj['exchrate']);
+			$('#salesid').val(obj['salesname']);
+			$('#departid').val(obj['departname']);
+			$('#maker').val('Admin');
+			$('#udef1').val(obj['udef1']);
+			$('#udef2').val(obj['udef2']);
+			$('#remark').val(obj['remark']);
+			$('#custid').attr('data-value', obj['custid']);
+			$('#saleclassid').attr('data-value', obj['saleclassid']);
+			$('#wareid').attr('data-value', obj['wareid']);
+			$('#salesid').attr('data-value', obj['salesid']);
+			$('#departid').attr('data-value', obj['departid']);
+			/*$(obj.dsdssalesub).each(function (i, obj) {
+				$("#list").append(tr);
+			})*/
+		})
+	}
 
-    function getDate() {
-        var date = new Date();
-        var year = date.getFullYear();
-        var month = date.getMonth();
-        if (month < 10)
-            month = "0" + month;
-        var day = date.getDate();
-        if (day < 10)
-            day = "0" + day;
-        date = year + "-" + month + "-" + day;
-        $("#date").val(date);
-        queryId();
-    }
+	function openForm() {
+		emptyForm();
+		$("#custid,#saleclassid,#wareid,#date,#salesid,#departid").removeAttr("disabled").attr("readonly", true);
+		$("#udef1,#udef2,#remark,#priceoftax,#addrid,#addrow").removeAttr("disabled");
+		layui.form().render();
+		getDate();
+		$("#menu-add").attr('onclick', 'save()');
+	}
 
-    function queryId() {
-        $.getJSON("/lhy/query/dsdssalemainId", {date: $("#date").val()}, function (data) {
-            $("#billno").val(data);
-        })
-    }
+	function closeForm() {
+		emptyForm();
+		$("#custid,#saleclassid,#wareid,#date,#salesid,#departid").removeAttr("readonly").attr("disabled", true);
+		$("#udef1,#udef2,#remark,#priceoftax,#addrid,#addrow").attr("disabled", true);
+		layui.form().render();
+		$("#menu-add").attr('onclick', 'openForm()');
+	}
 
-    function openWindow(title, content) {
-        var index = layer.open({
-            type: 1,
-            shade: 0,
-            area: ['500px', '300px'],
-            title: title,
-            content: content,
-            zIndex: layer.zIndex,
-            success: function (layero) {
-                layer.setTop(layero);
-            },
-            cancel: function () {
-                closeWindow({index: index, elem: content});
-            },
-            end: function () {
-                closeWindow({index: index, elem: content});
-            }
-        });
-        return index;
-    }
+	function emptyForm() {
+		$("input[type=text]:not(#currid,#exchrate),textarea").val(null);
+		$("select").val(0);
+		$("#list tr:not(#list-default)").remove();
+	}
 
-    function closeWindow(data) {
-        $(data.elem).parent().parent().remove();
-        layer.close(data.index);
-    }
+	function getDate() {
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = date.getMonth() + 1;
+		if (month < 10)
+			month = "0" + month;
+		var day = date.getDate();
+		if (day < 10)
+			day = "0" + day;
+		date = year + "-" + month + "-" + day;
+		$("#date").val(date);
+		queryId();
+	}
 
-    function queryList(url, params, prop, id, name, title, fun) {
-        $("#windowTable tbody").empty();
-        var table = $("#windowTable").clone().removeAttr("id").appendTo("#windowList");
-        var index = openWindow(title, table);
-        $.getJSON(url, params, function (data) {
-            data = prop == null ? data : data[prop];
-            $(data).each(function (i, obj) {
-                var tr = $("<tr></tr>").dblclick(function () {
-                    fun({obj: obj, index: index, elem: table});
-                });
-                var td1 = $("<td></td>").text(obj[id]);
-                var td2 = $("<td></td>").text(obj[name]);
-                tr.append(td1, td2);
-                table.append(tr);
-            })
-        })
-    }
+	function queryId() {
+		$.getJSON("/lhy/query/dsdssalemainId", {date: $("#date").val()}, function (data) {
+			$("#billno").val(data);
+		})
+	}
 
-    function calcLine(obj) {
-        obj = $(obj);
-        var oldprice = obj.find(".list-oldprice").html();
-        var discount = obj.find(".list-discount").html();
-        obj.find(".list-sprice").html(oldprice * discount / 100);
-        var squantity = obj.find(".list-squantity").html();
-        var sprice = obj.find(".list-sprice").html();
-        obj.find(".list-amount").html(squantity * sprice);
-        var amount = obj.find(".list-amount").html();
-        var taxrate = obj.find(".list-taxrate").html();
-        obj.find(".list-taxamt").html(amount * taxrate / 100);
-        var taxamt = obj.find(".list-taxamt").html();
-        obj.find(".list-amountatax").html(amount * 1 + taxamt * 1);
-    }
+	function openWindow(title, content) {
+		var index = layer.open({
+			type: 1,
+			shade: 0,
+			area: ['500px', '300px'],
+			title: title,
+			content: content,
+			zIndex: layer.zIndex,
+			success: function (layero) {
+				layer.setTop(layero);
+			},
+			cancel: function () {
+				closeWindow({index: index, elem: content});
+			},
+			end: function () {
+				closeWindow({index: index, elem: content});
+			}
+		});
+		return index;
+	}
 
-    $("#custid").dblclick(function () {
-        queryList('/lhy/query/customer', {}, null, 'customerid', 'customerfllnae', '选择客户', function (data) {
-            $("#custid").val(data.obj.customerfllnae);
-            closeWindow(data);
-        });
-    })
-    $("#saleclassid").dblclick(function () {
-        queryList('/lhy/query/billtype', {}, null, 'classid', 'classname', '选择销售出库类型', function (data) {
-            $("#saleclassid").val(data.obj.classname);
-            closeWindow(data);
-        });
-    })
-    $("#wareid").dblclick(function () {
-        queryList('/lhy/query/warehouse', {}, null, 'wareid', 'warename', '选择仓库', function (data) {
-            $("#wareid").val(data.obj.warename);
-            closeWindow(data);
-        });
-    })
-    $("#salesid").dblclick(function () {
-        queryList('/lhy/query/personnel', {}, null, 'personid', 'personname', '选择业务人员', function (data) {
-            $("#salesid").val(data.obj.personname);
-            $("#departid").val(data.obj.department.departname);
-            closeWindow(data);
-        });
-    })
-    $("body").on('dblclick', ".list-prodid", function () {
-        var elem = this;
-        queryList('/lhy/query/dsproduct', {size: -1}, 'list', 'prodid', 'prodname', '选择物料', function (data) {
-            $(elem).text(data.obj.prodid).next().text(data.obj.prodname).next().text(data.obj.prodsize).next().text(data.obj.unit).next().next().text(data.obj.suggestprice);
-            calcLine($(elem).parent());
-            closeWindow(data);
-        });
-    })
-    $("#addrow").click(function () {
-        var tr = $("#list-default").clone().show();
-        tr.find(".list-line").text($("#list tr").length);
-        $("#list").append(tr);
-        layui.form().render();
-        return false;
-    })
-    $("body").on("dblclick", ".list-line", function () {
-        $(this).parent().remove();
-        $(".list-line").each(function (i, obj) {
-            $(this).text(i);
-        })
-    })
-    $("body").on("blur", ".list-squantity,.list-oldprice,.list-discount,.list-taxrate", function () {
-        console.info($(this))
-        calcLine($(this).parent());
-    })
+	function closeWindow(data) {
+		$(data.elem).parent().parent().remove();
+		layer.close(data.index);
+	}
+
+	function queryList(url, params, prop, id, name, title, fun) {
+		$("#windowTable tbody").empty();
+		var table = $("#windowTable").clone().removeAttr("id").appendTo("#windowList");
+		var index = openWindow(title, table);
+		$.getJSON(url, params, function (data) {
+			data = prop == null ? data : data[prop];
+			$(data).each(function (i, obj) {
+				var tr = $("<tr></tr>").dblclick(function () {
+					fun({obj: obj, index: index, elem: table});
+				});
+				var td1 = $("<td></td>").text(obj[id]);
+				var td2 = $("<td></td>").text(obj[name]);
+				tr.append(td1, td2);
+				table.append(tr);
+			})
+		})
+	}
+
+	function calcLine(obj) {
+		obj = $(obj);
+		var oldprice = obj.find(".list-oldprice").html();
+		var discount = obj.find(".list-discount").html();
+		obj.find(".list-sprice").html(oldprice * discount / 100);
+		var squantity = obj.find(".list-squantity").html();
+		var sprice = obj.find(".list-sprice").html();
+		obj.find(".list-amount").html(squantity * sprice);
+		var amount = obj.find(".list-amount").html();
+		var taxrate = obj.find(".list-taxrate").html();
+		obj.find(".list-taxamt").html(amount * taxrate / 100);
+		var taxamt = obj.find(".list-taxamt").html();
+		obj.find(".list-amountatax").html(amount * 1 + taxamt * 1);
+	}
+
+	function save() {
+		var main = new Object();
+		main['custshortname'] = $('#custid').val();
+		main['custaddress'] = $('#addrid').val();
+		main['saleclassname'] = $('#saleclassid').val();
+		main['priceoftax'] = $('#priceoftax').val();
+		main['warename'] = $('#wareid').val();
+		main['billdate'] = $('#date').val();
+		main['billno'] = $('#billno').val();
+		main['currname'] = $('#currid').val();
+		main['exchrate'] = $('#exchrate').val();
+		main['salesname'] = $('#salesid').val();
+		main['departname'] = $('#departid').val();
+		main['maker'] = '001';
+		main['makername'] = 'Admin';
+		main['udef1'] = $('#udef1').val();
+		main['udef2'] = $('#udef2').val();
+		main['remark'] = $('#remark').val();
+		main['custid'] = $('#custid').attr('data-value');
+		main['saleclassid'] = $('#saleclassid').attr('data-value');
+		main['wareid'] = $('#wareid').attr('data-value');
+		main['salesid'] = $('#salesid').attr('data-value');
+		main['departid'] = $('#departid').attr('data-value');
+		main['dsdssalesub'] = new Array();
+		$("#list tr:not(#list-default)").each(function (i, obj) {
+			var data = new Object();
+			data['prodid'] = $(obj).find('.list-prodid').text();
+			data['prodname'] = $(obj).find('.list-prodname').text();
+			data['prodsize'] = $(obj).find('.list-prodsize').text();
+			data['sunit'] = $(obj).find('.list-sunit').text();
+			data['squantity'] = $(obj).find('.list-squantity').text();
+			data['oldprice'] = $(obj).find('.list-oldprice').text();
+			data['discount'] = $(obj).find('.list-discount').text();
+			data['sprice'] = $(obj).find('.list-sprice').text();
+			data['amount'] = $(obj).find('.list-amount').text();
+			data['taxrate'] = $(obj).find('.list-taxrate').text();
+			data['taxamt'] = $(obj).find('.list-taxamt').text();
+			data['amountatax'] = $(obj).find('.list-amountatax').text();
+			data['isgift'] = $(obj).find('.list-isgift').text();
+			data['itemremark'] = $(obj).find('.list-itemremark').text();
+			data['trantypename'] = $(obj).find('.list-trantype').text();
+			data['formno'] = $(obj).find('.list-formno').text();
+			data['custbillno'] = $(obj).find('.list-custbillno').text();
+			data['trantype'] = $(obj).find('.list-trantype').attr("data-value");
+			main['dsdssalesub'].push(data);
+		})
+		console.info(main)
+		$.post("/lhy/save/dsdssalemain", {str: JSON.stringify(main)}, function (data) {
+			layer.alert(data ? '保存成功' : '保存失败');
+			toPage();
+		}, 'JSON');
+		closeForm();
+	}
+
+	$("#custid").dblclick(function () {
+		queryList('/lhy/query/customer', {}, null, 'customerid', 'customerfllnae', '选择客户', function (data) {
+			$("#custid").attr("data-value", data.obj.customerfllnae);
+			$("#custid").val(data.obj.customerfllnae);
+			closeWindow(data);
+		});
+	})
+	$("#saleclassid").dblclick(function () {
+		queryList('/lhy/query/billtype', {}, null, 'classid', 'classname', '选择销售出库类型', function (data) {
+			$("#saleclassid").attr("data-value", data.obj.classid);
+			$("#saleclassid").val(data.obj.classname);
+			closeWindow(data);
+		});
+	})
+	$("#wareid").dblclick(function () {
+		queryList('/lhy/query/warehouse', {}, null, 'wareid', 'warename', '选择仓库', function (data) {
+			$("#wareid").attr("data-value", data.obj.wareid);
+			$("#wareid").val(data.obj.warename);
+			closeWindow(data);
+		});
+	})
+	$("#salesid").dblclick(function () {
+		queryList('/lhy/query/personnel', {}, null, 'personid', 'personname', '选择业务人员', function (data) {
+			$("#salesid").attr("data-value", data.obj.personid);
+			$("#departid").attr("data-value", data.obj.department.departid);
+			$("#salesid").val(data.obj.personname);
+			$("#departid").val(data.obj.department.departname);
+			closeWindow(data);
+		});
+	})
+	$("body").on('dblclick', ".list-prodid", function () {
+		var elem = this;
+		queryList('/lhy/query/dsproduct', {size: -1}, 'list', 'prodid', 'prodname', '选择物料', function (data) {
+			$(elem).text(data.obj.prodid).next().text(data.obj.prodname).next().text(data.obj.prodsize).next().text(data.obj.unit).next().next().text(data.obj.suggestprice);
+			calcLine($(elem).parent());
+			closeWindow(data);
+		});
+	})
+	$("#addrow").click(function () {
+		layer.alert(1)
+		var tr = $("#list-default").clone().show();
+		tr.removeAttr("id");
+		tr.find(".list-line").text($("#list tr").length);
+		$("#list").append(tr);
+		layui.form().render();
+		return false;
+	})
+	$("body").on("dblclick", ".list-line", function () {
+		$(this).parent().remove();
+		$(".list-line").each(function (i, obj) {
+			$(this).text(i);
+		})
+	})
+	$("body").on("blur", ".list-squantity,.list-oldprice,.list-discount,.list-taxrate", function () {
+		calcLine($(this).parent());
+	})
 </script>
 </body>
 </html>

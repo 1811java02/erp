@@ -5,6 +5,7 @@ import com.accp.pojo.T_CUSTOMER_INFORMATION;
 import com.accp.pojo.T_DSPRODUCTCLASS;
 import com.accp.pojo.T_WAREHOUSE;
 import com.accp.vo.lhy.T_DSDSSALEMAIN;
+import com.accp.vo.lhy.T_DSDSSALESUB;
 import com.accp.vo.lhy.T_DSPRODUCT;
 import com.accp.vo.lhy.T_PERSONNEL;
 import org.apache.ibatis.annotations.Param;
@@ -22,7 +23,13 @@ public interface LhyDao {
 
 	List<T_PERSONNEL> queryPersonnel();
 
-	T_DSDSSALEMAIN queryDsdssalemainByDate(@Param("date") String date);
+	String queryDsdssalemainByDate(@Param("date") String date);
 
 	List<T_BILLTYPE> queryBilltype();
+
+	List<T_DSDSSALEMAIN> queryDsdssalemain();
+
+	boolean saveDsdssalemain(T_DSDSSALEMAIN dsdssalemain);
+
+	boolean saveDsdssalesub(T_DSDSSALESUB dsdssalesub);
 }

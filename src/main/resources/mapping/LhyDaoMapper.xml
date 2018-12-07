@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.LhyDao">
 	<resultMap id="dsdswareamountMap" type="com.accp.vo.lhy.T_DSDSWAREAMOUNT">
 		<result property="warehouseid" column="warehouseid"></result>
@@ -18,9 +18,7 @@
 		<id property="billno" column="billno"></id>
 		<collection property="dsdssalesub" column="billno" select="selectDsdssalesub"></collection>
 	</resultMap>
-	<resultMap id="dsdssalesubMap" type="com.accp.vo.lhy.T_DSDSSALESUB">
-
-	</resultMap>
+	<resultMap id="dsdssalesubMap" type="com.accp.vo.lhy.T_DSDSSALESUB"></resultMap>
 
 	<select id="selectWarehouse" resultType="t_warehouse">
 		select * from t_warehouse where wareid=#{0}
@@ -50,10 +48,52 @@
 	<select id="queryPersonnel" resultMap="personnelMap">
 		select * from t_personnel
 	</select>
-	<select id="queryDsdssalemainByDate" resultMap="dsdssalemainMap">
-		select * from t_dsdssalemain where billdate=#{date}
+	<select id="queryDsdssalemainByDate" resultType="String">
+		select max(billno) from t_dsdssalemain where billdate=to_date(#{date},'yyyy-MM-dd')
 	</select>
 	<select id="queryBilltype" resultType="t_billtype">
 		select * from t_billtype where billtype='销售出库单'
 	</select>
+	<select id="queryDsdssalemain" resultMap="dsdssalemainMap">
+		select * from t_dsdssalemain order by billno desc
+	</select>
+
+	<insert id="saveDsdssalemain">
+    insert into T_DSDSSALEMAIN (BILLNO, BILLDATE, CUSTID,
+      CUSTSHORTNAME, ADDRID, CUSTADDRESS,
+      SALECLASSID, SALECLASSNAME, PRICEOFTAX,
+      WAREID, WARENAME, CURRID,
+      CURRNAME, EXCHRATE, UDEF1,
+      UDEF2, REMARK, SALESID,
+      SALESNAME, DEPARTID, DEPARTNAME,
+      PROJECTID, PROJECTNAME, MAKER,
+      MAKERNAME, PERMITTER, PERMITTERNAME,
+      PERMITTYPE)
+    values (#{billno,jdbcType=VARCHAR}, #{billdate,jdbcType=TIMESTAMP}, #{custid,jdbcType=VARCHAR},
+      #{custshortname,jdbcType=VARCHAR}, #{addrid,jdbcType=VARCHAR}, #{custaddress,jdbcType=VARCHAR},
+      #{saleclassid,jdbcType=VARCHAR}, #{saleclassname,jdbcType=VARCHAR}, #{priceoftax,jdbcType=DECIMAL},
+      #{wareid,jdbcType=VARCHAR}, #{warename,jdbcType=VARCHAR}, #{currid,jdbcType=VARCHAR},
+      #{currname,jdbcType=VARCHAR}, #{exchrate,jdbcType=FLOAT}, #{udef1,jdbcType=VARCHAR},
+      #{udef2,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{salesid,jdbcType=VARCHAR},
+      #{salesname,jdbcType=VARCHAR}, #{departid,jdbcType=VARCHAR}, #{departname,jdbcType=VARCHAR},
+      #{projectid,jdbcType=VARCHAR}, #{projectname,jdbcType=VARCHAR}, #{maker,jdbcType=VARCHAR},
+      #{makername,jdbcType=VARCHAR}, #{permitter,jdbcType=VARCHAR}, #{permittername,jdbcType=VARCHAR},
+      #{permittype,jdbcType=DECIMAL})
+    </insert>
+	<insert id="saveDsdssalesub" parameterType="t_dsdssalesub">
+    insert into T_DSDSSALESUB (SERNO, BILLNO, PRODID,
+      PRODNAME, PRODSIZE, SUNIT,
+      SQUANTITY, OLDPRICE, DISCOUNT,
+      SPRICE, AMOUNT, TAXRATE,
+      TAXAMT, AMOUNTATAX, ISGIFT,
+      ITEMREMARK, TRANTYPE, TRANTYPENAME,
+      FORMNO, CUSTBILLNO)
+    values (T_DSDSSALESUB_SERNO_SEQ.nextval, #{billno,jdbcType=VARCHAR}, #{prodid,jdbcType=VARCHAR},
+      #{prodname,jdbcType=VARCHAR}, #{prodsize,jdbcType=VARCHAR}, #{sunit,jdbcType=VARCHAR},
+      #{squantity,jdbcType=DECIMAL}, #{oldprice,jdbcType=FLOAT}, #{discount,jdbcType=FLOAT},
+      #{sprice,jdbcType=FLOAT}, #{amount,jdbcType=FLOAT}, #{taxrate,jdbcType=FLOAT},
+      #{taxamt,jdbcType=FLOAT}, #{amountatax,jdbcType=FLOAT}, #{isgift,jdbcType=DECIMAL},
+      #{itemremark,jdbcType=VARCHAR}, #{trantype,jdbcType=VARCHAR}, #{trantypename,jdbcType=VARCHAR},
+      #{formno,jdbcType=VARCHAR}, #{custbillno,jdbcType=VARCHAR})
+	</insert>
 </mapper>
