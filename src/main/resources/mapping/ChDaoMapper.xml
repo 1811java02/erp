@@ -51,7 +51,8 @@
     <select id="queryProdctInfo" resultType="T_DSPRODUCT" parameterType="string">
         SELECT * FROM T_DSPRODUCT WHERE PRODID=#{prodid}
     </select>
-    
+
+    <!--查询入库单主表 -->
     <insert id="savePurchase">
         INSERT  INTO T_PURCHASE_MASTER(BILLNO,BILLDATE,CUSTID,CUSTNAME,ADDRID,CUSTADDRESS,SALECLASSID,SALECLASSNAME,CURRID,
         CURRNAME,PRICEOFTAX,EXCHRATE,WAREID,WARENAME,SALESID,SALESNAME,MAKER,MAKERNAME,PERMITTER,PERMITTERNAME,DEPARTID,
@@ -64,7 +65,8 @@
         #{pm.departname,jdbcType=VARCHAR},#{pm.projectid,jdbcType=VARCHAR},#{pm.projectname,jdbcType=VARCHAR},#{pm.udef1,jdbcType=VARCHAR},#{pm.udef2,jdbcType=VARCHAR},
         #{pm.remark,jdbcType=VARCHAR},#{pm.eaminestate,jdbcType=INTEGER})
     </insert>
-    
+
+    <!--查询入库单从表 -->
     <insert id="savePurchaseDetail">
         INSERT INTO T_PURCHASE_DETAIL(LINEID,BILLNO,PRODID,PRODNAME,PRODSIZE,SUNIT,SQUANTITY,OLDPRICE,DISCOUNT,SPRICE,
         AMOUNT,TAXRATE,TAXAMT,AMOUNTATAX,ISGIFT,ITEMREMARK,TRANTYPE,FORMNO,MLAMOUNT)
@@ -74,4 +76,71 @@
                 #{d.amountatax,jdbcType=FLOAT},#{d.isgift,jdbcType=INTEGER},#{d.itemremark,jdbcType=VARCHAR},
                 #{d.trantype,jdbcType=VARCHAR},#{d.formno,jdbcType=VARCHAR},#{d.mlamount,jdbcType=FLOAT})
     </insert>
+
+    <resultMap id="PurchaseMap" type="com.accp.vo.ch.PurcahseVo">
+        <id column="billno" property="billno"></id>
+        <result column="billdate" property="billdate"></result>
+        <result column="custid" property="custid"></result>
+        <result column="custname" property="custname"></result>
+        <result column="addrid" property="addrid"></result>
+        <result column="custaddress" property="custaddress"></result>
+        <result column="saleclassid" property="saleclassid"></result>
+        <result column="saleclassname" property="saleclassname"></result>
+        <result column="currid" property="currid"></result>
+        <result column="currname" property="currname"></result>
+        <result column="priceoftax" property="priceoftax"></result>
+        <result column="exchrate" property="exchrate"></result>
+        <result column="wareid" property="wareid"></result>
+        <result column="warename" property="warename"></result>
+        <result column="salesid" property="salesid"></result>
+        <result column="salesname" property="salesname"></result>
+        <result column="maker" property="maker"></result>
+        <result column="makername" property="makername"></result>
+        <result column="permitter" property="permitter"></result>
+        <result column="permittername" property="permittername"></result>
+        <result column="departid" property="departid"></result>
+        <result column="departname" property="departname"></result>
+        <result column="projectid" property="projectid"></result>
+        <result column="projectname" property="projectname"></result>
+        <result column="udef1" property="udef1"></result>
+        <result column="udef2" property="udef2"></result>
+        <result column="remark" property="remark"></result>
+        <result column="eaminestate" property="eaminestate"></result>
+        <collection property="detaillist" column="billno" select="queryDetail">
+            <id column="lineid" property="lineid"></id>
+            <result column="billno" property="billno"></result>
+            <result column="prodid" property="prodid"></result>
+            <result column="prodname" property="prodname"></result>
+            <result column="prodsize" property="prodsize"></result>
+            <result column="sunit" property="sunit"></result>
+            <result column="squantity" property="squantity"></result>
+            <result column="oldprice" property="oldprice"></result>
+            <result column="discount" property="discount"></result>
+            <result column="sprice" property="sprice"></result>
+            <result column="amount" property="amount"></result>
+            <result column="taxrate" property="taxrate"></result>
+            <result column="taxamt" property="taxamt"></result>
+            <result column="amountatax" property="amountatax"></result>
+            <result column="isgift" property="isgift"></result>
+            <result column="itemremark" property="itemremark"></result>
+            <result column="trantype" property="trantype"></result>
+            <result column="formno" property="formno"></result>
+            <result column="mlamount" property="mlamount"></result>
+        </collection>
+    </resultMap>
+
+    <select id="queryDetail" resultType="T_PURCHASE_DETAIL">
+      SELECT * FROM T_PURCHASE_DETAIL WHERE BILLNO=#{0}
+    </select>
+    <select id="queryPurchase" resultMap="PurchaseMap">
+      SELECT * FROM T_PURCHASE_MASTER
+    </select>
+
+    <!--删除主详 -->
+    <delete id="deletePurchase" parameterType="string">
+        BEGIN
+        DELETE  FROM T_PURCHASE_DETAIL WHERE BILLNO=#{billno,jdbcType=VARCHAR};
+        DELETE  FROM T_PURCHASE_MASTER WHERE BILLNO=#{billno,jdbcType=VARCHAR};
+        END;
+    </delete>
 </mapper>

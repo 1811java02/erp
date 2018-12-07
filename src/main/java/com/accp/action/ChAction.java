@@ -5,6 +5,7 @@ import com.accp.pojo.*;
 import com.accp.vo.ch.PurcahseVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import oracle.jdbc.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -91,6 +92,49 @@ public class ChAction {
                 }
                 map.put("code","200");
                 map.put("msg","OK");
+            }
+        }catch (Exception e){
+            map.put("code","500");
+            map.put("Msg",e.getMessage());
+        }
+        return map;
+    }
+
+    @GetMapping("/queryPurchase")
+    @ResponseBody
+    public PageInfo<PurcahseVo> queryPurchase(int pageNum){
+        return chbiz.queryPurchase(pageNum);
+    }
+
+    @PostMapping("/deletePurchase")
+    @ResponseBody
+    public Map<String,String> deletePurchase(String billno){
+        Map<String,String> map=new HashMap<>();
+        try {
+            if (chbiz.deletePurchase(billno)==-1){
+                map.put("code","200");
+                map.put("msg","OK");
+            }
+        }catch (Exception e){
+            map.put("code","500");
+            map.put("Msg",e.getMessage());
+        }
+        return map;
+    }
+
+    @PostMapping("/updatePurchase")
+    @ResponseBody
+    public Map<String,String>  updatePurchase(@RequestBody PurcahseVo pm){
+        Map<String,String> map=new HashMap<>();
+        try {
+            if (chbiz.deletePurchase(pm.getBillno())==-1){
+                if(chbiz.savePurchase(pm)>0){
+                    for (T_PURCHASE_DETAIL d:pm.getDetaillist()) {
+                        chbiz.savePurchaseDetail(d);
+                    }
+                    map.put("code","200");
+                    map.put("msg","OK");
+                }
             }
         }catch (Exception e){
             map.put("code","500");

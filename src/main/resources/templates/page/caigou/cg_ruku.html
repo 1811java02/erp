@@ -331,7 +331,7 @@
     function getLocalDate() {
         var date = new Date();
         var year = date.getFullYear();
-        var month = date.getMonth();
+        var month = (date.getMonth()+1);
         if (month < 10)
             month = "0" + month;
         var day = date.getDate();
@@ -340,6 +340,107 @@
         date = year + "-" + month + "-" + day;
         jQuery("[name=billdate]").val(date);
     }
+
+    var p=1;
+    var pageinfo={};
+    showPurchase(p);
+    function showPurchase(pageNum) {
+        var lannum=0;
+        dbl=false;
+        jQuery.getJSON("/ch/queryPurchase",{"pageNum":pageNum},function (data) {
+            console.info(data);
+            pageinfo=data;
+            jQuery.each(data.list,function (i,obj) {
+                jQuery("#billno").val(obj.billno);
+                jQuery("[name=billdate]").val(obj.billdate);
+                jQuery("[name=cust]").attr("id",obj.custid);
+                jQuery("[name=cust]").val(obj.custname);
+                jQuery("#custaddress").val(obj.custaddress);
+                jQuery("[name=billtype]").attr("id",obj.saleclassid);
+                jQuery("[name=billtype]").val(obj.saleclassname);
+                jQuery("[name=curr]").attr("id",obj.currid);
+                jQuery("[name=curr]").val(obj.currname);
+                jQuery("[name=shui] option").each(function (j,o) {
+                    if(jQuery(o).text()==obj.priceoftax){
+                        jQuery(this).attr("selected","selected");
+                    }
+                })
+                jQuery("[name=exchrate]").val(obj.exchrate.toFixed(4));
+                jQuery("[name=ware]").attr("id",obj.wareid);
+                jQuery("[name=ware]").val(obj.warename);
+                jQuery("[name=person]").attr("id",obj.salesid);
+                jQuery("[name=person]").val(obj.salesname);
+                jQuery("[name=maker]").attr("id",obj.maker);
+                jQuery("[name=maker]").val(obj.makername);
+                jQuery("[name=deptName]").val(obj.departname);
+                jQuery("[name=project]").val(obj.project);
+                jQuery("[name=permitter]").val(obj.permittername);
+                jQuery("#udef1").val(obj.udef1);
+                jQuery("#udef2").val(obj.udef2);
+                jQuery("#remark").val(obj.remark);
+                jQuery("#detailinfo tbody").empty();
+                jQuery.each(obj.detaillist,function (k,d) {
+                    lannum++;
+                    var $tr = jQuery("<tr class='cgrkdateil'></tr>");
+                    $tr.append("<td>" + lannum + "</td>");
+                    $tr.append("<td class='prodid'>"+d.prodid+"</td>");
+                    $tr.append("<td class='prodname'>"+d.prodname+"</td>");
+                    $tr.append("<td>"+d.prodsize+"</td>");
+                    $tr.append("<td>"+d.sunit+"</td>");
+                    $tr.append("<td class='num'>"+d.squantity+"</td>");
+                    $tr.append("<td class='disprice'>"+parseFloat(d.oldprice).toFixed(2)+"</td>");
+                    $tr.append("<td class='discount'>"+parseFloat(d.discount).toFixed(2)+"</td>");
+                    $tr.append("<td class='price'>"+parseFloat(d.sprice).toFixed(2)+"</td>");
+                    $tr.append("<td class='amout'>"+parseFloat(d.amount).toFixed(2)+"</td>");
+                    $tr.append("<td class='taxrate'>"+parseFloat(d.taxrate).toFixed(2)+"</td>");
+                    $tr.append("<td class='taxamout'>"+parseFloat(d.taxamt).toFixed(2)+"</td>");
+                    $tr.append("<td>"+parseFloat(d.amountatax).toFixed(2)+"</td>");
+                    if(d.isgift==0){
+                        $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\" name=\"iszp\" checked='checked'/></td>");
+                    }else {
+                        $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\" name=\"iszp\"/></td>");
+                    }
+                    $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\"/> </td>");
+                    $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\"/></td>");
+                    $tr.append("<td>0</td>");
+                    $tr.append("<td>"+d.itemremark+"</td>");
+                    $tr.append("<td>"+d.trantype+"</td>");
+                    $tr.append("<td>"+d.formno+"</td>");
+                    $tr.append("<td>"+parseFloat(d.mlamount).toFixed(2)+"</td>");
+                    jQuery("#detailinfo tbody").append($tr);
+                    sum();
+                    form.render("checkbox");
+                })
+            })
+        })
+    }
+
+    $("#menu-prev").click(function () {
+        showPurchase(pageinfo.prePage==0?1:pageinfo.prePage);
+    });
+    $("#menu-next").click(function () {
+        showPurchase(pageinfo.pageNum==pageinfo.lastPage?pageinfo.lastPage:pageinfo.nextPage);
+    })
+
+    function deletePurchase() {
+        jQuery.post("/ch/deletePurchase",{"billno":jQuery("#billno").val()},function (data) {
+            console.info(data);
+            if(data.code=="200"){
+                layer.msg("删除成功");
+                showPurchase(p);
+            }
+        },"json")
+    }
+
+     jQuery("#menu-delete").click(function () {
+         layer.confirm('是否删除该单据？', {
+             btn: ['确定', '取消'],
+             yes: function (index) {
+                 deletePurchase();
+                 layer.close(index);
+             }
+         })
+     })
 
     function getBillNo() {
         jQuery.getJSON("/ch/getBillNo", {"date": jQuery("[name=billdate]").val()}, function (data) {
@@ -464,8 +565,26 @@
         }
     })
 
+    var addorupdate=null;
     jQuery("#menu-add").click(function () {
         dbl = true;
+        addorupdate="add";
+        jQuery("input[type=text]").val("");
+        jQuery("#detailinfo tbody").empty();
+        getLocalDate();
+        sum();
+        getBillNo();
+        jQuery("[name=maker]").val("Admin");
+        jQuery("[name=curr]").val("人民币");
+        jQuery("[name=exchrate]").val("0.0000");
+        jQuery("[name=add_overRead]").removeAttr("readonly");
+        jQuery("[name=shui]").removeAttr("disabled");
+        form.render('select');
+    })
+
+    jQuery("#menu-update").click(function () {
+        dbl = true;
+        addorupdate="update";
         jQuery("[name=add_overRead]").removeAttr("readonly");
         jQuery("[name=shui]").removeAttr("disabled");
         form.render('select');
@@ -591,9 +710,9 @@
         if(val=="num"){
             num=parseFloat(jQuery(dom).find("td").eq(5).text());
             price=parseFloat(jQuery(dom).find("td").eq(8).text());
-            jQuery(dom).find("td").eq(9).text(price*num.toFixed(2));
+            jQuery(dom).find("td").eq(9).text((price*num).toFixed(2));
             aount=parseFloat(jQuery(dom).find("td").eq(9).text());
-            jQuery(dom).find("td").eq(11).text(aount*taxrate.toFixed(2));
+            jQuery(dom).find("td").eq(11).text((aount*taxrate).toFixed(2));
             taxamount=parseFloat(jQuery(dom).find("td").eq(11).text());
             jQuery(dom).find("td").eq(12).text((aount+taxamount).toFixed(2));
         }else if(val=="discount"){
@@ -658,6 +777,7 @@
     })
 
     function save() {
+        saveok=false;
         if (jQuery("#detailinfo tbody tr").size()==0){
             layer.msg("表身不允许空白！");
             return false;
@@ -696,8 +816,6 @@
         var dateils=new Array();
         jQuery("#detailinfo tbody tr").each(function (i,obj) {
             var dateil={};
-            // var lineid=new Date().getTime();
-            // dateil["lineid"]=parseInt(lineid);
             dateil["billno"]=jQuery("#billno").val();
             dateil["prodid"]=jQuery(obj).find("td").eq(1).text()
             dateil["prodname"]=jQuery(obj).find("td").eq(2).text()
@@ -723,22 +841,58 @@
             dateils.push(dateil);
         })
         purchase["detaillist"]=dateils;
-        $.ajax({
-            url:"/ch/savePurchase",
-            type:"post",
-            contentType:"application/json",
-            data:JSON.stringify(purchase),
-            dataType:"json",
-            timeout:5000,
-            success:function(data){
-                console.info(data)
-                if(data.code=="200"){
-                    layer.msg("保存成功");
-                }else{
-                    layer.msg("保存失败");
+        if(addorupdate=="add") {
+            $.ajax({
+                url: "/ch/savePurchase",
+                type: "post",
+                contentType: "application/json",
+                data: JSON.stringify(purchase),
+                dataType: "json",
+                timeout: 5000,
+                success: function (data) {
+                    console.info(data)
+                    if (data.code == "200") {
+                        layer.msg("保存成功");
+                        saveok = true;
+                        showPurchase(p);
+                    } else {
+                        layer.msg("保存失败");
+                    }
                 }
-            }
-        })
+            })
+        }else if(addorupdate=="update"){
+            $.ajax({
+                url: "/ch/updatePurchase",
+                type: "post",
+                contentType: "application/json",
+                data: JSON.stringify(purchase),
+                dataType: "json",
+                timeout: 5000,
+                success: function (data) {
+                    console.info(data)
+                    if (data.code == "200") {
+                        layer.msg("修改成功");
+                        saveok = true;
+                        showPurchase(p);
+                    } else {
+                        layer.msg("修改失败");
+                    }
+                }
+            })
+        }
     }
+
+    var saveok=true;
+    jQuery("#menu-adopt").click(function () {
+        if (saveok==true) {
+            jQuery("form").addClass("pic-ok");
+        }
+    })
+
+    jQuery("#menu-refuse").click(function () {
+        if (saveok==true) {
+            jQuery("form").removeClass("pic-ok");
+        }
+    })
 </script>
 </html>
