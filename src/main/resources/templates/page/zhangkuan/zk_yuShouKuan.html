@@ -11,8 +11,8 @@
 	<link rel="stylesheet" href="../../css/common.css">
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
-<form class="layui-form" action="" id="vmindexCnt">
-	<div v-for="(temp,index) in pageInfo.list">
+<form class="layui-form">
+	<div>
 	<div class="layui-form-item">
 		<div class="layui-input-block" style="margin-left: 0">
 			<ul class="layui-nav" style="background-color: transparent;">
@@ -37,7 +37,7 @@
 					</a>
 				</li>
 				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="删除" 　id="menu-delete">
+					<a href="javascript:void(0);" class="iconfont menu-list" title="删除" onclick="del()" 　id="menu-delete">
 						<i class="layui-icon">&#xe640;</i>
 					</a>
 				</li>
@@ -74,7 +74,7 @@
 		<label class="layui-form-label">单据时间</label>
 		<div class="layui-input-inline">
 
-			<input type="text"  id="date" placeholder="yyyy-mm-dd" class="layui-input" `onclick="layui.laydate({elem: this,choose:getBillNo})"  readonly="readonly"  name="fundbilldate"/>
+			<input type="text"  id="date" placeholder="yyyy-mm-dd" class="layui-input" onclick="layui.laydate({elem: this,choose:getBillNo})"  readonly="readonly"  name="fundbilldate"/>
 
 	</div>
 	<div class="layui-form-item">
@@ -235,6 +235,7 @@
 		</div>
 	</div>
 	</div>
+    </div>
 </form>
 <div id="wrapper" style="display: none;">
 	<table class="layui-table"  id="content" style="overflow-y: scroll;">
@@ -249,9 +250,8 @@
 		</tbody>
 	</table>
 </div>
-<script src="../../layui/lay/dest/layui.all.js"></script>
 <script src="../../js/jquery-1.12.4.js"></script>
-<script src="../../js/vue.js"></script>
+<script src="../../layui/lay/dest/layui.all.js"></script>
 <script>
     var dbl=false;
     var dblparam=null;
@@ -272,7 +272,6 @@
         $.getJSON("/zg/getAdvancereceipt",{
             "page":num
         },function (data) {
-            alert(1)
 			console.info(data)
             pageinfo=data;
             $.each(data.list,function (i,obj) {
@@ -419,7 +418,7 @@
             lineid++;
             var $tr = jQuery("<tr class='cgrkdateil'></tr>");
             $tr.append("<td contenteditable='true' name='curprerecv'>0.00</td>");
-            $tr.append("<td ><select name='sourcelist'><option value='销售订单'>销售订单</option><option value='S/C'>S/C</option></select></td>");
+            $tr.append("<td contenteditable='true' ><input type='text' name='sourcelist'></td>");
             $tr.append("<td contenteditable='true'><input type='text' name='sourcenumber'/></td>");
             $tr.append("<td contenteditable='true'><input type='text' name='remarks'/></td>");
             jQuery("#detailinfo tbody").append($tr);
@@ -446,7 +445,7 @@
         }
         var Advancereceipt={};
         Advancereceipt["fundbillid"]=jQuery("[name=fundbillid]").val();
-        Advancereceipt["fundbilldate"]=jQuery("[name=fundbilldate]").attr("id");
+        Advancereceipt["fundbilldate"]=jQuery("[name=fundbilldate]").val();
         Advancereceipt["customername"]=jQuery("[name=customername]").val();
         Advancereceipt["cashstylename"]=jQuery("[name=cashstylename]").val();
         Advancereceipt["cash"]=jQuery("[name=cash]").attr("id");
@@ -470,13 +469,14 @@
         jQuery("#detailinfo tbody tr").each(function (i,obj) {
             var dateil={};
             dateil["fundbillid"]=jQuery("[name=fundbillid]").val();
-            dateil["curprerecv"]=jQuery(obj).find("td").eq(1).text();
-            dateil["sourcelist"]=jQuery(obj).find("td").eq(2).text();
-            dateil["sourcenumber"]=jQuery(obj).find("td").eq(3).text();
-            dateil["remarks"]=jQuery(obj).find("td").eq(4).text();
+            dateil["curprerecv"]=jQuery(obj).find("td").eq(0).text();
+            dateil["sourcelist"]=jQuery(obj).find("td").eq(1).text();
+            dateil["sourcenumber"]=jQuery(obj).find("td").eq(2).text();
+            dateil["remarks"]=jQuery(obj).find("td").eq(3).text();
             dateils.push(dateil);
         });
         Advancereceipt["details"]=dateils;
+        alert(JSON.stringify(Advancereceipt))
         $.ajax({
             url:"/zg/saveAdvancereceipt",
             type:"post",
@@ -498,7 +498,6 @@
 
     function removeAdvancereceipt() {
         	var fundbillid=jQuery("[name=fundbillid]").val();
-        if (window.confirm('是否移除?')) {
             $.post("/zg/deleteAdvancereceipt",{
                 "fundbillid":fundbillid
             }, function(data) {
@@ -509,15 +508,8 @@
                     alert("移除失败");
                 }
             },"json");
-
-        }
     }
-    jQuery("#menu-delete").click(function () {
-        if(dbl==true){
-            removeAdvancereceipt();
-        }
 
-    });
 
     function  update() {
         if (jQuery("#detailinfo tbody tr").size()==0){
@@ -525,7 +517,7 @@
             return false;
         }else{
             jQuery("#detailinfo tbody tr").each(function (i,obj) {
-                if(parseInt(jQuery(obj).find("td").eq(3).text())==""){
+                if(parseInt(jQuery(obj).find("td").eq(2).text())==""){
                     layer.msg("来源单号不能为空！");
                     return false;
                 }
@@ -557,10 +549,10 @@
         jQuery("#detailinfo tbody tr").each(function (i,obj) {
             var dateil={};
             dateil["fundbillid"]=jQuery("[name=fundbillid]").val();
-            dateil["curprerecv"]=jQuery(obj).find("td").eq(1).text();
-            dateil["sourcelist"]=jQuery(obj).find("td").eq(2).text();
-            dateil["sourcenumber"]=jQuery(obj).find("td").eq(3).text();
-            dateil["remarks"]=jQuery(obj).find("td").eq(4).text();
+            dateil["curprerecv"]=jQuery(obj).find("td").eq(0).text();
+            dateil["sourcelist"]=jQuery(obj).find("td").eq(1).text();
+            dateil["sourcenumber"]=jQuery(obj).find("td").eq(2).text();
+            dateil["remarks"]=jQuery(obj).find("td").eq(3).text();
             dateils.push(dateil);
         });
         Advancereceipt["details"]=dateils;
@@ -587,7 +579,17 @@
         if(dbl==true){
             update();
         }
-    })
+    });
+
+    function del(){
+        layer.confirm('是否删除该单据？', {
+            btn: ['确定', '取消'],
+            yes: function (index) {
+                removeAdvancereceipt();
+                layer.close(index);
+            }
+        });
+    }
 
 
 </script>

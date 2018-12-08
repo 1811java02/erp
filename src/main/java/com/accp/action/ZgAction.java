@@ -2,11 +2,9 @@ package com.accp.action;
 
 
 import com.accp.biz.ZgBiz;
-import com.accp.pojo.T_ADVANCERECEIPTDETAILS;
-import com.accp.pojo.T_CUSTOMERACCOUNTDETAILS;
-import com.accp.pojo.T_CUSTOMER_INFORMATION;
-import com.accp.pojo.T_DEPARTMENT;
+import com.accp.pojo.*;
 import com.accp.vo.zg.AdvancereceiptVo;
+import com.accp.vo.zg.ReceivablechargeVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +59,13 @@ public class ZgAction {
         return zgBiz.getAdvancereceipt(page);
     }
 
+    @GetMapping("/getReceivablecharge")
+    @ResponseBody
+    public PageInfo<ReceivablechargeVo> getReceivablecharge(@RequestParam(defaultValue = "1") int page) {
+        return zgBiz.getReceivablecharge(page);
+    }
+
+
     /**
      * 删除预收款单的主详表
      * @param
@@ -98,7 +103,7 @@ public class ZgAction {
     public Map<String,String> updatesaveAdvancereceipt(@RequestBody AdvancereceiptVo pm){
         Map<String,String> map=new HashMap<>();
         try {
-            if (zgBiz.deleteAdvancereceipt(pm.getFundbillid())>0){
+            if (zgBiz.deleteAdvancereceipt(pm.getFundbillid())==-1){
                 if (zgBiz.addAdvancereceipt(pm)>0){
                     for (T_ADVANCERECEIPTDETAILS d:pm.getDetails()) {
                         zgBiz.addAdvancereceiptdateils(d);
@@ -116,6 +121,59 @@ public class ZgAction {
     }
 
 
+    /**
+     * 删除应收冲款单的主详表
+     * @param
+     */
+    @PostMapping("/deleteReceivablecharge")
+    @ResponseBody
+    public Map<String,String> deleteReceivablecharge(String  fundbillid){
+        Map<String,String>map=new HashMap<String, String>();
+        zgBiz.deleteReceivablecharge(fundbillid);
+        map.put("code","200");
+        return map;
+    }
+
+    @PostMapping("/addReceivablecharge")
+    @ResponseBody
+    public Map<String,String> addReceivablecharge(@RequestBody ReceivablechargeVo pm){
+        Map<String,String> map=new HashMap<>();
+        try {
+            if (zgBiz.addReceivablecharge(pm)>0){
+                for (T_RECEIVABLECHARGEDETAILS d:pm.getReceivablechargedetails()) {
+                    zgBiz.addReceivablechargedetails(d);
+                }
+                map.put("code","200");
+                map.put("msg","OK");
+            }
+        }catch (Exception e){
+            map.put("code","500");
+            map.put("Msg",e.getMessage());
+        }
+        return map;
+    }
+
+    @PostMapping("/updateReceivablecharge")
+    @ResponseBody
+    public Map<String,String> updateReceivablecharge(@RequestBody ReceivablechargeVo pm){
+        Map<String,String> map=new HashMap<>();
+        try {
+            if (zgBiz.deleteReceivablecharge(pm.getFundbillid())==-1){
+                if (zgBiz.addReceivablecharge(pm)>0){
+                    for (T_RECEIVABLECHARGEDETAILS d:pm.getReceivablechargedetails()) {
+                        zgBiz.addReceivablechargedetails(d);
+                    }
+                    map.put("code","200");
+                    map.put("msg","OK");
+                }
+
+            }
+        }catch (Exception e){
+            map.put("code","500");
+            map.put("Msg",e.getMessage());
+        }
+        return map;
+    }
 
 
 

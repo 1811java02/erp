@@ -64,12 +64,29 @@
     </select>
 
     <delete id="deleteAdvancereceipt">
-          delete   from   t_advancereceiptdetails where  fundbillid=#{0};
-          delete   from    t_advancereceipt where  fundbillid=#{0};
+    BEGIN
+          delete   from   t_advancereceiptdetails where  fundbillid=#{fundbillid,jdbcType=VARCHAR};
+          delete   from    t_advancereceipt where  fundbillid=#{fundbillid,jdbcType=VARCHAR};
+    END;
     </delete>
-   <insert id="saveAdvancereceipt">
+
+    <delete id="deleteReceivablecharge">
+    BEGIN
+          delete   from   t_receivablechargedetails where  fundbillid=#{fundbillid,jdbcType=VARCHAR};
+          delete   from    t_receivablecharge where  fundbillid=#{fundbillid,jdbcType=VARCHAR};
+    END;
+    </delete>
+
+
+   <insert id="saveAdvancereceipt" >
         insert into t_advancereceipt(fundbillid,fundbilldate,customerid,customername,cashstylename,cash,visastylename,visa,otherpaystylename,otherpay,bcurrencyname,exchangerate,discountper,accmonthtomonth,voucherno,departnamefrom,makersign,projectfrom,fermittersign,auditstatus,customcolumnone,customcolumntwo,remarks)
-        values(#{pojo.fundbillid,jdbcType=VARCHAR},#{pojo.fundbilldate,jdbcType=DATE},#{pojo.customerid,jdbcType=VARCHAR},#{pojo.customername,jdbcType=VARCHAR},#{pojo.cashstylename,jdbcType=VARCHAR},#{pojo.cash,jdbcType=FLOAT},#{pojo.visastylename,jdbcType=VARCHAR},#{pojo.visa,jdbcType=FLOAT},#{pojo.otherpaystylename,jdbcType=VARCHAR},#{pojo.otherpay,jdbcType=FLOAT},#{pojo.bcurrencyname,jdbcType=VARCHAR},#{pojo.exchangerate,jdbcType=FLOAT},#{pojo.discountper,jdbcType=FLOAT},#{pojo.accmonthtomonth,jdbcType=DATE},#{pojo.voucherno,jdbcType=VARCHAR},#{pojo.departnamefrom,jdbcType=VARCHAR},#{pojo.makersign,jdbcType=VARCHAR},#{pojo.projectfrom,jdbcType=VARCHAR},#{pojo.fermittersign,jdbcType=VARCHAR},0,#{pojo.customcolumnone,jdbcType=VARCHAR},#{pojo.customcolumntwo,jdbcType=VARCHAR},#{pojo.remarks,jdbcType=VARCHAR});
+        values(#{pojo.fundbillid,jdbcType=VARCHAR},#{pojo.fundbilldate,jdbcType=DATE},#{pojo.customerid,jdbcType=VARCHAR},#{pojo.customername,jdbcType=VARCHAR},#{pojo.cashstylename,jdbcType=VARCHAR},#{pojo.cash,jdbcType=FLOAT},#{pojo.visastylename,jdbcType=VARCHAR},#{pojo.visa,jdbcType=FLOAT},#{pojo.otherpaystylename,jdbcType=VARCHAR},#{pojo.otherpay,jdbcType=FLOAT},#{pojo.bcurrencyname,jdbcType=VARCHAR},#{pojo.exchangerate,jdbcType=FLOAT},#{pojo.discountper,jdbcType=FLOAT},#{pojo.accmonthtomonth,jdbcType=DATE},#{pojo.voucherno,jdbcType=VARCHAR},#{pojo.departnamefrom,jdbcType=VARCHAR},#{pojo.makersign,jdbcType=VARCHAR},#{pojo.projectfrom,jdbcType=VARCHAR},#{pojo.fermittersign,jdbcType=VARCHAR},0,#{pojo.customcolumnone,jdbcType=VARCHAR},#{pojo.customcolumntwo,jdbcType=VARCHAR},#{pojo.remarks,jdbcType=VARCHAR})
+
+    </insert>
+
+    <insert id="saveReceivablecharge" >
+        insert into t_receivablecharge(fundbillid,fundbilldate,customerid,customername,cashstylename,cash,visastylename,visa,otherpaystylename,otherpay,bcurrencyname,exchangerate,discountper,accmonthtomonth,voucherno,departnamefrom,makersign,projectfrom,fermittersign,auditstatus,customcolumnone,customcolumntwo,remarks)
+        values(#{pojo.fundbillid,jdbcType=VARCHAR},#{pojo.fundbilldate,jdbcType=DATE},#{pojo.customerid,jdbcType=VARCHAR},#{pojo.customername,jdbcType=VARCHAR},#{pojo.cashstylename,jdbcType=VARCHAR},#{pojo.cash,jdbcType=FLOAT},#{pojo.visastylename,jdbcType=VARCHAR},#{pojo.visa,jdbcType=FLOAT},#{pojo.otherpaystylename,jdbcType=VARCHAR},#{pojo.otherpay,jdbcType=FLOAT},#{pojo.bcurrencyname,jdbcType=VARCHAR},#{pojo.exchangerate,jdbcType=FLOAT},#{pojo.discountper,jdbcType=FLOAT},#{pojo.accmonthtomonth,jdbcType=DATE},#{pojo.voucherno,jdbcType=VARCHAR},#{pojo.departnamefrom,jdbcType=VARCHAR},#{pojo.makersign,jdbcType=VARCHAR},#{pojo.projectfrom,jdbcType=VARCHAR},#{pojo.fermittersign,jdbcType=VARCHAR},0,#{pojo.customcolumnone,jdbcType=VARCHAR},#{pojo.customcolumntwo,jdbcType=VARCHAR},#{pojo.remarks,jdbcType=VARCHAR})
 
     </insert>
     <insert id="saveAdvancereceiptdateils">
@@ -77,5 +94,43 @@
         values(#{temp.fundbillid,jdbcType=VARCHAR},#{temp.curprerecv,jdbcType=FLOAT},#{temp.sourcelist,jdbcType=VARCHAR},#{temp.sourcenumber,jdbcType=VARCHAR},#{temp.remarks,jdbcType=VARCHAR})
     </insert>
 
+
+    <insert id="saveReceivablechargedateils">
+        insert into t_receivablechargedetails(fundbillid,linenumber,sourcelist,sourcenumber,bcurrencyname,originalamount,currentamount,moneycharged,offsetamount)
+        values(#{temp.fundbillid,jdbcType=VARCHAR},#{temp.linenumber,jdbcType=INTEGER},#{temp.sourcelist,jdbcType=VARCHAR},#{temp.sourcelist,jdbcType=VARCHAR},#{temp.sourcenumber,jdbcType=VARCHAR},#{temp.bcurrencyname,jdbcType=VARCHAR},#{temp.originalamount,jdbcType=FLOAT},#{temp.currentamount,jdbcType=FLOAT},#{temp.moneycharged,jdbcType=FLOAT},#{temp.offsetamount,jdbcType=FLOAT})
+    </insert>
+
+    <resultMap id="ReceivablechargeMap" type="com.accp.vo.zg.ReceivablechargeVo">
+        <id column="fundbillid" property="fundbillid"/>
+        <result column="fundbilldate" property="fundbilldate"/>
+        <result column="customerid" property="customerid"/>
+        <result column="customername" property="customername"/>
+        <result column="cashstylename" property="cashstylename"/>
+        <result column="cash" property="cash"/>
+        <result column="visastylename" property="visastylename"/>
+        <result column="visa" property="visa"/>
+        <result column="otherpaystylename" property="otherpaystylename"/>
+        <result column="otherpay" property="otherpay"/>
+        <result column="bcurrencyname" property="bcurrencyname"/>
+        <result column="exchangerate" property="exchangerate"/>
+        <result column="discountper" property="discountper"/>
+        <result column="accmonthtomonth" property="accmonthtomonth"/>
+        <result column="voucherno" property="voucherno"/>
+        <result column="departnamefrom" property="departnamefrom"/>
+        <result column="makersign" property="makersign"/>
+        <result column="projectfrom" property="projectfrom"/>
+        <result column="fermittersign" property="fermittersign"/>
+        <result column="auditstatus" property="auditstatus"/>
+        <result column="customcolumnone" property="customcolumnone"/>
+        <result column="customcolumntwo" property="customcolumntwo"/>
+        <result column="remarks" property="remarks"/>
+        <collection property="receivablechargedetails" column="fundbillid" select="getReceivablechargeDetail"/>
+    </resultMap>
+    <select id="getReceivablecharge" resultMap="ReceivablechargeMap">
+         select * from t_receivablecharge
+    </select>
+    <select id="getReceivablechargeDetail" resultType="T_RECEIVABLECHARGEDETAILS">
+        select * from t_receivablechargedetails
+    </select>
 
 </mapper>

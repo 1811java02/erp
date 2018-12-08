@@ -4,6 +4,7 @@ package com.accp.biz;
 import com.accp.dao.ZgDao;
 import com.accp.pojo.*;
 import com.accp.vo.zg.AdvancereceiptVo;
+import com.accp.vo.zg.ReceivablechargeVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class ZgBiz {
     public PageInfo<AdvancereceiptVo> getAdvancereceipt(int page) {
             PageHelper.startPage(page, 1);
             return new PageInfo<AdvancereceiptVo>(zgDao.getAdvancereceipt());
+    }
+
+    public PageInfo<ReceivablechargeVo> getReceivablecharge(int page) {
+        PageHelper.startPage(page, 1);
+        return new PageInfo<ReceivablechargeVo>(zgDao.getReceivablecharge());
     }
 
     public int deleteAdvancereceipt(String fundbillid){
@@ -67,6 +73,19 @@ public class ZgBiz {
 
     public int addAdvancereceiptdateils(T_ADVANCERECEIPTDETAILS AdvancereceiptDetails){
         return zgDao.saveAdvancereceiptdateils(AdvancereceiptDetails);
+
+    }
+
+    public int deleteReceivablecharge( String fundbillid){
+            return  zgDao.deleteReceivablecharge(fundbillid);
+    }
+
+    public  int addReceivablecharge(ReceivablechargeVo Receivablecharge ){
+            return  zgDao.saveReceivablecharge(Receivablecharge);
+    }
+
+    public  int addReceivablechargedetails(T_RECEIVABLECHARGEDETAILS Receivablechargedateils){
+            return  zgDao.saveReceivablechargedateils(Receivablechargedateils);
 
     }
 
