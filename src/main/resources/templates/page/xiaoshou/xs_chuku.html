@@ -24,7 +24,7 @@
 	</style>
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
-<form class="layui-form pic-ok">
+<form class="layui-form">
 	<div class="layui-form-item">
 		<div class="layui-input-block" style="margin-left: 0">
 			<ul class="layui-nav" style="background-color: transparent;">
@@ -265,16 +265,17 @@
 
 	function toPage(page) {
 		emptyForm();
+		initBtn();
 		var index = layer.load(1);
 		$.getJSON('/lhy/query/dsdssalemain', {page: page}, function (data) {
 			layer.close(index);
 			if (data.hasPreviousPage) {
-				$("#menu-prev").attr("onclick", "toPage(" + data.prePage + ")")
+				$("#menu-prev").attr("onclick", "toPage(" + data.prePage + ")");
 			} else {
 				$("#menu-prev").removeAttr("onclick");
 			}
 			if (data.hasNextPage) {
-				$("#menu-next").attr("onclick", "toPage(" + data.nextPage + ")")
+				$("#menu-next").attr("onclick", "toPage(" + data.nextPage + ")");
 			} else {
 				$("#menu-next").removeAttr("onclick");
 			}
@@ -300,36 +301,50 @@
 			$('#salesid').attr('data-value', obj['salesid']);
 			$('#departid').attr('data-value', obj['departid']);
 			$(obj.dsdssalesub).each(function (i, obj) {
-				data['prodid'] = $(obj).find('.list-prodid').text();
-				data['prodname'] = $(obj).find('.list-prodname').text();
-				data['prodsize'] = $(obj).find('.list-prodsize').text();
-				data['sunit'] = $(obj).find('.list-sunit').text();
-				data['squantity'] = $(obj).find('.list-squantity').text();
-				data['oldprice'] = $(obj).find('.list-oldprice').text();
-				data['discount'] = $(obj).find('.list-discount').text();
-				data['sprice'] = $(obj).find('.list-sprice').text();
-				data['amount'] = $(obj).find('.list-amount').text();
-				data['taxrate'] = $(obj).find('.list-taxrate').text();
-				data['taxamt'] = $(obj).find('.list-taxamt').text();
-				data['amountatax'] = $(obj).find('.list-amountatax').text();
-				data['isgift'] = $(obj).find('.list-isgift').text();
-				data['itemremark'] = $(obj).find('.list-itemremark').text();
-				data['trantypename'] = $(obj).find('.list-trantype').text();
-				data['formno'] = $(obj).find('.list-formno').text();
-				data['custbillno'] = $(obj).find('.list-custbillno').text();
-				data['trantype'] = $(obj).find('.list-trantype').attr("data-value");
+				var tr = $("<tr></tr>");
+				var td1 = $("<td></td>").addClass('.list-prodid').text(obj['prodid']);
+				var td2 = $("<td></td>").addClass('.list-prodname').text(obj['prodname']);
+				var td3 = $("<td></td>").addClass('.list-prodsize').text(obj['prodsize']);
+				var td4 = $("<td></td>").addClass('.list-sunit').text(obj['sunit']);
+				var td5 = $("<td></td>").addClass('.list-squantity').text(obj['squantity']);
+				var td6 = $("<td></td>").addClass('.list-oldprice').text(obj['oldprice']);
+				var td7 = $("<td></td>").addClass('.list-discount').text(obj['discount']);
+				var td8 = $("<td></td>").addClass('.list-sprice').text(obj['sprice']);
+				var td9 = $("<td></td>").addClass('.list-amount').text(obj['amount']);
+				var td10 = $("<td></td>").addClass('.list-taxrate').text(obj['taxrate']);
+				var td11 = $("<td></td>").addClass('.list-taxamt').text(obj['taxamt']);
+				var td12 = $("<td></td>").addClass('.list-amountatax').text(obj['amountatax']);
+				var td13 = $("<td></td>").addClass('.list-isgift').text(obj['isgift']);
+				var td14 = $("<td></td>").addClass('.list-itemremark').text(obj['itemremark']);
+				var td15 = $("<td></td>").addClass('.list-trantype').text(obj['trantypename']);
+				var td16 = $("<td></td>").addClass('.list-formno').text(obj['formno']);
+				var td17 = $("<td></td>").addClass('.list-custbillno').text(obj['custbillno']);
+				var td18 = $("<td></td>").addClass('.list-trantype').attr("data-value", obj['trantype']);
+				tr.append(td1, td2, td3, td4, td5, td6, td7, td8, td9, td10, td11, td12, td13, td14, td15, td16, td17, td18);
 				$("#list").append(tr);
 			})
 		})
 	}
 
+	function initBtn() {
+		$("#menu-prev").attr("onclick", $("#menu-prev").attr("data-value")).removeAttr("data-value");
+		$("#menu-next").attr("onclick", $("#menu-prev").attr("data-value")).removeAttr("data-value");
+		$("#menu-add").attr("onclick", "openForm()");
+	}
+
+	function useBtn() {
+		$("#menu-prev").attr("data-value", $("#menu-prev").attr("onclick")).removeAttr("onclick");
+		$("#menu-next").attr("data-value", $("#menu-prev").attr("onclick")).removeAttr("onclick");
+		$("#menu-add").attr("onclick", "save()");
+	}
+
 	function openForm() {
 		emptyForm();
+		useBtn();
 		$("#custid,#saleclassid,#wareid,#date,#salesid,#departid").removeAttr("disabled").attr("readonly", true);
 		$("#udef1,#udef2,#remark,#priceoftax,#addrid,#addrow").removeAttr("disabled");
 		layui.form().render();
 		getDate();
-		$("#menu-add").attr('onclick', 'save()');
 	}
 
 	function closeForm() {
@@ -470,8 +485,7 @@
 			data['custbillno'] = $(obj).find('.list-custbillno').text();
 			data['trantype'] = $(obj).find('.list-trantype').attr("data-value");
 			main['dsdssalesub'].push(data);
-		})
-		console.info(main)
+		});
 		$.post("/lhy/save/dsdssalemain", {str: JSON.stringify(main)}, function (data) {
 			layer.alert(data ? '保存成功' : '保存失败');
 			toPage();
