@@ -3,18 +3,20 @@ package com.accp.action;
 import com.accp.biz.ChBiz;
 import com.accp.pojo.*;
 import com.accp.vo.ch.PurcahseVo;
-import com.github.pagehelper.PageHelper;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
-import oracle.jdbc.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
+@SuppressWarnings("all")
 @RequestMapping("/ch")
 public class ChAction {
     @Autowired
@@ -136,6 +138,26 @@ public class ChAction {
                     map.put("msg","OK");
                 }
             }
+        }catch (Exception e){
+            map.put("code","500");
+            map.put("Msg",e.getMessage());
+        }
+        return map;
+    }
+
+    @PostMapping("/toExamine")
+    @ResponseBody
+    public Map<String,String>  toExamine(String billno,String waretransaction){
+        Map<String,String> map=new HashMap<>();
+        List<T_DSDSWARETRANSACTION> wlist = JSONObject.parseArray(waretransaction,T_DSDSWARETRANSACTION.class);
+        try {
+            chbiz.updateState(billno);
+            for (T_DSDSWARETRANSACTION d:wlist) {
+                chbiz.insertRecord(d);
+                chbiz.updateStock(d);
+            }
+            map.put("code","200");
+            map.put("msg","OK");
         }catch (Exception e){
             map.put("code","500");
             map.put("Msg",e.getMessage());

@@ -13,7 +13,7 @@
 
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
 <div id="Purchase">
-    <form class="layui-form layui-form-pane">
+    <form class="layui-form layui-form-pane" id="form1">
         <div class="layui-form-item">
             <div class="layui-input-block" style="margin-left: 0">
                 <ul class="layui-nav" style="background-color: transparent;">
@@ -351,6 +351,13 @@
             console.info(data);
             pageinfo=data;
             jQuery.each(data.list,function (i,obj) {
+                if(obj.eaminestate==1){
+                    adopt=true;
+                    jQuery("#form1").addClass("pic-ok");
+                }else{
+                    adopt=false;
+                    jQuery("#form1").removeClass("pic-ok");
+                }
                 jQuery("#billno").val(obj.billno);
                 jQuery("[name=billdate]").val(obj.billdate);
                 jQuery("[name=cust]").attr("id",obj.custid);
@@ -423,23 +430,25 @@
     })
 
     function deletePurchase() {
-        jQuery.post("/ch/deletePurchase",{"billno":jQuery("#billno").val()},function (data) {
-            console.info(data);
-            if(data.code=="200"){
-                layer.msg("删除成功");
-                showPurchase(p);
-            }
-        },"json")
+            jQuery.post("/ch/deletePurchase",{"billno":jQuery("#billno").val()},function (data) {
+                console.info(data);
+                if(data.code=="200"){
+                    layer.msg("删除成功");
+                    showPurchase(p);
+                }
+            },"json")
     }
 
      jQuery("#menu-delete").click(function () {
-         layer.confirm('是否删除该单据？', {
-             btn: ['确定', '取消'],
-             yes: function (index) {
-                 deletePurchase();
-                 layer.close(index);
-             }
-         })
+         if(addorupdate!="add") {
+             layer.confirm('是否删除该单据？', {
+                 btn: ['确定', '取消'],
+                 yes: function (index) {
+                     deletePurchase();
+                     layer.close(index);
+                 }
+             })
+         }
      })
 
     function getBillNo() {
@@ -583,11 +592,13 @@
     })
 
     jQuery("#menu-update").click(function () {
-        dbl = true;
-        addorupdate="update";
-        jQuery("[name=add_overRead]").removeAttr("readonly");
-        jQuery("[name=shui]").removeAttr("disabled");
-        form.render('select');
+        if(adopt==false) {
+            dbl = true;
+            addorupdate = "update";
+            jQuery("[name=add_overRead]").removeAttr("readonly");
+            jQuery("[name=shui]").removeAttr("disabled");
+            form.render('select');
+        }
     })
 
     jQuery(document.body).on("dblclick",".chooseInfo",function () {
@@ -771,7 +782,7 @@
     }
 
     jQuery("#menu-save").click(function () {
-        if(dbl==true){
+        if(dbl==true&&adopt==false){
             save();
         }
     })
@@ -813,6 +824,7 @@
         purchase["udef1"]=jQuery("#udef1").val();
         purchase["udef2"]=jQuery("#udef2").val();
         purchase["remark"]=jQuery("#remark").val();
+        purchase["eaminestate"]=0;
         var dateils=new Array();
         jQuery("#detailinfo tbody tr").each(function (i,obj) {
             var dateil={};
@@ -843,28 +855,69 @@
             dateils.push(dateil);
         })
         purchase["detaillist"]=dateils;
-        $.ajax({
-            url:"/ch/savePurchase",
-            type:"post",
-            contentType:"application/json",
-            data:JSON.stringify(purchase),
-            dataType:"json",
-            timeout:5000,
-            success:function(data){
-                console.info(data)
-                if(data.code=="200"){
-                    layer.msg("保存成功");
-                }else{
-                    layer.msg("保存失败");
+        if(addorupdate=="add"){
+            $.ajax({
+                url:"/ch/savePurchase",
+                type:"post",
+                contentType:"application/json",
+                data:JSON.stringify(purchase),
+                dataType:"json",
+                timeout:5000,
+                success:function(data){
+                    console.info(data)
+                    if(data.code=="200"){
+                        layer.msg("保存成功");
+                        showPurchase(p);
+                    }else{
+                        layer.msg("保存失败");
+                    }
                 }
-            }
-        })
+            })
+        }else if(addorupdate=="update"){
+            $.ajax({
+                url:"/ch/updatePurchase",
+                type:"post",
+                contentType:"application/json",
+                data:JSON.stringify(purchase),
+                dataType:"json",
+                timeout:5000,
+                success:function(data){
+                    console.info(data)
+                    if(data.code=="200"){
+                        layer.msg("修改成功");
+                        showPurchase(p);
+                    }else{
+                        layer.msg("修改失败");
+                    }
+                }
+            })
+        }
     }
 
+
     var saveok=true;
+    var adopt=false;
     jQuery("#menu-adopt").click(function () {
+        var waretransactions=new Array();
+        jQuery("#detailinfo tbody tr").each(function (i,obj) {
+            var waretransaction={};
+            waretransaction["trantype"]="采购入库单";
+            waretransaction["formno"]=jQuery("#billno").val();
+            waretransaction["warehouseid"]=jQuery("[name=ware]").attr("id");
+            waretransaction["prodid"]=jQuery(obj).find("td").eq(1).text();
+            waretransaction["quantity"]=jQuery(obj).find("td").eq(5).text();
+            waretransaction["price"]=jQuery(obj).find("td").eq(8).text();
+            waretransaction["amount"]=jQuery(obj).find("td").eq(9).text();
+            waretransactions.push(waretransaction);
+        })
         if (saveok==true) {
-            jQuery("form").addClass("pic-ok");
+            adopt=true;
+            jQuery.post("/ch/toExamine",{"billno":jQuery("#billno").val(),"waretransaction":JSON.stringify(waretransactions)},function (data) {
+                console.info(data)
+                if(data.code=="200"){
+                    jQuery("form").addClass("pic-ok");
+                }
+            },"json")
         }
     })
 
