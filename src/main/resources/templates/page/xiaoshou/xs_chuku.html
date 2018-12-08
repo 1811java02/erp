@@ -299,9 +299,27 @@
 			$('#wareid').attr('data-value', obj['wareid']);
 			$('#salesid').attr('data-value', obj['salesid']);
 			$('#departid').attr('data-value', obj['departid']);
-			/*$(obj.dsdssalesub).each(function (i, obj) {
+			$(obj.dsdssalesub).each(function (i, obj) {
+				data['prodid'] = $(obj).find('.list-prodid').text();
+				data['prodname'] = $(obj).find('.list-prodname').text();
+				data['prodsize'] = $(obj).find('.list-prodsize').text();
+				data['sunit'] = $(obj).find('.list-sunit').text();
+				data['squantity'] = $(obj).find('.list-squantity').text();
+				data['oldprice'] = $(obj).find('.list-oldprice').text();
+				data['discount'] = $(obj).find('.list-discount').text();
+				data['sprice'] = $(obj).find('.list-sprice').text();
+				data['amount'] = $(obj).find('.list-amount').text();
+				data['taxrate'] = $(obj).find('.list-taxrate').text();
+				data['taxamt'] = $(obj).find('.list-taxamt').text();
+				data['amountatax'] = $(obj).find('.list-amountatax').text();
+				data['isgift'] = $(obj).find('.list-isgift').text();
+				data['itemremark'] = $(obj).find('.list-itemremark').text();
+				data['trantypename'] = $(obj).find('.list-trantype').text();
+				data['formno'] = $(obj).find('.list-formno').text();
+				data['custbillno'] = $(obj).find('.list-custbillno').text();
+				data['trantype'] = $(obj).find('.list-trantype').attr("data-value");
 				$("#list").append(tr);
-			})*/
+			})
 		})
 	}
 
@@ -500,7 +518,6 @@
 		});
 	})
 	$("#addrow").click(function () {
-		layer.alert(1)
 		var tr = $("#list-default").clone().show();
 		tr.removeAttr("id");
 		tr.find(".list-line").text($("#list tr").length);
