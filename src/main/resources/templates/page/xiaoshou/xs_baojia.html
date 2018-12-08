@@ -1,256 +1,704 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>销售报价单</title>
-	<link rel="stylesheet" href="../../layui/css/layui.css">
-	<style>
-	</style>
-	<link rel="stylesheet" href="../../css/common.css">
+    <meta charset="UTF-8">
+    <title>销售报价单</title>
+    <link rel="stylesheet" href="../../layui/css/layui.css">
+    <style>
+    </style>
+    <link rel="stylesheet" href="../../css/common.css">
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
-<form class="layui-form">
-	<div class="layui-form-item">
-		<div class="layui-input-block" style="margin-left: 0">
-			<ul class="layui-nav" style="background-color: transparent;">
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
-						<i class="layui-icon">&#xe603;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
-						<i class="layui-icon">&#xe602;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="新增" id="menu-add">
-						<i class="layui-icon">&#xe654;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="修改" id="menu-update" disabled>
-						<i class="layui-icon">&#xe642;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="删除" id="menu-delete">
-						<i class="layui-icon">&#xe640;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="审核" id="menu-adopt" disabled="">
-						<i class="layui-icon">&#xe605;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="反审核" id="menu-refuse">
-						<i class="layui-icon">&#x1006;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="iconfont menu-list" title="刷新" id="menu-refresh">
-						<i class="layui-icon">&#x1002;</i>
-					</a>
-				</li>
-				<li class="layui-nav-item" style="margin-left: 20px;">
-					<a href="javascript:;">查询</a>
-					<dl class="layui-nav-child">
-						<dd><a href="">历史交易查询</a></dd>
-						<dd><a href="">利润预估查询</a></dd>
-					</dl>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<div class="layui-input-inline" style="width: 126px;zoom: 0.8;">
-			<input type="checkbox" title="正式客户" checked>
-		</div>
-		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" autocomplete="off"
-			       class="layui-input">
-		</div>
-		<label class="layui-form-label">单据日期</label>
-		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" autocomplete="off"
-			       class="layui-input">
-		</div>
-	</div>
+<form class="layui-form pic-ok">
+    <div class="layui-form-item">
+        <div class="layui-input-block" style="margin-left: 0">
+            <ul class="layui-nav" style="background-color: transparent;">
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="上一条" id="menu-prev">
+                        <i class="layui-icon">&#xe603;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="下一条" id="menu-next">
+                        <i class="layui-icon">&#xe602;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="新增" id="menu-add">
+                        <i class="layui-icon">&#xe654;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="修改" id="menu-update" disabled>
+                        <i class="layui-icon">&#xe642;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="删除" id="menu-delete">
+                        <i class="layui-icon">&#xe640;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:void(0);" class="iconfont menu-list" title="保存" id="menu-save">
+                        <i class="layui-icon">&#xe61d;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="审核" id="menu-adopt" disabled="">
+                        <i class="layui-icon">&#xe605;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="反审核" id="menu-refuse">
+                        <i class="layui-icon">&#x1006;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="iconfont menu-list" title="刷新" id="menu-refresh">
+                        <i class="layui-icon">&#x1002;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item" style="margin-left: 20px;">
+                    <a href="javascript:;">查询</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">历史交易查询</a></dd>
+                        <dd><a href="">利润预估查询</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-inline" style="width: 126px;zoom: 0.8;">
+            <input type="checkbox" title="正式客户" checked>
+        </div>
+        <div class="layui-input-inline">
+            <input name="khNameDBL" id="khName" type="text" name="title" required lay-verify="required"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+        <label class="layui-form-label">单据日期</label>
+        <div class="layui-input-inline">
+            <input id="billdate" type="date" name="title" required lay-verify="required" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
 
-	<div class="layui-form-item">
-		<label class="layui-form-label">送货地址</label>
-		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder=""
-			       autocomplete="off"
-			       class="layui-input" style="width: 50%;float: left">
-			<input type="text" name="title" required lay-verify="required" placeholder=""
-			       autocomplete="off"
-			       class="layui-input" style="width: 50%;float: left;">
-		</div>
-		<label class="layui-form-label">单据编号</label>
-		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" autocomplete="off"
-			       class="layui-input">
-		</div>
-	</div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">送货地址</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" required lay-verify="required" placeholder=""
+                   autocomplete="off"
+                   class="layui-input" style="width: 50%;float: left">
+            <input id="custaddress" type="text" name="title" required lay-verify="required" placeholder=""
+                   autocomplete="off"
+                   class="layui-input" style="width: 50%;float: left;">
+        </div>
+        <label class="layui-form-label">单据编号</label>
+        <div class="layui-input-inline">
+            <input id="billno" type="text" name="title" required lay-verify="required" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
 
-	<div class="layui-form-item">
-		<label class="layui-form-label">有效日期</label>
-		<div class="layui-input-inline">
-			<input type="date" name="title" required lay-verify="required" autocomplete="off"
-			       class="layui-input">
-		</div>
-		<label class="layui-form-label">币别</label>
-		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" autocomplete="off"
-			       class="layui-input">
-		</div>
-	</div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">有效日期</label>
+        <div class="layui-input-inline">
+            <input id="validdate" type="date" name="title" required lay-verify="required" autocomplete="off"
+                   class="layui-input">
+        </div>
+        <label class="layui-form-label">币别</label>
+        <div class="layui-input-inline">
+            <input id="curcurrencyname" type="text" name="title" required lay-verify="required" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
 
-	<div class="layui-form-item">
-		<label class="layui-form-label" style="font-size: 13px">单价是否含税</label>
-		<div class="layui-input-inline">
-			<select>
-				<option>含税</option>
-				<option>未含税</option>
-			</select>
-		</div>
-		<label class="layui-form-label">汇率</label>
-		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" autocomplete="off"
-			       class="layui-input">
-		</div>
-	</div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="font-size: 13px">单价是否含税</label>
+        <div class="layui-input-inline">
+            <select name="shui" id="priceoftax">
+                <option id="opt0" value="0">未含税</option>
+                <option id="opt1" value="1">含税</option>
+            </select>
+        </div>
+        <label class="layui-form-label">汇率</label>
+        <div class="layui-input-inline">
+            <input id="exchrate" type="text" name="title" required lay-verify="required" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
 
-	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-		<ul class="layui-tab-title">
-			<li class="layui-this">内容</li>
-			<li>备注</li>
-		</ul>
-		<div class="layui-tab-content" style="overflow: scroll">
-			<div class="layui-tab-item layui-show">内容1
-				<table class="layui-table" style="width: 3000px;">
-					<colgroup>
-						<col width="150">
-						<col width="200">
-						<col>
-					</colgroup>
-					<thead>
-					<tr>
-						<th>（栏号）</th>
-						<th>物料编号</th>
-						<th>（物料名称）</th>
-						<th>（规格型号）</th>
-						<th>（单位名称）</th>
-						<th>数量</th>
-						<th>折扣前单价</th>
-						<th>折数（%）</th>
-						<th>单价</th>
-						<th>金额</th>
-						<th>税率（%）</th>
-						<th>（税额）</th>
-						<th>（含税金额）</th>
-						<th>赠品</th>
-						<th>分录备注</th>
-					</tr>
-					</thead>
-					<tbody>
-					</tbody>
-					<tfoot>
-					<tr>
-						<td>合计：</td>
-						<td colspan="4"></td>
-						<td>1</td>
-						<td colspan="3"></td>
-						<td>1</td>
-						<td></td>
-						<td>1</td>
-						<td>1</td>
-						<td colspan="2"></td>
-					</tr>
-					</tfoot>
-				</table>
-			</div>
+    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">内容</li>
+            <li>备注</li>
+        </ul>
+        <div class="layui-tab-content" style="overflow: scroll">
+            <div class="layui-tab-item layui-show">内容1
+                <table class="layui-table" style="width: 3000px;">
+                    <colgroup>
+                        <col width="150">
+                        <col width="200">
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>（栏号）</th>
+                        <th name="prod">物料编号</th>
+                        <th>（物料名称）</th>
+                        <th>（规格型号）</th>
+                        <th>（单位名称）</th>
+                        <th>数量</th>
+                        <th>折扣前单价</th>
+                        <th>折数（%）</th>
+                        <th>单价</th>
+                        <th>金额</th>
+                        <th>税率（%）</th>
+                        <th>（税额）</th>
+                        <th>（含税金额）</th>
+                        <th>赠品</th>
+                        <th>分录备注</th>
+                    </tr>
+                    </thead>
+                    <tbody id="list">
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td>合计：</td>
+                        <td colspan="4"></td>
+                        <td id="snum">1</td>
+                        <td colspan="3"></td>
+                        <td id="sprice">1</td>
+                        <td></td>
+                        <td id="staxamt">1</td>
+                        <td id="samount">1</td>
+                        <td colspan="2"></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
 
-			<div class="layui-tab-item">选项卡内容2222
-				<form class="layui-form">
-					<div class="layui-form-item">
-						<label class="layui-form-label">表头条文</label>
-						<div class="layui-input-inline">
-							<input type="text" name="title" required lay-verify="required"
-							       autocomplete="off"
-							       class="layui-input">
-						</div>
-						<label class="layui-form-label">自定义栏一</label>
-						<div class="layui-input-inline">
-							<select>
-								<option></option>
-							</select>
-						</div>
-					</div>
-				</form>
+            <div class="layui-tab-item">选项卡内容2222
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">表头条文</label>
+                        <div class="layui-input-inline">
+                            <input id="spheader" type="text" name="title" required lay-verify="required"
+                                   autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                        <label class="layui-form-label">自定义栏一</label>
+                        <div class="layui-input-inline">
+                            <select>
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
 
-				<form class="layui-form">
-					<div class="layui-form-item">
-						<label class="layui-form-label">表尾条文</label>
-						<div class="layui-input-inline">
-							<input type="text" name="title" required lay-verify="required"
-							       autocomplete="off"
-							       class="layui-input">
-						</div>
-						<label class="layui-form-label">自定义栏二</label>
-						<div class="layui-input-inline">
-							<select>
-								<option></option>
-							</select>
-						</div>
-					</div>
-				</form>
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">表尾条文</label>
+                        <div class="layui-input-inline">
+                            <input id="spfooter" type="text" name="title" required lay-verify="required"
+                                   autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                        <label class="layui-form-label">自定义栏二</label>
+                        <div class="layui-input-inline">
+                            <select>
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
 
-				<form class="layui-form">
-					<div class="layui-form-item">
-						<label class="layui-form-label">备注</label>
-						<div class="layui-input-inline">
-							<textarea style="width: 500px;height: 180px;"></textarea>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">备注</label>
+                        <div class="layui-input-inline">
+                            <textarea id="remark" style="width: 500px;height: 180px;"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-	<div class="layui-form-item">
-		<label class="layui-form-label">业务人员</label>
-		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder=""
-			       autocomplete="off"
-			       class="layui-input">
+    <div class="layui-form-item">
+        <label class="layui-form-label">业务人员</label>
+        <div class="layui-input-inline">
+            <input name="person" id="salesname" type="text" name="title" required lay-verify="required" placeholder=""
+                   autocomplete="off"
+                   class="layui-input">
 
-		</div>
-		<label class="layui-form-label">制单人员</label>
-		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" autocomplete="off"
-			       class="layui-input">
-		</div>
-	</div>
+        </div>
+        <label class="layui-form-label">制单人员</label>
+        <div class="layui-input-inline">
+            <input id="maker" type="text" name="title" required lay-verify="required" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
 
-	<div class="layui-form-item">
-		<label class="layui-form-label">所属部门</label>
-		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" placeholder=""
-			       autocomplete="off"
-			       class="layui-input">
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属部门</label>
+        <div class="layui-input-inline">
+            <input id="departname" type="text" name="title" required lay-verify="required" placeholder=""
+                   autocomplete="off"
+                   class="layui-input">
 
-		</div>
-		<label class="layui-form-label">复核人员</label>
-		<div class="layui-input-inline">
-			<input type="text" name="title" required lay-verify="required" autocomplete="off"
-			       class="layui-input">
-		</div>
-	</div>
+        </div>
+        <label class="layui-form-label">复核人员</label>
+        <div class="layui-input-inline">
+            <input id="permitter" type="text" name="title" required lay-verify="required" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
 </form>
-
+<div id="wrapper" style="display: none;">
+    <table class="layui-table" id="content" name="content" style="overflow-y: scroll;">
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>名称</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 </body>
 <script src="../../layui/lay/dest/layui.all.js"></script>
+<script src="../../js/jquery-1.12.4.js"></script>
+<script>
+
+    toPage();
+    var dbl = false;
+
+    function toPage(page) {
+        /*
+         去除保存按钮的单击事件,防止新增状态下点了下一页,保存按钮还有功能,导致重复录入数据
+        */
+        $("#menu-save").removeAttr("onclick");
+        var index = layer.load(1);
+        $.getJSON('/wxy/query', {page: page}, function (data) {
+            var dbl = false;
+            layer.close(index);
+            if (data.hasPreviousPage) {
+                $("#menu-prev").attr("onclick", "toPage(" + data.prePage + ")")
+            } else {
+                $("#menu-prev").removeAttr("onclick");
+            }
+            if (data.hasNextPage) {
+                $("#menu-next").attr("onclick", "toPage(" + data.nextPage + ")")
+            } else {
+                $("#menu-next").removeAttr("onclick");
+            }
+            if (data.list.length < 1)
+                return;
+            $("#khName").val(data.list[0].khName);
+            $("#billdate").val(data.list[0].billdate.substring(0, 10));
+            $("#custaddress").val(data.list[0].custaddress);
+            $("#billno").val(data.list[0].billno);
+            $("#validdate").val(data.list[0].validdate.substring(0, 10));
+            $("#curcurrencyname").val(data.list[0].curcurrencyname);
+            $("#priceoftax").val(data.list[0].priceoftax);
+            console.info(data.list[0].priceoftax);
+            $("#priceoftax").val(data.list[0].priceoftax);
+            console.info($("#priceoftax").val());
+            layui.form().render();//更新渲染数据
+            $("#exchrate").val(data.list[0].exchrate);
+            $("#salesname").val(data.list[0].salesname);
+            $("#maker").val(data.list[0].maker);
+            $("#departname").val(data.list[0].departname);
+            $("#permitter").val(data.list[0].permitter);
+            $("#spheader").val(data.list[0].spheader);
+            $("#spfooter").val(data.list[0].spfooter);
+            $("#remark").val(data.list[0].remark);
+            $("#list").empty();
+            var snum = 0;
+            var sprice = 0;
+            var staxamt = 0;
+
+            $(data.list[0].list).each(function (i, obj) {
+                console.info(obj);
+                snum += obj.squantity;
+                sprice += obj.amount;
+                staxamt += ((obj.amount) * (obj.taxrate) / 100);
+
+                var tr = $("<tr></tr>");
+                var td1 = $("<td></td>").text(1 + i);
+                var td2 = $("<td></td>").text(obj.prodid);
+                var td3 = $("<td></td>").text(obj.prodname);
+                var td4 = $("<td></td>").text(obj.prodsize);
+                var td5 = $("<td></td>").text(obj.sunit);
+                var td6 = $("<td></td>").text(obj.squantity);
+                var td7 = $("<td></td>").text(obj.oldprice);
+                var td8 = $("<td></td>").text(obj.discount);
+                var td9 = $("<td></td>").text(obj.sprice);
+                var td10 = $("<td></td>").text((obj.sprice) * (obj.squantity));//金额 =未税单价*数量 (obj.sprice)*(obj.squantity)
+                var td11 = $("<td></td>").text(obj.taxrate);
+                var td12 = $("<td></td>").text((obj.amount) * (obj.taxrate) / 100);//税额=本金*税率 (obj.amount)*(obj.taxrate)/100
+                var td13 = $("<td></td>").text(((obj.sce) * (obj.squantity) + (obj.amount) * (obj.taxrate) / 100));  //含税金额 = 金额 +税额
+                var td14 = $("<td></td>").text(obj.isgift == "1" ? "是" : "否");
+                var td15 = $("<td></td>").text(obj.itemremark);
+                tr.append(td1, td2, td3, td4, td5, td6, td7, td8, td9, td10, td11, td12, td13, td14, td15);
+                $("#list").append(tr);
+
+            });
+            //alert(snum);
+            $("#snum").text(snum);
+            $("#sprice").text(sprice);
+            $("#staxamt").text(staxamt);
+            $("#samount").text(sprice + staxamt);
+            layui.form().render();//更新渲染数据
+        })
+
+
+    }
+
+    function getLocalDate() {
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = (date.getMonth() + 1);
+        if (month < 10)
+            month = "0" + month;
+        var day = date.getDate();
+        if (day < 10)
+            day = "0" + day;
+        date = year + "-" + month + "-" + day;
+        $("#billdate").val(date);
+        $("#validdate").val(date);
+    }
+
+    //点击新增生成新的表单
+    $("#menu-add").click(function () {
+        dbl = true;
+        $("#menu-save").attr("onclick", "save()"); // 绑定点击事件 给MENU-SAVE 用的时候1个参数，设置2个
+        $("input[type=text]").val("");
+        getLocalDate();
+        getBillNo();
+        $("#curcurrencyname").val("RMB");
+        $("#exchrate").val("1");
+        $("#snum").val("");
+        $("#sprice").val("");
+        $("#staxamt").val("");
+        $("#samount").val("");
+        $("#list").empty();
+    });
+
+
+    function getBillNo() {
+        $.getJSON("/wxy/getBillNo", {"date": $("#billdate").val()}, function (data) {
+            console.info(data);
+            $("#billno").val(data);
+        })
+    }
+
+    $("[name=khNameDBL]").dblclick(function () {
+        if (dbl == true) {
+            showWrapper("kh");
+        }
+    });
+
+    $("[name=person]").dblclick(function () {
+        if (dbl == true) {
+            showWrapper("person");
+        }
+    });
+
+    $("[name=prod]").dblclick(function () {
+        if (dbl == true) {
+            showWrapper("prod");
+        }
+    });
+
+    var winWrapper;
+
+    function showWrapper(param) {
+        dblparam = param;
+        winWrapper = layer.open({
+            type: 1,
+            title: "请选择信息",
+            content: $('#wrapper'),
+            area: ['500px', '300px'],
+            success: function () {
+                if (param == "kh") {
+                    queryKh();
+                } else if (param == "prod") {
+                    queryProdct();
+                } else if (param == "person") {
+                    queryPerson();
+                }
+            },
+            cancel: function (index) {
+                layer.close(index);
+            },
+            end: function () {
+                $("#wrapper").hide();
+            }
+
+        });
+    }
+
+    function queryProduct() {
+        $.getJSON("/wxy/queryProduct", {}, function (data) {
+            $("#content tbody").empty();
+            $.each(data, function (i, obj) {
+                var $tr = $("<tr class='chooseInfo'></tr>");
+                $tr.append("<td>" + obj.customerid + "</td>");
+                $tr.append("<td>" + obj.customerfllnae + "</td>");
+                $("#content tbody").append($tr);
+            })
+        })
+    }
+
+    function queryKh() {
+        $.getJSON("/wxy/queryKh", {}, function (data) {
+            $("#content tbody").empty();
+            $.each(data, function (i, obj) {
+                var $tr = $("<tr class='chooseInfo'></tr>");
+                $tr.append("<td>" + obj.customerid + "</td>");
+                $tr.append("<td>" + obj.customerfllnae + "</td>");
+                $("#content tbody").append($tr);
+            })
+        })
+    }
+
+    var depid = null;
+
+    function queryPerson() {
+        $.getJSON("/wxy/queryPerson", {}, function (data) {
+            $("#content tbody").empty();
+            $.each(data, function (i, obj) {
+                var $tr = $("<tr class='chooseInfo'></tr>");
+                $tr.append("<td>" + obj.personid + "</td>");
+                $tr.append("<td>" + obj.personname + "</td>");
+                depid = obj.departid;
+                $("#content tbody").append($tr);
+            })
+        })
+    }
+
+    var prodata = new Object();
+
+    function queryProdct() {
+        $.getJSON("/wxy/queryProduct", {}, function (data) {
+            $("#content tbody").empty();
+            $.each(data, function (i, obj) {
+                var $tr = $("<tr class='chooseInfo'></tr>");
+                $tr.append("<td>" + obj.prodid + "</td>");
+                $tr.append("<td>" + obj.prodname + "</td>");
+                $("#content tbody").append($tr);
+            })
+        })
+    }
+
+    // var proddom=null;
+    // jQuery(document.body).on("dblclick",".prodid",function () {
+    //     proddom=jQuery(this);
+    //     showWrapper("prod");
+    // })
+
+
+    var lineid = 0;
+
+    $(document.body).on("dblclick", ".chooseInfo", function () {
+        var id = $(this).find("td").eq(0).text();
+        var name = $(this).find("td").eq(1).text();
+        if (dblparam == "kh") {
+            /*
+                        .attr("data-id", id);  设置隐藏属性data-xx 2个参数K,Y
+                        使用的时候 单个参数使用  .attr("data-id")
+             */
+            $("[name=khNameDBL]").val(name).attr("data-id", id);
+            $("[name=khNameDBL]").change();
+        } else if (dblparam == "person") {
+            layer.alert(id)
+            $("[name=person]").val(name).attr("data-id", id);
+            $("[name=person]").change();
+            jQuery.getJSON("/wxy/queryDept", {"depid": depid}, function (data) {
+                $("#departname").val(data.departname);
+
+            });
+        } else if (dblparam == "prod") {
+            $.getJSON("/wxy/queryProdctInfo", {"prodid": id}, function (data) {
+                prodata = data;
+                if (dbl == true) {
+                    lineid++;
+                    var $tr = jQuery("<tr class='cgrkdateil'></tr>");
+                    $tr.append("<td contenteditable='true'>" + lineid + "</td>");
+                    $tr.append("<td class='prodid'>" + prodata.prodid + "</td>");
+                    $tr.append("<td class='prodname' contenteditable='true'>" + prodata.prodname + "</td>");
+                    $tr.append("<td contenteditable='true'></td>");
+                    $tr.append("<td contenteditable='true'></td>");
+                    $tr.append("<td class='num' contenteditable='true'>0</td>");
+                    $tr.append("<td class='disprice' contenteditable='true'>0.00</td>");
+                    $tr.append("<td class='discount' contenteditable='true'>100.00</td>");
+                    $tr.append("<td class='price' contenteditable='true'>0.00</td>");
+                    $tr.append("<td class='amout' contenteditable='true'>0.00</td>");
+                    $tr.append("<td class='taxrate' contenteditable='true'>17.00</td>");
+                    $tr.append("<td class='taxamout'contenteditable='true'>0.00</td>");
+                    $tr.append("<td contenteditable='true'>0.00</td>");
+                    $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\" name=\"iszp\"/></td>");
+                    $tr.append("<td><input type=\"checkbox\" lay-skin=\"primary\"/> </td>");
+                    $(".amount")
+                    jQuery("#list").append($tr);
+                }
+            });
+        }
+        layer.close(winWrapper)
+    })
+
+    function save() {
+        if (jQuery("#list tr").size() == 0) {
+            layer.msg("表身不允许空白！");
+            return false;
+        }
+        var product = {};
+        product["billno"] = jQuery("#billno").val();
+        product["billdate"] = jQuery("#billdate").val();
+        product["khName"] = jQuery("#khNameDBL").val();
+        product["custaddress"] = jQuery("#custaddress").val();
+        product["validdate"] = jQuery("#validdate").val();
+        product["curcurrencyname"] = jQuery("#curcurrencyname").val();
+        product["priceoftax"] = jQuery("[name=shui] option:selected").val();
+        product["exchrate"] = jQuery("#exchrate").val();
+        product["salesid"] = jQuery("[name=person]").attr("data-id");
+        product["salesname"] = jQuery("[name=person]").val();
+        product["maker"] = jQuery("#maker").attr("data-id");
+        product["makername"] = jQuery("#maker").val();
+        product["permittername"] = "Admin";
+        product["departname"] = jQuery("#departname").val();
+        product["spheader"] = jQuery("#spheader").val();
+        product["spfooter"] = jQuery("#spheader").val();
+        product["userdef"] = $("#userdef").val();
+        product["userdef2"] = $("#userdef2").val();
+        product["remark"] = jQuery("#remark").val();
+        product["customerid"] = $("#khName").attr("data-id");
+        var list = new Array();
+        jQuery("#list tr").each(function (i, obj) {
+            var dateil = {};
+            // var lineid=new Date().getTime();
+            // dateil["lineid"]=parseInt(lineid);
+            dateil["billno"] = jQuery("#billno").val();
+            dateil["prodid"] = jQuery(obj).find("td").eq(1).text()
+            dateil["prodname"] = jQuery(obj).find("td").eq(2).text()
+            dateil["prodsize"] = jQuery(obj).find("td").eq(3).text()
+            dateil["sunit"] = jQuery(obj).find("td").eq(4).text()
+            dateil["squantity"] = jQuery(obj).find("td").eq(5).text()
+            dateil["oldprice"] = jQuery(obj).find("td").eq(6).text()
+            dateil["discount"] = jQuery(obj).find("td").eq(7).text()
+            dateil["sprice"] = jQuery(obj).find("td").eq(8).text()
+            dateil["amount"] = jQuery(obj).find("td").eq(9).text()
+            dateil["taxrate"] = jQuery(obj).find("td").eq(10).text()
+            dateil["taxamt"] = jQuery(obj).find("td").eq(11).text()
+            dateil["amountatax"] = jQuery(obj).find("td").eq(12).text()
+            if (jQuery(obj).find("td").eq(14).is(":checked")) {
+                dateil["isgift"] = 0;
+            } else {
+                dateil["isgift"] = 1;
+            }
+            list.push(dateil);
+        })
+        product["list"] = list;
+        $.ajax({
+            url: "/wxy/saveProduct",
+            type: "post",
+            contentType: "application/json",
+            data: JSON.stringify(product),
+            dataType: "json",
+            timeout: 5000,
+            success: function (data) {
+                console.info(data)
+                if (data.code == "200") {
+                    layer.msg("保存成功");
+                    $("#menu-save").removeAttr("onclick");
+                } else {
+                    layer.msg("保存失败");
+                }
+            }
+        })
+    }
+
+
+
+    jQuery("#menu-update").click(function () {
+        dbl = true;
+        $("#menu-save").attr("onclick", "update()"); // 绑定点击事件 给MENU-SAVE 用的时候1个参数，设置2个
+    })
+
+    function update() {
+        if (jQuery("#list tr").size() == 0) {
+            layer.msg("表身不允许空白！");
+            return false;
+        }
+        var product = {};
+        product["billno"] = jQuery("#billno").val();
+        product["billdate"] = jQuery("#billdate").val();
+        product["khName"] = jQuery("#khNameDBL").val();
+        product["custaddress"] = jQuery("#custaddress").val();
+        product["validdate"] = jQuery("#validdate").val();
+        product["curcurrencyname"] = jQuery("#curcurrencyname").val();
+        product["priceoftax"] = jQuery("[name=shui] option:selected").val();
+        product["exchrate"] = jQuery("#exchrate").val();
+        product["salesid"] = jQuery("[name=person]").attr("data-id");
+        product["salesname"] = jQuery("[name=person]").val();
+        product["maker"] = jQuery("#maker").attr("data-id");
+        product["makername"] = jQuery("#maker").val();
+        product["permittername"] = "Admin";
+        product["departname"] = jQuery("#departname").val();
+        product["spheader"] = jQuery("#spheader").val();
+        product["spfooter"] = jQuery("#spheader").val();
+        product["userdef"] = $("#userdef").val();
+        product["userdef2"] = $("#userdef2").val();
+        product["remark"] = jQuery("#remark").val();
+        product["customerid"] = $("#khName").attr("data-id");
+        var list = new Array();
+        jQuery("#list tr").each(function (i, obj) {
+            var dateil = {};
+            dateil["billno"] = jQuery("#billno").val();
+            dateil["prodid"] = jQuery(obj).find("td").eq(1).text()
+            dateil["prodname"] = jQuery(obj).find("td").eq(2).text()
+            dateil["prodsize"] = jQuery(obj).find("td").eq(3).text()
+            dateil["sunit"] = jQuery(obj).find("td").eq(4).text()
+            dateil["squantity"] = jQuery(obj).find("td").eq(5).text()
+            dateil["oldprice"] = jQuery(obj).find("td").eq(6).text()
+            dateil["discount"] = jQuery(obj).find("td").eq(7).text()
+            dateil["sprice"] = jQuery(obj).find("td").eq(8).text()
+            dateil["amount"] = jQuery(obj).find("td").eq(9).text()
+            dateil["taxrate"] = jQuery(obj).find("td").eq(10).text()
+            dateil["taxamt"] = jQuery(obj).find("td").eq(11).text()
+            dateil["amountatax"] = jQuery(obj).find("td").eq(12).text()
+            if (jQuery(obj).find("td").eq(14).is(":checked")) {
+                dateil["isgift"] = 0;
+            } else {
+                dateil["isgift"] = 1;
+            }
+            list.push(dateil);
+        })
+        product["list"] = list;
+        console.info(JSON.stringify(product))
+        $.ajax({
+            url: "/wxy/update",
+            type: "post",
+            contentType: "application/json",
+            data: JSON.stringify(product),
+            dataType: "json",
+            timeout: 5000,
+            success: function (data) {
+                console.info(data)
+                if (data.code == "200") {
+                    layer.msg("修改成功");
+                    $("#menu-save").removeAttr("onclick");
+                } else {
+                    layer.msg("修改失败");
+                }
+            }
+        })
+    }
+
+
+</script>
 </html>

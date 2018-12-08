@@ -11,7 +11,7 @@ public class T_SALEPRICE_DETAILS {
 
     private String prodsize;
 
-    private Integer sunitid;
+    private String sunitid;
 
     private String sunit;
 
@@ -75,11 +75,11 @@ public class T_SALEPRICE_DETAILS {
         this.prodsize = prodsize == null ? null : prodsize.trim();
     }
 
-    public Integer getSunitid() {
+    public String getSunitid() {
         return sunitid;
     }
 
-    public void setSunitid(Integer sunitid) {
+    public void setSunitid(String sunitid) {
         this.sunitid = sunitid;
     }
 

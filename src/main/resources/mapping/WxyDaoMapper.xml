@@ -3,4 +3,87 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.WxyDao">
 
+    <!--<select id="QueryAllLast" resultType="com.accp.vo.wxy.SalesVO">-->
+    <!--select s.BILLDATE,s.CUSTADDRESS,s.BILLNO,s.VALIDDATE-->
+    <!--,s.CURCURRENCYNAME,s.PRICEOFTAX,s.EXCHRATE,s.SALESNAME,s.DEPARTNAME,s.MAKER,s.PERMITTER,c.CUSTOMERFLLNAE  FROM T_SALEPRICE s,T_CUSTOMER_INFORMATION c WHERE s.CUSTOMERID=c.CUSTOMERID order by s.BILLNO desc ;-->
+    <!--</select>-->
+
+    <select id="QueryAllLast" resultMap="QueryAllForListMap">
+        select  * from T_SALEPRICE s
+        left join T_CUSTOMER_INFORMATION c on s.CUSTOMERID=c.CUSTOMERID
+     </select>
+
+    <select id="queryDetail" resultType="T_SALEPRICE_DETAILS">
+        SELECT  * FROM T_SALEPRICE_DETAILS WHERE BILLNO=#{0}
+    </select>
+
+    <resultMap id="QueryAllForListMap" type="com.accp.vo.wxy.SalesVO">
+        <id property="billno" column="billno"></id>
+        <result column="CustomerFllNae" property="khName"></result>
+        <collection property="list" column="billno" select="queryDetail"></collection>
+    </resultMap>
+
+
+    <!--查询当前时间最大单据号 -->
+    <select id="getBillNo" resultType="long" parameterType="string">
+        SELECT MAX(BILLNO) FROM T_SALEPRICE WHERE BILLDATE=to_date(#{date},'yyyy-MM-dd')
+    </select>
+
+
+    <!--查询人员 -->
+    <select id="queryPerson" resultType="T_PERSONNEL">
+        SELECT * FROM T_PERSONNEL
+    </select>
+
+    <!--查询客户-->
+    <select id="queryKh" resultType="T_CUSTOMER_INFORMATION">
+        SELECT * FROM T_CUSTOMER_INFORMATION
+    </select>
+
+    <!--查询物料信息-->
+    <select id="queryProduct" resultType="T_DSPRODUCT">
+        SELECT * FROM T_DSPRODUCT
+    </select>
+
+    <!--查询部门信息-->
+    <select id="queryDept" resultType="T_DEPARTMENT">
+        SELECT *  FROM T_DEPARTMENT WHERE DEPARTID = #{depid}
+    </select>
+
+    <!--查询物料 -->
+    <select id="queryProdctInfo" resultType="T_DSPRODUCT">
+        SELECT * FROM T_DSPRODUCT WHERE PRODID=#{prodid}
+    </select>
+
+    <!--保存主表-->
+    <insert id="saveProduct">
+        insert into t_saleprice
+(billno,billdate,customerid,formalcust,custaddress,validdate,priceoftax,curcurrencyname,exchrate,salesid,salesname,departid,departname,maker,permitter,spheader,spfooter,userdef,userdef2,remark)values
+  (#{pm.billno,jdbcType=VARCHAR},#{pm.billdate,jdbcType=DATE},#{pm.customerid,jdbcType=VARCHAR},#{pm.formalcust,jdbcType=INTEGER},#{pm.custaddress,jdbcType=VARCHAR},#{pm.validdate,jdbcType=DATE},#{pm.priceoftax,jdbcType=INTEGER},#{pm.curcurrencyname,jdbcType=VARCHAR},#{pm.exchrate,jdbcType=FLOAT},#{pm.salesid,jdbcType=VARCHAR},#{pm.salesname,jdbcType=VARCHAR},#{pm.departid,jdbcType=VARCHAR},#{pm.departname,jdbcType=VARCHAR},#{pm.maker,jdbcType=VARCHAR},#{pm.permitter,jdbcType=VARCHAR},#{pm.spheader,jdbcType=VARCHAR},#{pm.spfooter,jdbcType=VARCHAR},#{pm.userdef,jdbcType=VARCHAR},#{pm.userdef2,jdbcType=VARCHAR},#{pm.remark,jdbcType=VARCHAR})
+
+    </insert>
+
+    <!--保存从表-->
+    <insert id="saveDetails">
+insert into t_saleprice_details(billno,detailid,prodid,prodname,prodsize,sunitid,sunit,squantity,oldprice,discount,sprice,amount,taxrate,taxamt,vftotal,isgift,itemremark)values
+(#{d.billno,jdbcType=VARCHAR},
+(select case when MAX(DETAILID) is null then 1 else MAX(DETAILID)+1 end id from t_saleprice_details)+1,#{d.prodid,jdbcType=VARCHAR},
+#{d.prodname,jdbcType=VARCHAR},#{d.prodsize,jdbcType=VARCHAR},#{d.sunitid,jdbcType=VARCHAR},
+#{d.sunit,jdbcType=VARCHAR},#{d.squantity,jdbcType=INTEGER},#{d.oldprice,jdbcType=FLOAT},
+#{d.discount,jdbcType=INTEGER},#{d.sprice,jdbcType=FLOAT},#{d.amount,jdbcType=FLOAT},
+#{d.taxrate,jdbcType=INTEGER},#{d.taxamt,jdbcType=FLOAT},#{d.vftotal,jdbcType=FLOAT},
+#{d.isgift,jdbcType=INTEGER},#{d.itemremark,jdbcType=VARCHAR})
+    </insert>
+
+
+
+    <delete id="deleteMain">
+    delete from T_SALEPRICE
+    where BILLNO = #{billno,jdbcType=VARCHAR}
+   </delete>
+    <delete id="deleteSub">
+    delete from T_SALEPRICE_DETAILS
+    where BILLNO = #{billno,jdbcType=VARCHAR}
+   </delete>
+
 </mapper>
