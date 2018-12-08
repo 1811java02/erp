@@ -98,4 +98,25 @@ public interface ChDao {
      * @return
      */
     public int deletePurchase(String billno);
+
+    /**
+     * 审核修改单据状态
+     * @param billno
+     * @return
+     */
+    public int updateState(String billno);
+
+    /**
+     * 新增库存出入明细
+     * @param ds
+     * @return
+     */
+    public int insertRecord(@Param("ds") T_DSDSWARETRANSACTION ds);
+
+    /**
+     * 修改库存
+     * @param ds
+     * @return
+     */
+    public int updateStock(@Param("ds") T_DSDSWARETRANSACTION ds);
 }

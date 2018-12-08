@@ -143,4 +143,24 @@
         DELETE  FROM T_PURCHASE_MASTER WHERE BILLNO=#{billno,jdbcType=VARCHAR};
         END;
     </delete>
+
+    <!--修改单据状态 -->
+    <update id="updateState" parameterType="string">
+      UPDATE T_PURCHASE_MASTER
+      SET EAMINESTATE=1
+      WHERE BILLNO=#{billno}
+    </update>
+
+    <!--新增出入库明细 -->
+    <insert id="insertRecord">
+        INSERT INTO T_DSDSWARETRANSACTION(TRANTYPE,FORMNO,WAREHOUSEID,PRODID,QUANTITY,PRICE,AMOUNT,BILLDATE)
+        VALUES (#{ds.trantype},#{ds.formno},#{ds.warehouseid},#{ds.prodid},#{ds.quantity},#{ds.price},#{ds.amount},SYSDATE)
+    </insert>
+
+    <!--修改库存 -->
+    <update id="updateStock">
+        UPDATE T_DSDSWAREAMOUNT
+        SET QUANTITY=QUANTITY+#{ds.quantity},CALLCOST=CALLCOST+#{ds.amount},CAVGCOST=(CALLCOST+#{ds.amount})/(QUANTITY+#{ds.quantity})
+        WHERE WAREHOUSEID=#{ds.warehouseid} AND PRODID=#{ds.prodid}
+    </update>
 </mapper>

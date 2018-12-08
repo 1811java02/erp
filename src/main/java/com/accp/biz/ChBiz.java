@@ -90,4 +90,19 @@ public class ChBiz {
     public int deletePurchase(String billno){
         return chdao.deletePurchase(billno);
     }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED,readOnly = false)
+    public int updateState(String billno){
+        return chdao.updateState(billno);
+    }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED,readOnly = false)
+    public int insertRecord(T_DSDSWARETRANSACTION ds){
+        return chdao.insertRecord(ds);
+    }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED,readOnly = false)
+    public int updateStock(T_DSDSWARETRANSACTION ds){
+        return chdao.updateStock(ds);
+    }
 }

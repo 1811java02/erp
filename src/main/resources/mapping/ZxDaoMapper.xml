@@ -1,6 +1,57 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.accp.dao.ZxDao">
+
+
+
+
+
+
+<select id="query" resultType="t_sales_returns">
+
+    select*from T_SALES_RETURNS
+</select>
+
+<select id="queryCustomer" resultType="t_customer_type">
+    select*from T_CUSTOMER_TYPE
+</select>
+
+    <select id="queryCustId" resultType="t_customer_type">
+    select*from T_CUSTOMER_TYPE where CLASSID=#{id}
+
+    </select>
+
+<insert id="addCustType">
+insert into T_CUSTOMER_TYPE(CLASSID,CLASSNAME,ENGNAME,MEMO)values (#{pojo.classid},#{pojo.classname},#{pojo.engname},#{pojo.memo})
+</insert>
+    <select id="queryCustomerInfo" resultType="t_customer_information">
+   select*from T_CUSTOMER_INFORMATION
+    </select>
+
+    <!--查询销售退货主详表 !-->
+    <resultMap type="com.accp.vo.zx.t_returns" id="yufuMap">
+        <id column="billno" property="billno" />
+        <result column="billdate" property="billdate" />
+        <result column="addrid" property="addrid" />
+        <result column="priceoftax" property="priceoftax" />
+        <result column="warename" property="warename" />
+        <result column="exchrate" property="exchrate" />
+        <result column="isdetuct" property="isdetuct" />
+        <result column="dueto" property="dueto" />
+        <result column="salesname" property="salesname" />
+        <result column="maker" property="maker" />
+        <result column="departname" property="departname" />
+        <result column="permitter" property="permitter" />
+        <result column="auditedstate" property="auditedstate" />
+
+        <collection property="details" column="billno"
+                    select="selectyufu"/>
+    </resultMap>
+    <select id="selectyufu" resultType="com.accp.pojo.T_SALES_RETURNS_DETAILS">
+		select * from T_SALES_RETURNS_DETAILS where billno=#{0}
+	</select>
+    <select id="querRetrunsList" resultMap="yufuMap">
+		select * from T_SALES_RETURNS
+	</select>
 
 </mapper>
