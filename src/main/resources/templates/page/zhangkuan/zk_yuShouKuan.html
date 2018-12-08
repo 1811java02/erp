@@ -287,12 +287,12 @@
                 $("[name=exchangerate]").val(obj.exchangerate);
                 $("[name=discountper]").val(obj.discountper);
                 $("[name=accmonthtomonth]").val(obj.accmonthtomonth);
-                $.each(obj.details,function (j,objs) {
+                /*$.each(obj.details,function (j,objs) {
                     $("#list").html("");
-                    var $row=("<tr><td> "+objs.curprerecv+"</td><td>"+objs.sourcelist+"</td><td>"+objs.fundbillid+"</td><td>"+objs.remarks+"</td></tr>");
+                   var $row=("<tr><td> "+objs.curprerecv+"</td><td>"+objs.sourcelist+"</td><td>"+objs.fundbillid+"</td><td>"+objs.remarks+"</td></tr>");
                     $("#list").append($row);
 
-                });
+                });*/
             })
         });
     }
@@ -468,7 +468,9 @@
         var dateils=new Array();
         jQuery("#detailinfo tbody tr").each(function (i,obj) {
             var dateil={};
-            dateil["fundbillid"]=jQuery("[name=fundbillid]").val();
+
+            var timestamp = (new Date()).getTime();
+            dateil["fundbillid"]=timestamp;
             dateil["curprerecv"]=jQuery(obj).find("td").eq(0).text();
             dateil["sourcelist"]=jQuery(obj).find("td").eq(1).text();
             dateil["sourcenumber"]=jQuery(obj).find("td").eq(2).text();
@@ -548,7 +550,10 @@
         var dateils=new Array();
         jQuery("#detailinfo tbody tr").each(function (i,obj) {
             var dateil={};
-            dateil["fundbillid"]=jQuery("[name=fundbillid]").val();
+
+
+            var timestamp = (new Date()).getTime();
+            dateil["fundbillid"]=timestamp;
             dateil["curprerecv"]=jQuery(obj).find("td").eq(0).text();
             dateil["sourcelist"]=jQuery(obj).find("td").eq(1).text();
             dateil["sourcenumber"]=jQuery(obj).find("td").eq(2).text();
