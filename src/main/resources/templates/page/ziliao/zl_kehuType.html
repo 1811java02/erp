@@ -4,10 +4,12 @@
 	<meta charset="UTF-8">
 	<title>客户类别</title>
 	<link rel="stylesheet" href="../../layui/css/layui.css">
+	<link rel="stylesheet" href="../../css/ziliao/zl_kehuType.css">
 	<link rel="stylesheet" href="../../css/common.css">
 </head>
 <body style="width: 100%;padding: 10px 20px;box-sizing: border-box;min-width: 900px;">
-<form class="layui-form">
+<form class="layui-form" id="vmindexCnt">
+    <div v-for="(temp,index) in pageInfo.list">
 	<div class="layui-form-item">
 		<div class="layui-input-block" style="margin-left: 0">
 			<ul class="layui-nav" style="background-color: transparent;">
@@ -58,31 +60,77 @@
 		<label class="layui-form-label">类别编号</label>
 		<div class="layui-input-block">
 			<input type="text" name="title" required lay-verify="required" placeholder=""
-			       autocomplete="off" class="layui-input">
+			       autocomplete="off" class="layui-input" id="bianhao">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">类别名称</label>
 		<div class="layui-input-block">
 			<input type="text" name="title" required lay-verify="required" placeholder=""
-			       autocomplete="off" class="layui-input">
+			       autocomplete="off" class="layui-input" id="typename">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">英文名称</label>
 		<div class="layui-input-block">
 			<input type="text" name="title" required lay-verify="required" placeholder="" autocomplete="off"
-			       class="layui-input">
+			       class="layui-input" id="engname">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">备注</label>
 		<div class="layui-input-block">
-			<textarea class="layui-textarea"></textarea>
+			<textarea class="layui-textarea" id="beizhu"></textarea>
 		</div>
 	</div>
+    </div>
 </form>
 </body>
 <script src="../../layui/lay/dest/layui.all.js"></script>
+<script src="../../js/jquery-1.12.4.js"></script>
+<script src="../../js/ziliao/zl_kehuType.js"></script>
+<script type="text/javascript">
+    toPage();
+    function toPage(page) {
+        var index=layer.load(1);
+        $.getJSON('/zx/queryCustpage', {page: page}, function (data) {
+            layer.close(index);
+            var obj=data.list[0];
+            console.info(obj)
+            $("#bianhao").val(obj.classid);
+            $("#typename").val(obj.classname);
+            $("#engname").val(obj.engname);
+            $("#beizhu").val(obj.memo);
+            if(data.hasPreviousPage){
+                $("#menu-prev").attr("onclick","toPage("+data.prePage+")")
+            }else{
+                $("#menu-prev").removeAttr("onclick");
+            }
+            if(data.hasNextPage){
+                $("#menu-next").attr("onclick","toPage("+data.nextPage+")")
+            }else{
+                $("#menu-next").removeAttr("onclick");
+            }
+        })
+    }
 
+    $(document).on("click","#menu-add",function(){
+        alert(112)
+        var user={};
+        user["classid"]=$("#bianhao").val();
+        user["classname"]=$("#typename").val();
+        user["engname"]=$("#engname").val();
+        user["memo"]=$("#beizhu").val();
+        $.post('/zx/addcust',{"jsonStr":JSON.stringify(user)},function(message) {
+			if(message.code=="200"){
+			    alert("新增成功");
+                toPage();
+			}else if(message.code=="500"){
+			    alert(message.msg);
+			}
+        },"json");
+	});
+
+
+</script>
 </html>
