@@ -398,12 +398,12 @@
 			$("#list").empty();
 			var snum = 0, sprice = 0, samount = 0, nnum = 0, nprice = 0, namount = 0;
 			$(obj.dsdswareamount).each(function (i, obj) {
-				snum += obj.bquantity;
-				sprice += obj.bavgcost;
-				samount += obj.ballcost;
-				nnum += obj.quantity;
-				nprice += obj.cavgcost;
-				namount += obj.callcost;
+				snum += obj.bquantity; // 期初总数量
+				sprice += obj.bavgcost; // 期初平均成本
+				samount += obj.ballcost; // 期初总金额
+				nnum += obj.quantity; // 现行总数量
+				nprice += obj.cavgcost; // 现行平均成本
+				namount += obj.callcost; // 现行总成本
 				var tr = $("<tr></tr>");
 				var td1 = $("<td></td>").text(obj.warehouse.wareid);
 				var td2 = $("<td></td>").text(obj.warehouse.warename);

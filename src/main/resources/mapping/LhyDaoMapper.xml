@@ -58,6 +58,13 @@
 		select * from t_dsdssalemain order by billno desc
 	</select>
 
+	<delete id="deleteDsdssalemain">
+		delete from t_dsdssalemain where billno=#{0}
+	</delete>
+	<delete id="deleteDsdssalesub">
+		delete from t_dsdssalesub where billno=#{0}
+	</delete>
+
 	<insert id="saveDsdssalemain">
     insert into T_DSDSSALEMAIN (BILLNO, BILLDATE, CUSTID,
       CUSTSHORTNAME, ADDRID, CUSTADDRESS,
