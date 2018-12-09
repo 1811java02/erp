@@ -2,6 +2,7 @@ package com.accp.dao;
 
 import com.accp.pojo.*;
 import com.accp.vo.wxy.SalesVO;
+import com.accp.vo.wxy.T_DSVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -80,4 +81,16 @@ public interface WxyDao {
      */
     public int deleteSub(@Param("billno")String billno);
     //-------------------------销售报价---
+
+
+    //--------------------供应商表操作 DSDATASET1---
+
+    /**
+     * 查询所有供应商分页
+     * @return
+     */
+    public List<T_DSVO> queryDs();
+
+
+    //--------------------供应商表操作 DSDATASET1---
 }

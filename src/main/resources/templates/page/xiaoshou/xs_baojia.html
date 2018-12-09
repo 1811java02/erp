@@ -622,6 +622,11 @@
         })
     }
 
+    //删除功能
+    $("#menu-delete").click(function(){
+        $("#menu-delete").attr("onclick","del()");  //绑定一个点击事件
+    })
+
 
 
     jQuery("#menu-update").click(function () {
@@ -699,6 +704,23 @@
         })
     }
 
+    /**
+     * 删除销售报价单
+     */
+    function del() {
+        var billno = $("#billno").val();
+        console.info(billno)
+        if (billno.length < 1)
+            return;
+        layer.confirm("确认删除吗", function () {
+            $.getJSON("/wxy/del", {billno: billno}, function (data) {
+                layer.msg(data ? '删除成功' : '删除失败');
+                if (data) {
+                    toPage();
+                }
+            })
+        })
+    }
 
 </script>
 </html>

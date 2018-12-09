@@ -5,6 +5,7 @@ import com.accp.dao.WxyDao;
 import com.accp.pojo.*;
 import com.accp.vo.ch.PurcahseVo;
 import com.accp.vo.wxy.SalesVO;
+import com.accp.vo.wxy.T_DSVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +82,26 @@ public class WxyBiz {
             return true;
     }
 
+    //删除
+    public boolean deleteMain(String billno){
+        dao.deleteMain(billno);
+        dao.deleteSub(billno);
+        return true;
+    }
+
     //--------------销售报价表
 
+    //-------------供应商资料维护
+
+    /**
+     * 查询全部供应商
+     * @param page
+     * @return
+     */
+    public PageInfo<T_DSVO> queryDs(Integer page){
+        PageHelper.startPage(page,1);
+        return new PageInfo<T_DSVO>(dao.queryDs());
+    }
+    //-------------供应商资料维护
 
 }

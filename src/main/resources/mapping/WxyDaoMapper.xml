@@ -86,4 +86,10 @@ insert into t_saleprice_details(billno,detailid,prodid,prodname,prodsize,sunitid
     where BILLNO = #{billno,jdbcType=VARCHAR}
    </delete>
 
+
+    <!---供应商操作-->
+    <select id="queryDs" resultType="T_DSDATASET1">
+        SELECT * FROM T_DSDATASET1
+    </select>
+
 </mapper>

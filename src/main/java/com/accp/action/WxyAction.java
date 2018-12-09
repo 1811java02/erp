@@ -5,6 +5,7 @@ import com.accp.biz.WxyBiz;
 import com.accp.pojo.*;
 import com.accp.vo.ch.PurcahseVo;
 import com.accp.vo.wxy.SalesVO;
+import com.accp.vo.wxy.T_DSVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -117,7 +118,7 @@ public class WxyAction {
 
 
     /**
-     * 李航宇写的
+     * 李航宇写的--修改
      * @param pm
      * @return
      */
@@ -129,5 +130,26 @@ public class WxyAction {
         map.put("code",code);
         return map;
     }
+
+    /**
+     * 删除功能
+     * @param billno
+     * @return
+     */
+    @GetMapping("/del")
+    public Map<String,String> dsdssalemain(String billno){
+        Map<String,String> map = new HashMap<>();
+        boolean flag = biz.deleteMain(billno);
+        String code=flag?"200":"500";
+        map.put("code",code);
+       return map;
+    }
     //--------------销售报价表
+
+    //-----------供应商action
+    @RequestMapping("/queryDS")
+    public PageInfo<T_DSVO> queryAll(@RequestParam(defaultValue = "1") Integer page){
+     return  biz.queryDs(page);
+    }
+    //-----------供应商action
 }
